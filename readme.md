@@ -1,6 +1,6 @@
-<a href="#demand">需求分析</a>
+- <a href="#demand">需求分析</a>
 
-<a href="#database">数据库设计</a>
+- <a href="#database">数据库设计</a>
 
 # <a name="demand">需求分析</a>
 
@@ -54,28 +54,28 @@
 
 - employee（员工表）
 
-    - 主要字段：自增id，emp_id，emp_name, dpart_id（外键关联department）, isActive（0失效，1生效）
+    - 字段：自增id，emp_id，emp_name, dpart_id（外键关联department）, isActive（0失效，1生效）
 
 - daily_log（工作日志表）
 
-    - 主要字段：自增id, emp_id（外键关联employee）, content, time
+    - 字段：自增id, emp_id（外键关联employee）, content, time
 
 - project（项目表）
 
-    - 主要字段：自增prj_id, create_time, finish_time, prj_desc（项目描述）, status（0未开始，1进行中，2已完成，3已作废）
+    - 字段：自增prj_id, create_time, finish_time, prj_desc（项目描述）, status（0未开始，1进行中，2已完成，3已作废）
 
 - prj_task（项目任务表）
 
-    - 主要字段：自增task_id, prj_id（外键关联project）, weight, create_time, finish_time, task_desc（任务描述）, score_desc（评分标准说明）,  status（0未开始，1进行中，2已完成，3已作废）
+    - 字段：自增task_id, prj_id（外键关联project）, weight, create_time, finish_time, task_desc（任务描述）, score_desc（评分标准说明）,  status（0未开始，1进行中，2已完成，3已作废）
 
 - task_eva（任务绩效表）
     
-    - 主要字段：自增eva_id, emp_id（外键关联employee）, create_time, finish_time, last_upd_time, score, status（0未开始，1进行中，2已完成，3已作废）
+    - 字段：自增eva_id, emp_id（外键关联employee）, create_time, finish_time, last_upd_time, score, status（0未开始，1进行中，2已完成，3已作废）
 
 - notice
 
-    - 主要字段：自增nt_id, content, create_time, 
+    - 字段：自增nt_id, content, create_time, 
 
 - login
 
-    - 主要字段：自增id, user_id（外键关联user表）, login_time
+    - 字段：自增id, user_id（外键关联user表）, login_time
