@@ -46,7 +46,7 @@
 
 - user（用户表）
     
-    - 字段：自增user_id, user_name, password, emp_id（外键关联employee表）, role, last_login_time, isActive（0失效，1生效）
+    - 字段：自增user_id, emp_id（外键关联employee表）, password, role（0管理员，1部门主管，2普通员工）, last_login_time, isActive（0失效，1生效）
 
 - department（部门表）
 
@@ -56,7 +56,7 @@
 
     - 字段：自增id，emp_id，emp_name, dpart_id（外键关联department）, status（0离职，1在职）
 
-- daily_log（工作日志表）
+- daily_log（工作日志表）      
 
     - 字段：自增id, emp_id（外键关联employee）, content, create_time, last_upd_time, status（0未审阅，1已审阅）
 
