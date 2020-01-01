@@ -46,7 +46,7 @@
 
 - user（用户表）
     
-    - 字段：自增user_id, user_name, password, emp_id（外键关联employee表）, role, last_login_time
+    - 字段：自增user_id, user_name, password, emp_id（外键关联employee表）, role, last_login_time, isActive（0失效，1生效）
 
 - department（部门表）
 
@@ -54,11 +54,11 @@
 
 - employee（员工表）
 
-    - 字段：自增id，emp_id，emp_name, dpart_id（外键关联department）, isActive（0失效，1生效）
+    - 字段：自增id，emp_id，emp_name, dpart_id（外键关联department）, status（0离职，1在职）
 
 - daily_log（工作日志表）
 
-    - 字段：自增id, emp_id（外键关联employee）, content, time
+    - 字段：自增id, emp_id（外键关联employee）, content, create_time, last_upd_time, status（0未审阅，1已审阅）
 
 - project（项目表）
 
@@ -72,9 +72,9 @@
     
     - 字段：自增eva_id, emp_id（外键关联employee）, create_time, finish_time, last_upd_time, score, status（0未开始，1进行中，2已完成，3已作废）
 
-- notice
+- notice（公告表）
 
-    - 字段：自增nt_id, content, create_time, 
+    - 字段：自增nt_id, content, create_time
 
 - login
 
