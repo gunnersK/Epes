@@ -1,5 +1,7 @@
 - <a href="#demand">需求分析</a>
 
+- <a href="#tech">技术选型</a>
+
 - <a href="#database">数据库设计</a>
 
 # <a name="demand">需求分析</a> 
@@ -41,6 +43,16 @@
     - 能够配置不同评分标准来进行绩效考评。
 
     - 能够根据条件统计，绘制统计图：员工考评评分结果统计，可分别按绩效考评项、员工、时间段进行统计。
+    
+# <a name="tech">开发技术</a>
+
+- 本项目是java语言的前后端分离的webapp：
+
+    - 前端：html+mui+jquery，HBuilder开发，nginx部署
+    
+    - 后端：jdk8+springboot+mybatisPlus，idea开发，tomcat部署
+    
+    - 由于前后端分开开发，会产生跨域问题，故开发中用nginx做代理服务器
 
 # <a name="database">数据库设计</a>
 
