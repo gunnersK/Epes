@@ -3,7 +3,7 @@ $(function(){
 	
 	btn.addEventListener('tap', function(){
 		mui.openWindow({
-			url: 'e_index.html'
+			url: 'e_home.html'
 		});
 	});
 }); 

@@ -6,13 +6,30 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
 	</head>
 
 	<body>
-		
+		<header class="mui-bar mui-bar-nav">
+			<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+		</header>
 		<div id="" class="mui-content">
 			<div class="mui-input-row" style="margin: 10px 5px;">
 				<textarea id="textarea" rows="5" placeholder="多行文本框"></textarea>
+			</div>
+		</div>
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">	
+						<li class="mui-table-view-cell">
+							<a href="#">Item1</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item10</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		
@@ -20,6 +37,14 @@
 		<script src="js/jquery-3.2.1.js"></script>
 		<script type="text/javascript">
 			mui.init()
+			mui.plusReady(function () {
+						});
+						
+						mui('.mui-scroll-wrapper').scroll();
+						mui('body').on('shown', '.mui-popover', function(e) {
+						});
+						mui('body').on('hidden', '.mui-popover', function(e) {
+						});
 		</script>
 	</body>
 

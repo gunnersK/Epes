@@ -1,0 +1,20 @@
+/* 公告栏 */
+.ind-ntc-bar{height: 65px; margin-bottom: 40px;}
+.ntc-title{height: 31px; padding: 0 10px 0 5px;}
+.ntc-title p{float: left;}
+.lamp-icon{color: blue; margin-right: 2px;}
+.ntc_text{text-align: center;font-size: 11px; color: #000000;}
+.all-ntc{float: right; font-size: 11px; }
+.ntc-content{margin: 0 5% 0 5%; padding-top: 6px; height: 26px; border-top: #d5d5d5 solid 1px; width: 90%;}
+.ntc-content span{font-size: 11px; color: #000000; text-align: center;}
+
+/* 按钮bar */
+.ind-btn-bar{height: 70px;}
+.ind-btn-bar{padding: 0 10px 0 10px;}
+.ind-btn-div{width: 50px; float: left; margin: 0 5px 0 5px;}
+.index-btn{width: 50px; height: 50px; border-radius: 12px;}
+.ind-btn-div p{font-size: 11px; color: #000000; text-align: center;}
+
+/* 统计图 */
+.chart-area{margin: 0 0 20px 0;}
+/* .line-chart{position: relative; left: -60px;} */

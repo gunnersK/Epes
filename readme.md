@@ -86,7 +86,7 @@
 
 - notice（公告表）
 
-    - 字段：自增nt_id, content, create_time
+    - 字段：自增nt_id, title, content, create_time
 
 - login
 

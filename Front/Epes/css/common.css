@@ -1,13 +1,5 @@
-/* 公告栏 */
-.ind-ntc-bar{height: 40px; padding: 0 10px 0 5px;}
-.ind-ntc-bar p{float: left;}
-.lamp-icon{color: blue; margin-right: 2px;}
-.ntc_text{text-align: center;font-size: 11px; color: #000000;}
-.all-ntc{float: right; font-size: 11px; }
+/* 公共样式 */
+body{background-color: white;}
+.mui-content{background-color: white;}
+.mui-bar{background-color: white}
 
-/* 按钮bar */
-.ind-btn-bar{height: 70px;}
-.ind-btn-bar{padding: 0 10px 0 10px;}
-.ind-btn-div{width: 50px; float: left; margin: 0 5px 0 5px;}
-.index-btn{width: 50px; height: 50px; border-radius: 12px;}
-.ind-btn-div p{font-size: 11px; color: #000000; text-align: center;}
