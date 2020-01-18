@@ -13,8 +13,8 @@
 			.mui-plus .plus{
 				display: inline;
 			}
-			
 			.plus{
+			
 				display: none;
 			}
 			
@@ -37,7 +37,7 @@
 				padding-right: 10px;
 			}
 			.mui-popover {
-				height: 300px;
+				height: 200px;
 			}
 			.mui-content {
 				padding: 10px;
@@ -59,7 +59,7 @@
 			<div class="mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul class="mui-table-view">	
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell" id="check_all" class="check-all">
 							<a href="#">查看所有日志</a>
 						</li>
 					</ul>
@@ -69,16 +69,16 @@
 		
 		<script src="js/mui.js"></script>
 		<script src="js/jquery-3.2.1.js"></script>
+		<script src="js/e_daily_log.js"></script>
 		<script type="text/javascript">
 			mui.init()
-			mui.plusReady(function () {
-						});
-						
-						mui('.mui-scroll-wrapper').scroll();
-						mui('body').on('shown', '.mui-popover', function(e) {
-						});
-						mui('body').on('hidden', '.mui-popover', function(e) {
-						});
+			mui.plusReady(function () {});
+			
+			mui('.mui-scroll-wrapper').scroll();
+			mui('body').on('shown', '.mui-popover', function(e) {
+			});
+			mui('body').on('hidden', '.mui-popover', function(e) {
+			});
 		</script>
 	</body>
 
