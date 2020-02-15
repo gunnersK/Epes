@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/e_daily_log.css"/>
 		
 		<style>
 			
@@ -43,15 +44,20 @@
 				padding: 10px;
 			}
 		</style>
-	</head>
+	</head> 
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">工作日志</h1>
 			<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
 		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" class="mui-btn mui-btn-primary" style="top: 0;">提交</button>
+		</nav>
 		<div id="" class="mui-content">
 			<div class="mui-input-row" style="margin: 10px 5px;">
-				<textarea id="textarea" rows="5" placeholder="多行文本框"></textarea>
+				<textarea id="textarea" rows="5" placeholder="今日工作日志"></textarea>
 			</div>
 		</div>
 		<div id="topPopover" class="mui-popover">

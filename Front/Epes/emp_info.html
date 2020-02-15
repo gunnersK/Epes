@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/emp_info.css"/>
+		<style>
+			#mod_popover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#mod_popover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.mui-popover {
+				height: 300px;
+				width: 300px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个人资料</h1>
+		</header>
+		<div id="" class="mui-content">
+			<div class="head-img">
+				<img src="" alt="">照片
+			</div>
+			<div class="info-item">
+				工号：
+				<span id="emp_id">111</span>
+			</div>
+			<div class="info-item">
+				姓名：
+				<span id="emp_name">111</span>
+			</div>
+			<div class="info-item">
+				性别：
+				<span id="gender">男</span>
+			</div>
+			<div class="info-item">
+				部门：
+				<span id="dpart_name">研发部</span>
+			</div>
+			<div class="info-item">
+				联系方式：
+				<span id="contract">13455555555</span>
+			</div>
+			<div class="info-item">
+				登录密码：
+				<span id="passwd">********</span>
+				<a href="#mod_popover" style="float: right;">修改</a>
+			</div>
+		</div>
+		<div id="mod_popover" class="mui-popover mod-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div class="info-item">
+						旧密码：
+						<span id="old_passwd">111</span>
+					</div>
+					<div class="info-item">
+						新密码：
+						<span id="new_passwd">111</span>
+					</div>
+					<div class="info-item">
+						确认密码：
+						<span id="conf_passwd">111</span>
+					</div>
+					<div class="btn-bar">
+						<button type="button" class="mui-btn mui-btn-primary">确定</button>
+						<button type="button" class="mui-btn">取消</button>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+		
+		<script src="js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

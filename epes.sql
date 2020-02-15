@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50717
+ Source Server Version : 50727
  Source Host           : localhost:3306
  Source Schema         : epes
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 20/01/2020 01:00:50
+ Date: 15/02/2020 13:50:57
 */
 
 SET NAMES utf8mb4;
@@ -22,37 +22,38 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `daily_log`;
 CREATE TABLE `daily_log`  (
-  `id` int(11) NOT NULL COMMENT '自增id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `emp_id` char(9) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `create_time` datetime(6) NULL DEFAULT NULL,
   `last_upd_time` datetime(6) NULL DEFAULT NULL,
   `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '0未审阅，1已审阅',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for department
 -- ----------------------------
 DROP TABLE IF EXISTS `department`;
 CREATE TABLE `department`  (
-  `dpart_id` int(11) NOT NULL COMMENT '自增部门id',
+  `dpart_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增部门id',
   `dpart_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`dpart_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for employee
 -- ----------------------------
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee`  (
-  `id` int(11) NOT NULL COMMENT '自增id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `emp_id` char(9) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '工号（101200101）',
   `emp_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dpart_id` int(11) NULL DEFAULT NULL COMMENT '部门id',
+  `contract` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '联系方式',
   `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '0离职，1在职',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for login
@@ -83,6 +84,7 @@ CREATE TABLE `notice`  (
 DROP TABLE IF EXISTS `prj_task`;
 CREATE TABLE `prj_task`  (
   `task_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增task_id',
+  `task_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `prj_id` int(11) NOT NULL COMMENT '关联project',
   `weight` tinyint(2) NULL DEFAULT NULL COMMENT '权重',
   `create_time` datetime(6) NULL DEFAULT NULL,
@@ -99,6 +101,7 @@ CREATE TABLE `prj_task`  (
 DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project`  (
   `prj_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增prj_id',
+  `prj_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `prj_desc` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '项目描述',
   `create_time` datetime(6) NULL DEFAULT NULL,
   `finish_time` datetime(6) NULL DEFAULT NULL,
@@ -117,7 +120,8 @@ CREATE TABLE `task_eva`  (
   `create_time` datetime(6) NULL DEFAULT NULL,
   `finish_time` datetime(6) NULL DEFAULT NULL,
   `last_upd_time` datetime(6) NULL DEFAULT NULL,
-  `score` decimal(5, 2) NULL DEFAULT NULL,
+  `score` decimal(5, 2) NULL DEFAULT NULL COMMENT '任务得分',
+  `performance` decimal(5, 2) NULL DEFAULT NULL COMMENT '绩效=任务得分*任务权重',
   `status` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '0未开始，1进行中，2已完成，3已作废',
   PRIMARY KEY (`eva_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;

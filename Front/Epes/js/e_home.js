@@ -1,11 +1,26 @@
-$(function(){
+// $(function(){
 	var log_btn = document.getElementById('log_btn');
+	var perf_btn = document.getElementById('perf_btn');
+	var ctc_btn = document.getElementById('ctc_btn');
 	var all_ntc = document.getElementById('all_ntc');
 	var ntc_content = document.getElementById('ntc_content');
+	var emp_info = document.getElementById('emp_info');
 	
 	log_btn.addEventListener('tap', function(){
 		mui.openWindow({
 			url: 'e_daily_log.html'
+		});
+	});
+	
+	perf_btn.addEventListener('tap', function(){
+		mui.openWindow({
+			url: 'perf_list.html'
+		});
+	});
+	
+	ctc_btn.addEventListener('tap', function(){
+		mui.openWindow({
+			url: 'ctc_list.html'
 		});
 	});
 	
@@ -20,7 +35,14 @@ $(function(){
 			url: 'notice_detail.html'
 		});
 	})
-});
+	
+	emp_info.addEventListener('tap', function(){
+		mui.openWindow({
+			url: 'emp_info.html'
+		});
+		mui('#topPopover').popover('toggle');//show hide toggle
+	})
+// });
 
 // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('chart'));

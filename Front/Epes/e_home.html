@@ -9,6 +9,23 @@
 		<link rel="stylesheet" type="text/css" href="css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="css/home.css"/>
 		<link rel="stylesheet" type="text/css" href="css/icons-extra.css"/>
+		<style>
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.mui-popover {
+				height: 100px;
+			}
+			.mui-content {
+				padding: 10px;
+			}
+		</style>
 		<script src="js/js/echarts-all.js"></script>
 	</head>
 
@@ -16,6 +33,7 @@
 		<header id="header" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">首页</h1>
+			<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
 		</header>
 		<div id="" class="mui-content">
 			<div class="chart-area">
@@ -42,7 +60,7 @@
 					<p>工作日志</p>
 				</div>
 				<div class="ind-btn-div">
-					<button type="button" id="eva_btn" class="mui-btn mui-btn-yellow index-btn">
+					<button type="button" id="perf_btn" class="mui-btn mui-btn-yellow index-btn">
 						<span id="" class="mui-icon mui-icon-star"></span>
 					</button>
 					<p>我的绩效</p>
@@ -52,6 +70,21 @@
 						<span id="" class="mui-icon-extra mui-icon-extra-peoples"></span>
 					</button>
 					<p>通讯录</p>
+				</div>
+			</div>
+		</div>
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">	
+						<li class="mui-table-view-cell" id="emp_info" class="emp-info">
+							<a href="#">个人资料</a>
+						</li>
+						<li class="mui-table-view-cell" id="log_out" class="log-out">
+							<a href="#">退出</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
