@@ -8,13 +8,13 @@
 		<link href="css/mui.css" rel="stylesheet" />
 		<link href="css/mui.picker.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="css/log_date_filt.css"/>
+		<link rel="stylesheet" type="text/css" href="css/d_log_filt.css"/>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">选择日期</h1>
+			<h1 class="mui-title">筛选条件</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
 			<button type="button" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
@@ -36,6 +36,18 @@
 								<span class="result"></span>
 							</a>
 						</li>
+						<li class="mui-table-view-cell">
+							<a id = "emp" class="mui-navigate-right" data-options='{"type":"date"}'>
+								选择员工
+								<span id = "emp_result" class="result"></span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id = "status" class="mui-navigate-right" data-options='{"type":"date"}'>
+								选择状态
+								<span id = "status_result" class="result"></span>
+							</a>
+						</li>
 					</ul>
 				<!-- </div> -->
 				<!-- <div class="filt-bar"> -->
@@ -46,9 +58,9 @@
 			</div>
 		</div>
 		
-		<script src="js/mui.js"></script>	
+		<script src="js/mui.js"></script>
 		<script src="js/js/mui.picker.min.js"></script>
-		<script src="js/log_date_filt.js"></script>	
+		<script src="js/d_log_filt.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>

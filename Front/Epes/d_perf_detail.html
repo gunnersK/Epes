@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="css/perf_detail.css"/>
+		<link rel="stylesheet" type="text/css" href="css/d_perf_detail.css"/>
 	</head>
 
 	<body>
@@ -15,6 +15,9 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">绩效详情</h1>
 		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
+		</nav>
 		<div id="" class="mui-content">
 			<div class="info-item">
 				任务名：
@@ -42,8 +45,13 @@
 			</div>
 			<div class="info-item">
 				得分：
-				<span id="passwd">80</span>
-			</div>
+				<!-- <span id="passwd">80</span> -->
+				<div class="mui-numbox" data-numbox-step='5' data-numbox-min='0' data-numbox-max='100'>
+				  <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+				  <input class="mui-numbox-input" type="number" value="80" />
+				  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+				</div>
+			</div> 
 			<div class="info-item">
 				任务绩效：
 				<span id="passwd">4</span>
@@ -57,7 +65,9 @@
 				<span id="passwd">2020-01-15</span>
 			</div>
 		</div>
+		
 		<script src="js/mui.js"></script>
+		<script src="js/d_perf_detail.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/home.css"/>
+		<link rel="stylesheet" type="text/css" href="css/icons-extra.css"/>
+		<style>
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.mui-popover {
+				height: 100px;
+			}
+			.mui-content {
+				padding: 10px;
+			}
+		</style>
+		<script src="js/js/echarts-all.js"></script>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">首页</h1>
+			<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+		</header>
+		<div id="" class="mui-content">
+			<div class="chart-area">
+				<div class="line-chart" id="chart" style="width: 320px;height:200px;">
+		<!-- 			<h5>线图示例</h5>
+					<div class="chart" id="lineChart"></div> -->
+				</div>
+			</div>
+			<div id="" class="ind-ntc-bar">
+				<div id="" class="ntc-title">
+					<p><span id="" class=" mui-icon-extra mui-icon-extra-lamp lamp-icon" style="font-size: 16px;"></span></p>
+					<p class="ntc_text">公告</p>
+					<span id="all_ntc" class="all-ntc">查看全部</span>
+				</div>
+				<div id="ntc_content" class="ntc-content"> 
+					<span>2020年春节放假通知</span>
+				</div>
+			</div>
+			<div class="ind-btn-bar">
+				<div class="ind-btn-div">
+					<button type="button" id="log_btn" class="mui-btn mui-btn-blue index-btn">
+						<span id="" class="mui-icon mui-icon-compose"></span>
+					</button>
+					<p>工作日志</p>
+				</div>
+				<div class="ind-btn-div">
+					<button type="button" id="perf_btn" class="mui-btn mui-btn-yellow index-btn">
+						<span id="" class="mui-icon mui-icon-star"></span>
+					</button>
+					<p>我的绩效</p>
+				</div>
+				<div class="ind-btn-div">
+					<button type="button" id="ctc_btn" class="mui-btn mui-btn-blue index-btn">
+						<span id="" class="mui-icon-extra mui-icon-extra-peoples"></span>
+					</button>
+					<p>通讯录</p>
+				</div>
+				<div class="ind-btn-div">
+					<button type="button" id="log_mana_btn" class="mui-btn mui-btn-blue index-btn">
+						<span id="" class="mui-icon mui-icon-compose"></span>
+					</button>
+					<p>日志管理</p>
+				</div>
+				<div class="ind-btn-div">
+					<button type="button" id="perf_eva_btn" class="mui-btn mui-btn-yellow index-btn">
+						<span id="" class="mui-icon mui-icon-star"></span>
+					</button>
+					<p>绩效评分</p>
+				</div>
+			</div>
+		</div>
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">	
+						<li class="mui-table-view-cell" id="emp_info" class="emp-info">
+							<a href="#">个人资料</a>
+						</li>
+						<li class="mui-table-view-cell" id="log_out" class="log-out">
+							<a href="#">退出</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src="js/mui.js"></script>
+		<script src="js/home.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>
