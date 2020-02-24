@@ -34,7 +34,7 @@
 	var creTask = document.getElementById('cre_task');
   	creTask.addEventListener('tap', function(){
 		mui.openWindow({
-			url: 'a_new_task.html'
+			url: 'new_task.html'
 		});
 	});
 	

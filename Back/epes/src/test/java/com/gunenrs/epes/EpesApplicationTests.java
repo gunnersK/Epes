@@ -8,6 +8,8 @@ class EpesApplicationTests {
 
     @Test
     void contextLoads() {
+        String a = "d";
+        System.out.println(a.getClass());
     }
 
 }

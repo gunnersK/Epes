@@ -1,22 +1,25 @@
-# 前端
+<a href="#front">前端</a>
+<a href="#back">后端</a>
+
+# <a name="front">前端</a> 
 
 - mui批量元素事件绑定
 
 	- 可用于监听列表item的事件，例如一个<div class='aa'\></div\>里面有几个<span\>类型的item，就可以这么写
 
-	```
-		mui(".aa").on('tap', 'span', function(){
-        	mui.openWindow({
-        		url: '....html'
-        	});
+    ```
+        mui(".aa").on('tap', 'span', function(){
+            mui.openWindow({
+            	url: '....html'
+            });
         });
-	```
-	
+    ```
+
 	- mui(选择器).on('事件名称', '选择器', 回调函数)
 
 - 前端服务器页面间传递数据可用localStorage 和 sessionStorage
 
-# 后端
+# <a name="back">后端</a> 
 
 - 跨域问题
 
@@ -56,4 +59,4 @@
 
     - 个人资料还要用图片服务器
 
-    - 部门管理的增删部门、员工还没做、项目管理的filt还没做、任务管理的filt和新建任务还没
+    - 任务管理的新建任务还得改改

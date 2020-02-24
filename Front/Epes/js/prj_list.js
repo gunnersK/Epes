@@ -48,7 +48,7 @@ mui.init({
 	var crePrj = document.getElementById('cre_prj');
 	crePrj.addEventListener('tap', function(){
 		mui.openWindow({
-			url: 'prj_filt.html'
+			url: 'new_prj.html'
 		});
 	});
 	 

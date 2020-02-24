@@ -6,10 +6,54 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.css" rel="stylesheet" />
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/prj_filt.css"/>
 	</head>
 
 	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">筛选条件</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
+			<button type="button" class="mui-btn" style="top: 0;">取消</button>
+		</nav>
+		<div id="" class="mui-content">
+			<div class="filt-area">
+				<!-- <div class="filt-bar"> -->
+					<ul id="list" class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right date" data-options='{"type":"date"}'>
+								创建日期始
+								<span class="result"></span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right date" data-options='{"type":"date"}'>
+								创建日期末
+								<span class="result"></span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a id = "status" class="mui-navigate-right" data-options='{"type":"date"}'>
+								选择状态
+								<span id = "status_result" class="result"></span>
+							</a>
+						</li>
+					</ul>
+				<!-- </div> -->
+				<!-- <div class="filt-bar"> -->
+					<ul id="list" class="">
+						
+					</ul> 
+				<!-- </div> -->
+			</div>
+		</div> 
 		<script src="js/mui.js"></script>
+		<script src="js/js/mui.picker.min.js"></script>
+		<script src="js/prj_filt.js"></script>	
 		<script type="text/javascript">
 			mui.init()
 		</script>
