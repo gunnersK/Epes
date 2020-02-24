@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/task_dis.css"/>
+		<style>
+			#mod_popover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#mod_popover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			.emp_popover {
+				height: 400px;
+				width: 250px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">任务分配</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" class="mui-btn" style="top: 0;">取消</button>
+			<button type="button" id="sel_emp_btn" class="mui-btn mui-btn-primary" style="top: 0;">选择员工</button>
+		</nav>
+		<div class="mui-content">
+			<!-- <h5 class="mui-content-padded">图标右对齐</h5> -->
+			<div class="mui-card" id="task_list">
+				<form class="mui-input-group">
+					<div class="mui-input-row mui-checkbox">
+						<span><a href="">smartpuller加impression_url</a></span>
+						<input name="checkbox1" value="Item 3" type="checkbox" >
+					</div>
+					<div class="mui-input-row mui-checkbox">
+						<span><a href="">campaign增加payout过滤</a></span>
+						<input name="checkbox1" value="Item 4" type="checkbox" checked>
+					</div>
+					<div class="mui-input-row mui-checkbox mui-disabled">
+						<span><a href="">checked：false</a></span>
+						<input name="checkbox1" type="checkbox" disabled="disabled">
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<script src="js/mui.js"></script>
+		<script src="js/task_dis.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

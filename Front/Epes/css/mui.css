@@ -1728,7 +1728,7 @@ input[type='submit']:enabled:active, input[type='submit'].mui-active:enabled,
 
 .mui-bar .mui-icon
 {
-    font-size: 24px;
+    font-size: 28px;
 
     position: relative;
     z-index: 20;
