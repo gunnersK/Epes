@@ -1,4 +1,4 @@
-package com.gunenrs.epes;
+package com.gunners.epes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
