@@ -1,5 +1,6 @@
 package com.gunners.epes.service;
 
+import com.gunners.epes.entity.Employee;
 import com.gunners.epes.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-02-27
  */
 public interface IUserService extends IService<User> {
+
+    public boolean deleteUserByEmpId(Employee employee);
 
 }

@@ -2,7 +2,6 @@ package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,14 +35,14 @@ public class Project implements Serializable {
      */
     private String prjDesc;
 
-    private LocalDateTime createTime;
+    private Integer createTime;
 
-    private LocalDateTime finishTime;
+    private Integer finishTime;
 
     /**
      * 0未开始，1进行中，2已完成，3已作废
      */
-    private String status;
+    private Integer status;
 
 
 }

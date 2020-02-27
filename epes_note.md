@@ -39,15 +39,16 @@
 
                     location / {
             #        location ~ test {
-                       root  /usr/local/upload/test;               //这里表示代理前端项目的路径
+                       root  /usr/local/upload/test;               #这里表示代理前端项目的路径
                        index tabbar.html;
                     }
-                    location /api {                                //这里是配置后台接口的路径，表示/api会映射到后台http://192.168.80.1:8080
+                    location /api {                                #这里是配置后台接口的路径，表示/api会映射到后台http://192.168.80.1:8080
                        rewrite      ^/api/(.*)$ /$1 break;
-                       proxy_pass   http://192.168.80.1:8080;      //这里注意ip(或域名)前面要加http
+                       proxy_pass   http://192.168.80.1:8080;      #这里注意ip(或域名)前面要加http
                     }
             #       access_log  logs/bhz.com.access.log  main;
                 }
+              }
 
             ```
       

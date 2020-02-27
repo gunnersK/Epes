@@ -2,7 +2,6 @@ package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +32,7 @@ public class Notice implements Serializable {
 
     private String content;
 
-    private LocalDateTime createTime;
+    private Integer createTime;
 
 
 }

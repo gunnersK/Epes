@@ -1,4 +1,5 @@
 (function($) {
+	console.log('');
 	/* 性别picker */
 	var genderPicker = new $.PopPicker();
 	genderPicker.setData([{
@@ -54,5 +55,28 @@
 			//return false;
 		});
 	}, false);
+	
+	var addBtn = document.getElementById('add_btn');
+	console.log('');
+	addBtn.addEventListener('tap', function(){
+		mui.ajax('api/employee/delete', {
+			// data:{
+			// 	"empId":"10000103",
+			// 	"empName":"张无",
+			// 	"password":"1111",
+			// 	"role":2
+			// },
+			data:{
+				"empId":"10000102"
+			},
+			
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			// headers:{'Content-Type':'application/json'},
+			success: function(data){
+				console.log(data.msg);
+			}
+		});
+	});
 	
 })(mui);

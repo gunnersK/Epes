@@ -2,7 +2,6 @@ package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
@@ -40,15 +39,15 @@ public class User implements Serializable {
     /**
      * 角色（0管理员，1部门主管，2普通员工）
      */
-    private String role;
+    private Integer role;
 
-    private LocalDateTime lastLoginTime;
+    private Integer lastLoginTime;
 
     /**
      * （0失效，1生效）
      */
     @TableField("isActive")
-    private String isActive;
+    private Integer isActive;
 
 
 }

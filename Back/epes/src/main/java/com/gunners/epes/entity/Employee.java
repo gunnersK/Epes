@@ -36,6 +36,11 @@ public class Employee implements Serializable {
     private String empName;
 
     /**
+     * 0男，1女
+     */
+    private Integer gender;
+
+    /**
      * 部门id
      */
     private Integer dpartId;
@@ -43,12 +48,12 @@ public class Employee implements Serializable {
     /**
      * 联系方式
      */
-    private String contract;
+    private String contact;
 
     /**
      * 0离职，1在职
      */
-    private String status;
+    private Integer status;
 
 
 }

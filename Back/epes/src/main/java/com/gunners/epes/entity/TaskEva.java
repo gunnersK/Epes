@@ -3,7 +3,6 @@ package com.gunners.epes.entity;
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,11 +36,11 @@ public class TaskEva implements Serializable {
      */
     private Integer taskId;
 
-    private LocalDateTime createTime;
+    private Integer createTime;
 
-    private LocalDateTime finishTime;
+    private Integer finishTime;
 
-    private LocalDateTime lastUpdTime;
+    private Integer lastUpdTime;
 
     /**
      * 任务得分
@@ -56,7 +55,7 @@ public class TaskEva implements Serializable {
     /**
      * 0未开始，1进行中，2已完成，3已作废
      */
-    private String status;
+    private Integer status;
 
 
 }

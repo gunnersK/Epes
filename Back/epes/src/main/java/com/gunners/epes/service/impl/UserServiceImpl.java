@@ -1,5 +1,8 @@
 package com.gunners.epes.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.gunners.epes.entity.Employee;
 import com.gunners.epes.entity.User;
 import com.gunners.epes.mapper.UserMapper;
 import com.gunners.epes.service.IUserService;
@@ -8,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author gunners
@@ -17,4 +20,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Override
+    public boolean deleteUserByEmpId(Employee employee) {
+        Wrapper queryWrapper = new QueryWrapper<User>().lambda()
+                .eq(User::getEmpId, employee.getEmpId());
+        return this.remove(queryWrapper);
+    }
 }

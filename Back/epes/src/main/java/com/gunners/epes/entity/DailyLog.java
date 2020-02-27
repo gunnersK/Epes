@@ -2,7 +2,6 @@ package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,14 +32,14 @@ public class DailyLog implements Serializable {
 
     private String content;
 
-    private LocalDateTime createTime;
+    private Integer createTime;
 
-    private LocalDateTime lastUpdTime;
+    private Integer lastUpdTime;
 
     /**
      * 0未审阅，1已审阅
      */
-    private String status;
+    private Integer status;
 
 
 }

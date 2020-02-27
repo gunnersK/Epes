@@ -19,6 +19,7 @@
         <mybatis.plus.version>3.3.1.tmp</mybatis.plus.version>
         <freemarker.version>2.3.28</freemarker.version>
         <mysql.version>5.1.47</mysql.version>
+        <guava-version>27.1-jre</guava-version>
     </properties>
 
     <dependencies>
@@ -31,7 +32,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <!--<scope>test</scope>-->
+        </dependency>
 
+        <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -58,6 +65,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!--guava-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava-version}</version>
+        </dependency>
+
         <!--freemarker-->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -66,17 +80,6 @@
             <!--<scope>test</scope>-->
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
 
     <build>

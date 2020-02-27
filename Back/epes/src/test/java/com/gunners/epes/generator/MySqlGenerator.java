@@ -20,7 +20,7 @@ public class MySqlGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
 //        String projectPath = System.getProperty("/project/Epes/Back/epes");
-        String projectPath = "/project/Epes/Back/epes";
+        String projectPath = "E:/0000gunners/Larry/Epes/Back/epes";
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("gunners");
         gc.setOpen(false);

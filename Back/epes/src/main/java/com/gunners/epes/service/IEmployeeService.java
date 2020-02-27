@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IEmployeeService extends IService<Employee> {
 
+    public boolean deleteEmployeeByEmpId(Employee employee);
+
 }
