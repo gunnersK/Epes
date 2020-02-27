@@ -7,6 +7,10 @@
  * MUI核心JS
  * @type _L4.$|Function
  */
+var urlPattern = {
+	// value: "http://192.168.43.21:8080"
+	value: "api"
+}
 var mui = (function(document, undefined) {
 	var readyRE = /complete|loaded|interactive/;
 	var idSelectorRE = /^#([\w-]+)$/;
