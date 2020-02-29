@@ -58,7 +58,6 @@
 	var addBtn = document.getElementById('add_btn');
 	addBtn.addEventListener('tap', function(){
 		mui.ajax(urlPattern.value+'/employee/delete', {
-		// mui.ajax('api/employee/delete', {
 			// data:{
 			// 	"empId":"10000103",
 			// 	"empName":"张无",

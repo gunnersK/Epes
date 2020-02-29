@@ -8,8 +8,9 @@
  * @type _L4.$|Function
  */
 var urlPattern = {
-	// value: "http://192.168.43.21:8080"
-	value: "api"
+	// value: "http://192.168.43.21:8080" ,//手机调试,自己电脑
+	value: "http://192.168.43.128:8080" //手机调试,公司电脑
+	// value: "api" //nginx
 }
 var mui = (function(document, undefined) {
 	var readyRE = /complete|loaded|interactive/;

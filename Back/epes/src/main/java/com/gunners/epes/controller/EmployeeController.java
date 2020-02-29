@@ -6,8 +6,12 @@ import com.gunners.epes.entity.User;
 import com.gunners.epes.service.IEmployeeService;
 import com.gunners.epes.service.IUserService;
 import com.gunners.epes.utils.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/employee")
+@Slf4j
 public class EmployeeController {
 
     @Autowired
@@ -35,9 +40,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/delete")
-    public Response deleteEmployee(Employee employee){
+    public Response deleteEmployee(Employee employee, HttpServletRequest req){
         employeeService.deleteEmployeeByEmpId(employee);
         userService.deleteUserByEmpId(employee);
+        log.info(req.getSession().getId());
         return Response.ok();
     }
 
