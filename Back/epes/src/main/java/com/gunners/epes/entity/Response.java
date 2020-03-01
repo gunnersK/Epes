@@ -1,9 +1,6 @@
-package com.gunners.epes.utils;
-
-import com.google.common.collect.Lists;
+package com.gunners.epes.entity;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class Response implements Serializable {
 

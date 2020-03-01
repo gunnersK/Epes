@@ -32,9 +32,9 @@ public class DailyLog implements Serializable {
 
     private String content;
 
-    private Integer createTime;
+    private Long createTime;
 
-    private Integer lastUpdTime;
+    private Long lastUpdTime;
 
     /**
      * 0未审阅，1已审阅

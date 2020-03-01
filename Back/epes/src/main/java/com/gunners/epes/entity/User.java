@@ -41,7 +41,7 @@ public class User implements Serializable {
      */
     private Integer role;
 
-    private Integer lastLoginTime;
+    private Long lastLoginTime;
 
     /**
      * （0失效，1生效）

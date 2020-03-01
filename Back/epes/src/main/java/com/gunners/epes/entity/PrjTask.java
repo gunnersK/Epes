@@ -40,9 +40,9 @@ public class PrjTask implements Serializable {
      */
     private Integer weight;
 
-    private Integer createTime;
+    private Long createTime;
 
-    private Integer finishTime;
+    private Long finishTime;
 
     /**
      * 任务描述

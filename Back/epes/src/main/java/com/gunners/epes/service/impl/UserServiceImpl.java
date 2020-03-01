@@ -26,4 +26,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .eq(User::getEmpId, employee.getEmpId());
         return this.remove(queryWrapper);
     }
+
+    @Override
+    public int updateUserByEmpId(User user) {
+        Wrapper updateWrapper = new QueryWrapper<User>().lambda()
+                .eq(User::getEmpId, user.getEmpId());
+        return this.baseMapper.update(user, updateWrapper);
+    }
 }

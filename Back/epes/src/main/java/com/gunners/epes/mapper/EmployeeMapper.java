@@ -13,4 +13,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface EmployeeMapper extends BaseMapper<Employee> {
 
+    public Employee getLastEmp(String subId);
+
+    public int deleteByDpartId(Integer dpartId);
+
 }

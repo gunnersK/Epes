@@ -36,11 +36,11 @@ public class TaskEva implements Serializable {
      */
     private Integer taskId;
 
-    private Integer createTime;
+    private Long createTime;
 
-    private Integer finishTime;
+    private Long finishTime;
 
-    private Integer lastUpdTime;
+    private Long lastUpdTime;
 
     /**
      * 任务得分

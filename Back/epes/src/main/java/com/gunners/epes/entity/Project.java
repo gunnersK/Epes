@@ -35,9 +35,9 @@ public class Project implements Serializable {
      */
     private String prjDesc;
 
-    private Integer createTime;
+    private Long createTime;
 
-    private Integer finishTime;
+    private Long finishTime;
 
     /**
      * 0未开始，1进行中，2已完成，3已作废

@@ -1,4 +1,4 @@
-package com.gunners.epes.generator;
+package com.gunners.epes.mybatisPlus.generator;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;

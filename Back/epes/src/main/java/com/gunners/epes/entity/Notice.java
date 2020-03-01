@@ -32,7 +32,7 @@ public class Notice implements Serializable {
 
     private String content;
 
-    private Integer createTime;
+    private Long createTime;
 
 
 }

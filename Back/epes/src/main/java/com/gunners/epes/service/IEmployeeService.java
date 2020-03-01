@@ -3,6 +3,8 @@ package com.gunners.epes.service;
 import com.gunners.epes.entity.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,6 +15,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IEmployeeService extends IService<Employee> {
 
-    public boolean deleteEmployeeByEmpId(Employee employee);
+    public boolean deleteByEmpId(Employee employee);
+
+    public List<Employee> listByDpartId(Integer dpartId);
+
+    public Employee getLastEmp(String subId);
+
+    public int updateEmployee(Employee employee);
+
+    public boolean deleteByDpartId(Integer dpartId);
 
 }

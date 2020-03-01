@@ -30,7 +30,7 @@ public class Login implements Serializable {
 
     private Integer userId;
 
-    private Integer loginTime;
+    private Long loginTime;
 
 
 }

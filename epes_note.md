@@ -54,7 +54,11 @@
       
       教程：https://www.jianshu.com/p/849f58eb0614
     
+- 中文存mysql乱码：在properties文件中定义定义数据源时加上characterEncoding=UTF-8      
+  
 - 给每个绩效的实体类添加一个评分状态的属性，这是数据库没有的字段，然后和任务记录一起存到redis，然后主管筛选任务列表的页面就多加个评分状态的属性
+
+- 碰到了spring无法为静态变量自动注入的问题
 
 - 公告和日志记录也存在redis
 

@@ -2,4 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gunners.epes.mapper.EmployeeMapper">
 
+    <select id="getLastEmp" resultType="com.gunners.epes.entity.Employee">
+        select * from employee
+        where emp_id like #{subId}"__"
+        order by id desc
+        limit 1
+    </select>
+
+    <delete id="deleteByDpartId">
+        delete from employee
+        where dpart_id = #{dpartId}
+    </delete>
+
 </mapper>

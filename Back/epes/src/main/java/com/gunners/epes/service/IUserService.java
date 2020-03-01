@@ -16,4 +16,6 @@ public interface IUserService extends IService<User> {
 
     public boolean deleteUserByEmpId(Employee employee);
 
+    public int updateUserByEmpId(User user);
+
 }
