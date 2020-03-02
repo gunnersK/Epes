@@ -107,4 +107,22 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>home</id>
+            <properties>
+                <spring.active>home</spring.active>
+            </properties>
+            <!--<activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>-->
+        </profile>
+        <profile>
+            <id>company</id>
+            <properties>
+                <spring.active>company</spring.active>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>

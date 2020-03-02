@@ -19,8 +19,8 @@ public class TestRedisson {
     @Test
     public void testRedisson(){
         List<String> list = redissonClient.getList("list1");
-//        list.add("aa");
-//        list.add("bb");
+        list.add("aa");
+        list.add("bb");
         list = redissonClient.getList("list1");
         list.forEach( x -> {
             System.out.println(x);

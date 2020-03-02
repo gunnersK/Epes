@@ -1,0 +1,15 @@
+clusterServersConfig:
+  nodeAddresses:
+    - "redis://192.168.1.126:30001"
+    - "redis://192.168.1.126:30002"
+    - "redis://192.168.1.126:30003"
+    - "redis://192.168.1.126:30004"
+    - "redis://192.168.1.126:30005"
+    - "redis://192.168.1.126:30006"
+  slaveSubscriptionConnectionMinimumIdleSize: 1
+  slaveSubscriptionConnectionPoolSize: 5
+  slaveConnectionMinimumIdleSize: 5
+  slaveConnectionPoolSize: 30
+  masterConnectionMinimumIdleSize: 5
+  masterConnectionPoolSize: 30
+  readMode: "SLAVE"
