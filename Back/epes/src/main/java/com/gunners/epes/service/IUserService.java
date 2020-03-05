@@ -18,4 +18,6 @@ public interface IUserService extends IService<User> {
 
     public int updateUserByEmpId(User user);
 
+    public User authentication(User user);
+
 }

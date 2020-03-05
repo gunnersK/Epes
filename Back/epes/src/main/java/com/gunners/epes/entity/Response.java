@@ -13,17 +13,27 @@ public class Response implements Serializable {
     // 响应中的数据
     private Object data;
 
+    public static Response ok(){
+        return new Response(null);
+    }
+
     public static Response ok(Object data) {
         return new Response(data);
     }
 
-    public static Response ok(){
-        return new Response(null);
+    public static Response ok(Object data, String msg){
+        return new Response(data, msg);
     }
 
     public Response(Object data){
         this.status = "200";
         this.msg = "success";
+        this.data = data;
+    }
+
+    public Response(Object data, String msg){
+        this.status = "200";
+        this.msg = msg;
         this.data = data;
     }
 

@@ -6,6 +6,7 @@
     <title></title>
     <link href="css/mui.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
 	<style type="text/css">
 		.mui-btn {
 			padding: 10px;
@@ -36,6 +37,9 @@
 				<input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
 			</div>
 		</form>
+		<div class="failure-msg" id="failure_msg">
+			用户名或密码不存在
+		</div>
 		<div style="height: 15px;"></div>
 		<div class="mui-content-padded">
 			<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
@@ -44,7 +48,7 @@
 		</div>
 	</div>
 	
-	<script src="js/mui.min.js"></script>
+	<script src="js/mui.js"></script>
 	<!-- <script type="text/javascript" src="js/jquery-3.2.1.js"></script> -->
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" charset="utf-8">

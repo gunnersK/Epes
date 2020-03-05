@@ -5,6 +5,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Component
@@ -34,5 +35,14 @@ public class RedissonUtils {
     public String getTransmitId(String partnerId, String key){
         RMap<String, String> map = redissonClient.getMap(partnerId);
         return map.get(key);
+    }
+
+    /**
+     * 将用户session保存进redis
+     * @param session
+     */
+    public void saveSession(String sessionID, HttpSession session){
+        RMap<String, HttpSession> map = redissonClient.getMap("epes_session");
+        map.put(sessionID, session);
     }
 }

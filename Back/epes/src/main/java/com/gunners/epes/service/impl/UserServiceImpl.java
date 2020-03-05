@@ -1,5 +1,7 @@
 package com.gunners.epes.service.impl;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.CharsetUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gunners.epes.entity.Employee;
@@ -32,5 +34,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         Wrapper updateWrapper = new QueryWrapper<User>().lambda()
                 .eq(User::getEmpId, user.getEmpId());
         return this.baseMapper.update(user, updateWrapper);
+    }
+
+    @Override
+    public User authentication(User user) {
+        user.setPassword(Base64.encode(user.getPassword(), CharsetUtil.UTF_8));
+        Wrapper queryWrapper = new QueryWrapper<User>().lambda()
+                .eq(User::getEmpId, user.getEmpId())
+                .eq(User::getPassword, user.getPassword());
+        return this.getOne(queryWrapper);
     }
 }
