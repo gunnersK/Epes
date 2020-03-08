@@ -13,7 +13,7 @@
 			success: function(data){
 				if(data.status == "200"){
 					mui.back(function(){
-						mui.toast('发布成功', { duration:'long', type:'div' });
+						
 					});
 				}
 			}

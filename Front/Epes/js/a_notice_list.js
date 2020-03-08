@@ -1,8 +1,26 @@
+mui.init({
+  pullRefresh : {
+    container:'#pullrefresh',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+    up : {
+      height:50,//可选.默认50.触发上拉加载拖动距离
+      // auto:true,//可选,默认false.自动上拉加载一次
+      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+      callback :pullupRefresh//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+    }
+  }
+}); 
+	
+window.addEventListener('refresh', function(e){//执行刷新
+	  location.reload();
+});
+
 (function($){
+	
 	var search = document.getElementById('search');
 	search.blur();
 	
-	loadAllNtc();
+	loadFirstPage();
 	
 	/* 公告item */
 	mui("#ntc_list").on('tap', '.mui-table-view-cell', function(){
@@ -41,6 +59,8 @@
 					success: function(data){
 						if(data.status == "200"){
 							li.parentNode.removeChild(li);
+							location.reload();
+							mui('#pullrefresh').pullRefresh().refresh(true); //重置上拉加载
 							mui.toast('删除成功', { duration:'long', type:'div' });
 						}
 					}
@@ -50,7 +70,7 @@
 					$.swipeoutClose(li);
 				}, 0);
 			}
-		});
+		}, 'div');
 	});
 	var btnArray = ['确认', '取消'];
 	
@@ -66,48 +86,67 @@
 
 /* 搜索框监听 */
 $("#search").keyup(function(){
-	mui.ajax(urlPattern.value+'/notice/search', {
-		data: {
-			"keyWord": document.getElementById('search').value
-		},
-		// async: false,
-		dataType:'json',//服务器返回json格式数据
-		type:'get',//HTTP请求类型
-		success: function(data){
-			if(data.status == "200"){
-				$(".ntc-item").remove();
-				for(i = 0; i < data.data.length; i++){
-					var time = data.data[i].createTime;
-					var item = "<li class='mui-table-view-cell ntc-item' id="+data.data[i].ntId+">"
-						+"<div class='mui-slider-right mui-disabled'><a class='mui-btn mui-btn-red'>删除</a></div>"
-						+"<div class='mui-table mui-slider-handle'><div class='mui-table-cell mui-col-xs-10'>"
-						+"<h4 class='mui-ellipsis'>"+data.data[i].title+"</h4><h5>"+EPES.formatDateTime(time * 1000)+"</h5></div></div></li>"
-					$("#ntc_list").append(item);
-				} 
-			}
-		}
-	});
+	loadFirstPage();
+	
+	mui('#pullrefresh').pullRefresh().refresh(true); //重置上拉加载
 })
 
-/* 加载所有公告 */
-function loadAllNtc(){
+/* 加载第一页数据 */
+function loadFirstPage(){
 	mui.ajax(urlPattern.value+'/notice/list', {
+		data: {
+			"page": 1,
+			"size":10,
+			"title": document.getElementById('search').value
+		},
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
 			if(data.status == "200"){
 				$(".ntc-item").remove();
-				for(i = 0; i < data.data.length; i++){
-					var time = data.data[i].createTime;
-					var item = "<li class='mui-table-view-cell ntc-item' id="+data.data[i].ntId+">"
-						+"<div class='mui-slider-right mui-disabled'><a class='mui-btn mui-btn-red'>删除</a></div>"
-						+"<div class='mui-table mui-slider-handle'><div class='mui-table-cell mui-col-xs-10'>"
-						+"<h4 class='mui-ellipsis'>"+data.data[i].title+"</h4><h5>"+EPES.formatDateTime(time * 1000)+"</h5></div></div></li>"
-					$("#ntc_list").append(item);
-				} 
+				addItem(data);
 			}
 		}
 	});
+}
+
+var current = 1;
+/* 下拉刷新加载下一页 */
+function pullupRefresh() {
+	setTimeout(function() {
+		current++;
+		mui.ajax(urlPattern.value+'/notice/list', {
+			data: {
+				"page": current,
+				"size": 10,
+				"title": document.getElementById('search').value
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'get',//HTTP请求类型
+			success: function(data){	
+				if(data.status == "200"){
+					addItem(data);
+				}
+				if(data.data.length == 0){
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
+					current = 1;
+				}
+			}
+		});
+		mui('#pullrefresh').pullRefresh().endPullupToRefresh(false); //参数为true代表没有更多数据了。
+	}, 500);
+}
+
+/* 刷新时添加公告item */
+function addItem(data){
+	for(i = 0; i < data.data.length; i++){
+		var time = data.data[i].createTime;
+		var item = "<li class='mui-table-view-cell ntc-item' id="+data.data[i].ntId+">"
+			+"<div class='mui-slider-right mui-disabled'><a class='mui-btn mui-btn-red'>删除</a></div>"
+			+"<div class='mui-table mui-slider-handle'><div class='mui-table-cell mui-col-xs-10'>"
+			+"<h4 class='mui-ellipsis'>"+data.data[i].title+"</h4><h5>"+EPES.formatDateTime(time * 1000)+"</h5></div></div></li>"
+		$("#ntc_list").append(item);
+	} 
 }
 
 Date.prototype.format = function(format){ 
@@ -133,7 +172,7 @@ Date.prototype.format = function(format){
 	
 	
 	
-	var EPES = {
+	var EPES = {	
 			// 格式化时间
 			formatDateTime : function(val,row){
 				var now = new Date(val);

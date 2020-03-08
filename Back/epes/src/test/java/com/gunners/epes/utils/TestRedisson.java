@@ -2,6 +2,7 @@ package com.gunners.epes.utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,5 +28,21 @@ public class TestRedisson {
         });
 //        System.out.println(redissonClient.getList("list1"));
     }
+
+    @Test
+    public void testExist(){
+        RMap map = redissonClient.getMap("mapaaa");
+        map.put("key1", "map1");
+    }
+
+    @Test
+    public void testExist2(){
+        RMap map = redissonClient.getMap("mapaaa");
+        map.forEach((k, v) -> {
+            System.out.println(k+":"+v);
+        });
+    }
+
+
 }
 

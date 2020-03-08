@@ -2,6 +2,7 @@ package com.gunners.epes.service;
 
 import com.gunners.epes.entity.Notice;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gunners.epes.entity.vo.NoticeVo;
 
 import java.util.List;
 
@@ -15,5 +16,6 @@ import java.util.List;
  */
 public interface INoticeService extends IService<Notice> {
 
-    public List<Notice> searchByKeyword(String keyWord);
+    public List<Notice> listNotice(NoticeVo noticeVo);
+
 }

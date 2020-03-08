@@ -44,5 +44,10 @@ public class Project implements Serializable {
      */
     private Integer status;
 
+    /**
+     * 关联项目数
+     */
+    private Integer releTaskNum;
+
 
 }

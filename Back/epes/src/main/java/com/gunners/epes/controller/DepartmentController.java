@@ -1,11 +1,12 @@
 package com.gunners.epes.controller;
 
 
+import com.gunners.epes.constants.SessionKeyConstants;
 import com.gunners.epes.entity.Department;
 import com.gunners.epes.service.IDepartmentService;
 import com.gunners.epes.entity.Response;
 import com.gunners.epes.service.IEmployeeService;
-import com.gunners.epes.utils.RedissonUtils;
+import com.gunners.epes.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -32,7 +35,7 @@ import java.util.List;
 public class DepartmentController {
 
     @Autowired
-    RedissonUtils redissonUtils;
+    SessionUtils sessionUtils;
 
     @Autowired
     RedissonClient redissonClient;
@@ -64,13 +67,13 @@ public class DepartmentController {
 
     @PostMapping("/transId")
     public Response transmitId(Integer dpartId){
-        redissonUtils.setTransmitId("admin_id", "dpart_id", String.valueOf(dpartId));
+        sessionUtils.putIntoSession(SessionKeyConstants.DPART_ID, dpartId);
         return Response.ok();
     }
 
     @GetMapping("/getDpart")
     public Response getDpartById(){
-        Integer dpartId = Integer.valueOf(redissonUtils.getTransmitId("admin_id", "dpart_id"));
+        Integer dpartId = (Integer) sessionUtils.getFromSession(SessionKeyConstants.DPART_ID);
         Department dpart = departmentService.getById(dpartId);
         return Response.ok(dpart);
     }

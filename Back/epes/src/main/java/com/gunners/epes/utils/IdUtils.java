@@ -2,6 +2,7 @@ package com.gunners.epes.utils;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import com.gunners.epes.constants.SessionKeyConstants;
 import com.gunners.epes.entity.Employee;
 import com.gunners.epes.service.IEmployeeService;
 import com.gunners.epes.service.impl.EmployeeServiceImpl;
@@ -18,7 +19,7 @@ public class IdUtils {
     private IEmployeeService employeeService;
 
     @Autowired
-    RedissonUtils redissonUtils;
+    SessionUtils sessionUtils;
 
     /**
      * 生成员工id
@@ -26,9 +27,11 @@ public class IdUtils {
      */
     public String generateEmpId(){
         //部门id
-        String dpartId = redissonUtils.getTransmitId("admin_id", "dpart_id");
-        if(Integer.valueOf(dpartId) < 10){
-            dpartId = 0 + dpartId;
+        String dpartId = "";
+        Integer temp = (Integer)sessionUtils.getFromSession(SessionKeyConstants.DPART_ID);
+        dpartId += "" + temp;
+        if(temp < 10){
+            dpartId = "0" + temp;
         }
 
         //日期

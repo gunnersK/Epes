@@ -20,4 +20,6 @@ public interface IUserService extends IService<User> {
 
     public User authentication(User user);
 
+    public boolean validPasswd(String old_passwd);
+
 }

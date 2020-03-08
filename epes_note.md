@@ -54,9 +54,21 @@
       
       教程：https://www.jianshu.com/p/849f58eb0614
     
-- 中文存mysql乱码：在properties文件中定义定义数据源时加上characterEncoding=UTF-8      
+- 中文存mysql乱码：在properties文件中定义定义数据源时加上characterEncoding=UTF-8     
+
+- 把页面间传递的id以及过滤条件放redis中该用户的session中
+
+- redis放一些以id为key的实体类对象，方便查询
+
+	- redis放热数据（经常访问的数据），但需要条件查询或者分页的数据还是要去sql数据库查，这些数据不能放redis
+
+- 优化缓存service为单例模式
+
+- 部门管理那些员工信息还没有放redis
   
-- 给每个绩效的实体类添加一个评分状态的属性，这是数据库没有的字段，然后和任务记录一起存到redis，然后主管筛选任务列表的页面就多加个评分状态的属性
+- 给每个绩效的实体类添加一个评分状态的属性，这是数据库没有的字段，然后和任务记录一起存到redis，然后主管筛选任务列表的页面就多加个评分状态的属性（有待验证可行性）
+
+- mybatis-plus使用IPage分页需要在config类中配置分页的bean
 
 - 碰到了spring无法为静态变量自动注入的问题
 

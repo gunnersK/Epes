@@ -4,6 +4,7 @@ package com.gunners.epes.controller;
 import cn.hutool.core.codec.Base32;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.CharsetUtil;
+import com.gunners.epes.constants.SessionKeyConstants;
 import com.gunners.epes.entity.EmpInfo;
 import com.gunners.epes.entity.Employee;
 import com.gunners.epes.entity.User;
@@ -12,14 +13,16 @@ import com.gunners.epes.service.IEmployeeService;
 import com.gunners.epes.service.IUserService;
 import com.gunners.epes.entity.Response;
 import com.gunners.epes.utils.IdUtils;
-import com.gunners.epes.utils.RedissonUtils;
+import com.gunners.epes.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
+import org.redisson.api.TransactionOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -37,7 +40,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    RedissonUtils redissonUtils;
+    SessionUtils sessionUtils;
 
     @Autowired
     IdUtils idUtils;
@@ -83,22 +86,29 @@ public class EmployeeController {
     }
 
     @GetMapping("/list")
-    public Response listEmployee(){
-        Integer dpartId = Integer.valueOf(redissonUtils.getTransmitId("admin_id", "dpart_id"));
+    public Response listEmployee(HttpSession session){
+        Integer dpartId = (Integer) sessionUtils.getFromSession(SessionKeyConstants.DPART_ID);
         List list = employeeService.listByDpartId(dpartId);
         return Response.ok(list);
     }
 
     @PostMapping("/transId")
     public Response transmitId(String empId){
-        redissonUtils.setTransmitId("admin_id", "emp_id", empId);
+        sessionUtils.putIntoSession(SessionKeyConstants.EMP_ID, empId);
         return Response.ok();
     }
 
     @GetMapping("/getEmpInfo")
     public Response getEmpInfo(){
-        String empId = redissonUtils.getTransmitId("admin_id", "emp_id");
+        String empId = (String) sessionUtils.getFromSession(SessionKeyConstants.EMP_ID);
         EmpInfo empInfo = empInfoService.getEmpInfo(empId);
+        return Response.ok(empInfo);
+    }
+
+    @GetMapping("/getProfile")
+    public Response getProfile(){
+        User user = (User) sessionUtils.getFromSession(SessionKeyConstants.USER);
+        EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
         return Response.ok(empInfo);
     }
 

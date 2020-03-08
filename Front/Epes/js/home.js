@@ -1,26 +1,31 @@
 // $(function(){
-	var btns = document.getElementsByClassName("ind-btn-div");
-	// for(i = 0; i < btns.length; i++){
-	// 	btns[i].style.display = "none";
-	// } 
-	Array.prototype.map.call(btns,function(e){
-		// console.log(e);
-		// e.style.display = "none";
-	})	
-	 
-	var role = 0;
 	
-	if(role == 0){
-		initAdmin();
-	} else if(role == 1){
-		initDirector();
-	} else if(role == 2){
-		initEmployee();
-	}/* else{
-		mui.openWindow({
-			url: 'index.html'
-		});
-	} */
+	mui.ajax(urlPattern.value+'/login/getUser', {
+		async: true,
+		dataType:'json',//服务器返回json格式数据
+		type:'get',//HTTP请求类型
+		success: function(data){
+			if(data.status == "200"){
+				var role = data.data.role
+				if(role == 0){
+					initAdmin();
+				} else if(role == 1){
+					initDirector();
+				} else if(role == 2){
+					initEmployee();
+				}
+			}
+		}
+	});
+	
+	var btns = document.getElementsByClassName("ind-btn-div");
+	for(i = 0; i < btns.length; i++){
+		btns[i].style.display = "none";
+	} 
+	// Array.prototype.map.call(btns,functions(e){
+	// 	console.log(e);
+	// 	e.style.display = "none";
+	// })	
 	
 	function initAdmin(){
 		var btns = document.getElementsByClassName("admin");
@@ -54,6 +59,9 @@
 	var ntcManaBtn = document.getElementById('ntc_mana_btn');
 	var prjManaBtn = document.getElementById('prj_mana_btn');
 	var taskManaBtn = document.getElementById('task_mana_btn');
+	
+	/* 左上退出 */
+	var logoutBtn = document.getElementById('log_out');
 	
 	/* 公告 */
 	var allNtc = document.getElementById('all_ntc');
@@ -133,6 +141,24 @@
 		});
 	});
 	
+	/* 左上退出 */
+	logoutBtn.addEventListener('tap', function(){
+		mui.confirm(' ', '确定退出登录?', btnArray, function(e) {
+			if (e.index == 0) {
+				mui.ajax(urlPattern.value+'/login/logout', {
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					success: function(data){
+						if(data.status == "200"){
+							mui.back();
+						}
+					}
+				});
+			}
+		}, 'div');
+	});
+	var btnArray = ['确认', '取消'];
+	
 	/* 查看全部(公告) */
 	allNtc.addEventListener('tap', function(){
 		mui.openWindow({
@@ -154,7 +180,6 @@
 		});
 		mui('#topPopover').popover('toggle');//show hide toggle
 	});
-// });
 
 // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('chart'));
