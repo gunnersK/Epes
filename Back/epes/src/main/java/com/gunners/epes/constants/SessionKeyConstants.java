@@ -12,4 +12,8 @@ public class SessionKeyConstants {
 
    public static final String NOTICE_ID = "notice_id";
 
+   public static final String PROJECT_START_TIME = "project_start_time";
+
+   public static final String PROJECT_END_TIME = "project_end_time";
+
 }
