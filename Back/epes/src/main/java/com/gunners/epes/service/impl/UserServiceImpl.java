@@ -14,6 +14,7 @@ import com.gunners.epes.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.function.Predicate;
 
 /**
@@ -54,8 +55,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public boolean validPasswd(String old_passwd) {
-        User user = (User) sessionUtils.getFromSession(SessionKeyConstants.USER);
+    public boolean validPasswd(HttpSession session, String old_passwd) {
+        User user = (User) sessionUtils.getFromSession(session, SessionKeyConstants.USER);
         Predicate<String> predicate = (passwd) -> {
             return user.getPassword().equals(Base64.encode(passwd, CharsetUtil.UTF_8));
         };

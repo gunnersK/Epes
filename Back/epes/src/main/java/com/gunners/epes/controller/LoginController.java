@@ -52,32 +52,32 @@ public class LoginController {
     public Response login(User user, HttpSession session){
         User u = userservice.authentication(user);
         if(!Objects.isNull(u)){
-            sessionUtils.saveSession(session.getId());
-            sessionUtils.putIntoSession(SessionKeyConstants.USER, u);
+            sessionUtils.saveSession(session);
+            sessionUtils.putIntoSession(session, SessionKeyConstants.USER, u);
             return Response.ok();
         }
         return Response.ok(null, "failure");
     }
 
     @GetMapping("/getUser")
-    public Response getUser(){
-        User user = (User) sessionUtils.getFromSession(SessionKeyConstants.USER);
+    public Response getUser(HttpSession session){
+        User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
         return Response.ok(user);
     }
 
     @PostMapping("/logout")
-    public Response logout(){
-        sessionUtils.clearSession();
+    public Response logout(HttpSession session){
+        sessionUtils.clearSession(session);
         return Response.ok();
     }
 
     @PostMapping("/modifyPwd")
-    public Response modifyPassword(String old_passwd, String new_passwd){
-        if(userservice.validPasswd(old_passwd)){
-            User user = (User) sessionUtils.getFromSession(SessionKeyConstants.USER);
+    public Response modifyPassword(HttpSession session, String old_passwd, String new_passwd){
+        if(userservice.validPasswd(session, old_passwd)){
+            User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
             user.setPassword(Base64.encode(new_passwd, CharsetUtil.UTF_8));
             userservice.updateUserByEmpId(user);
-            sessionUtils.putIntoSession(SessionKeyConstants.USER, user);
+            sessionUtils.putIntoSession(session, SessionKeyConstants.USER, user);
             return Response.ok();
         }
         return Response.ok(null, "failure");

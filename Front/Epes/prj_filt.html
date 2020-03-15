@@ -17,8 +17,7 @@
 			<h1 class="mui-title">筛选条件</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
-			<button type="button" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
-			<button type="button" class="mui-btn" style="top: 0;">取消</button>
+			<button type="button" id="confirm" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
 		</nav>
 		<div id="" class="mui-content">
 			<div class="filt-area">
@@ -27,19 +26,19 @@
 						<li class="mui-table-view-cell">
 							<a class="mui-navigate-right date" data-options='{"type":"date"}'>
 								创建日期始
-								<span class="result"></span>
+								<span class="result" id="start_res" data=""></span>
 							</a>
 						</li>
 						<li class="mui-table-view-cell">
 							<a class="mui-navigate-right date" data-options='{"type":"date"}'>
 								创建日期末
-								<span class="result"></span>
+								<span class="result" id="end_res" data=""></span>
 							</a>
 						</li>
 						<li class="mui-table-view-cell">
 							<a id = "status" class="mui-navigate-right" data-options='{"type":"date"}'>
 								选择状态
-								<span id = "status_result" class="result"></span>
+								<span id = "status_result" data="" class="result"></span>
 							</a>
 						</li>
 					</ul>
@@ -55,7 +54,16 @@
 		<script src="js/js/mui.picker.min.js"></script>
 		<script src="js/prj_filt.js"></script>	
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				beforeback: function() {　　　　
+					var list = plus.webview.currentWebview().opener();　　　　
+					//refresh是A页面自定义事件
+					mui.fire(list, 'refresh');
+					// mui.toast('发布成功', { duration:'long', type:'div' });
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			})
 		</script>
 	</body>
 

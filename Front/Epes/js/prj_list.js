@@ -19,32 +19,66 @@ mui.init({
 	}
 });
 
+window.addEventListener('refresh', function(e){//执行刷新
+	  location.reload();
+});
+
 (function($){
+	var search = document.getElementById('search');
+	search.blur();
 	
 	loadFirstPage();
 	
 	/* 右上角过滤 */
-	var filt_btn = document.getElementById('filt_btn');
-	filt_btn.addEventListener('tap', function(){
+	var filBtn = document.getElementById('filt_btn');
+	filBtn.addEventListener('tap', function(){
 		mui.openWindow({
 			url: 'prj_filt.html'
 		});
 	});
 	
 	/* 项目item */
-	mui(".prj-list").on('tap', '.mui-table-view-cell', function(){
-		mui.openWindow({
-			url: 'prj_detail.html'
+	mui("#prj_list").on('tap', '.mui-table-view-cell', function(){
+		mui.ajax(urlPattern.value+'/project/transId', {
+			data: {
+				"prjId": this.id
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			success: function(data){
+				if(data.status == "200"){
+					mui.openWindow({
+						url: 'prj_detail.html'
+					});
+				}
+			},
+			error: function(){
+				mui.toast('失败', { duration:'long', type:'div' });
+			}
 		});
 	});
 	
 	/* 项目item右滑删除 */
-	$('.prj-list').on('tap', '.mui-btn', function(event) {
+	$('#prj_list').on('tap', '.mui-btn', function(event) {
 		var elem = this;
 		var li = elem.parentNode.parentNode;
 		mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
 			if (e.index == 0) {
-				li.parentNode.removeChild(li);
+				mui.ajax(urlPattern.value+'/project/delete', {
+					data: {
+						"prjId": li.id
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					success: function(data){
+						if(data.status == "200"){
+							li.parentNode.removeChild(li);
+							location.reload();
+							mui('#pullrefresh').pullRefresh().refresh(true); //重置上拉加载
+							mui.toast('删除成功', { duration:'long', type:'div' });
+						}
+					}
+				});
 			} else {
 				setTimeout(function() {
 					$.swipeoutClose(li);
@@ -64,13 +98,20 @@ mui.init({
 	 
 })(mui);
 
+/* 搜索框监听 */
+$("#search").keyup(function(){
+	loadFirstPage();
+	
+	mui('#pullrefresh').pullRefresh().refresh(true); //重置上拉加载
+}) 
+
 /* 加载第一页数据 */
 function loadFirstPage(){
 	mui.ajax(urlPattern.value+'/project/list', {
 		data: {
 			"page": 1,
 			"size":10,
-			"title": document.getElementById('search').value
+			"prjName": document.getElementById('search').value
 		},
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
@@ -92,7 +133,7 @@ function pullupRefresh() {
 			data: {
 				"page": current,
 				"size": 10,
-				"title": document.getElementById('search').value
+				"prjName": document.getElementById('search').value
 			},
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
@@ -124,9 +165,5 @@ function addItem(data){
 /**
  * 下拉刷新具体业务实现
  */
-function pulldownRefresh() {
-	setTimeout(function() {
-		mui('#prj_list').pullRefresh().endPulldownToRefresh(); //refresh completed
-	}, 1000);
-}
+	 
 

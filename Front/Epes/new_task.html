@@ -17,7 +17,7 @@
 			<h1 class="mui-title">新建任务</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
-			<button type="button" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
+			<button type="button" id="confirm" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
 		</nav>
 		<div id="" class="mui-content">
 			<div class="info-item">
@@ -26,31 +26,32 @@
 			</div>
 			<div class="info-item">
 				<label>所属项目：</label>
-				<input type="text" id="prj" value="">
+				<input type="text" id="prj" value="" data="">
 			</div>
 			<div class="info-item">
 				权重：
 				<div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='10'>
 				  <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
-				  <input class="mui-numbox-input" type="number" value="5" />
+				  <input class="mui-numbox-input" id="weight" type="number" value="5" />
 				  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
 				</div>
 			</div> 
 			<div class="info-item text-item">
 				<label>任务描述：</label>
-				<textarea id="textarea" rows="5" placeholder=""></textarea>
+				<textarea id="task_desc" rows="5" placeholder=""></textarea>
 			</div>
 			<div style="height: 20px;"></div>
 			<div class="info-item text-item">
 				<label>评分标准：</label>
-				<textarea id="textarea" rows="5" placeholder=""></textarea>
+				<textarea id="score_desc" rows="5" placeholder=""></textarea>
 			</div>
 		</div>
 		<script src="js/mui.js"></script>
 		<script src="js/js/mui.picker.min.js"></script>
 		<script src="js/new_task.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			// mui('#weight').numbox()
 		</script>
 	</body>
 

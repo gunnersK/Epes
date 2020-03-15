@@ -25,6 +25,7 @@
 				 * rs.i 分（minutes 的第二个字母），用法同年
 				 */
 				res[0].innerHTML = rs.y.text + '-' + rs.m.text + '-' + rs.d.text;
+				res[0].data = rs.y.text + '-' + rs.m.text + '-' + rs.d.text;
 				/* 
 				 * 返回 false 可以阻止选择框的关闭
 				 * return false;
@@ -45,19 +46,60 @@
 	/* 状态picker */
 	var statusPicker = new $.PopPicker();
 	statusPicker.setData([{
-		value: 'ywj',
-		text: '未完成'
+		value: '0',
+		text: '进行中'
 	}, {
-		value: 'lj',
+		value: '1',
 		text: '已完成'
 	}]);
 	var status = document.getElementById('status');
 	var statusResult = document.getElementById('status_result');
 	status.addEventListener('tap', function(event) {
 		statusPicker.show(function(items) {
-			statusResult.innerText = JSON.stringify(items[0]);
+			statusResult.data = items[0].value;
+			statusResult.innerHTML = items[0].text;
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
 	}, false);
+
+
+	var confBtn = document.getElementById("confirm");
+
+	confBtn.addEventListener('tap', function(){
+		var startTime = document.getElementById("start_res").data;
+		var endTime = document.getElementById("end_res").data;
+		var status = document.getElementById("status_result").data;
+		if(startTime == undefined){
+			startTime = "";
+		} else{
+			var startTime = Date.parse(new Date(document.getElementById("start_res").data)) / 1000;
+		}
+		if(endTime == undefined){
+			endTime = "";
+		} else{
+			var endTime = Date.parse(new Date(document.getElementById("end_res").data)) / 1000;
+		}
+		if(status == undefined){
+			status = "";
+		}
+		
+		mui.ajax(urlPattern.value+'/project/transFilter', {
+			data: {
+				"startTime": startTime,
+				"endTime": endTime,
+				"status": status,
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			success: function(data){
+				if(data.status == "200"){
+					// mui.openWindow({
+					// 	url: 'prj_list.html'
+					// });
+					mui.back();
+				}
+			}
+		});
+	});
 })(mui);

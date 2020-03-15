@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
@@ -78,14 +79,14 @@ public class NoticeController {
      * @return
      */
     @PostMapping("/transId")
-    public Response transmitId(Integer ntId){
-        sessionUtils.putIntoSession(SessionKeyConstants.NOTICE_ID, ntId);
+    public Response transmitId(HttpSession session, Integer ntId){
+        sessionUtils.putIntoSession(session, SessionKeyConstants.NOTICE_ID, ntId);
         return Response.ok();
     }
 
     @GetMapping("/getNtc")
-    public Response getNotice(){
-        Integer ntId = (Integer) sessionUtils.getFromSession(SessionKeyConstants.NOTICE_ID);
+    public Response getNotice(HttpSession session){
+        Integer ntId = sessionUtils.getFromSession(session, SessionKeyConstants.NOTICE_ID);
         Notice notice = getCacheService.getNotice(ntId);
         if(Objects.isNull(notice)){
             notice = noticeService.getById(ntId);

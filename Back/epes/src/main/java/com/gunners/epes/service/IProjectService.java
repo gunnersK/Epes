@@ -18,4 +18,8 @@ public interface IProjectService extends IService<Project> {
 
     List<Project> listProject(ProjectVo projectVo);
 
+    boolean updateProject(Project project);
+
+    List<Project> listUndo();
+
 }

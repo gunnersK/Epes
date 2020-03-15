@@ -3,9 +3,11 @@ package com.gunners.epes.entity.vo;
 import lombok.Data;
 
 @Data
-public class ProjectVo extends PageVo {
+public class PrjTaskVo extends PageVo {
 
-    private String prjName;
+    private String taskName;
+
+    private Integer prjId;
 
     private Long startTime;
 

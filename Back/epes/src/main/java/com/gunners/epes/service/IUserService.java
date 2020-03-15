@@ -4,6 +4,8 @@ import com.gunners.epes.entity.Employee;
 import com.gunners.epes.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * <p>
  *  服务类
@@ -20,6 +22,6 @@ public interface IUserService extends IService<User> {
 
     public User authentication(User user);
 
-    public boolean validPasswd(String old_passwd);
+    public boolean validPasswd(HttpSession session, String old_passwd);
 
 }

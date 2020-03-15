@@ -66,14 +66,14 @@ public class DepartmentController {
     }
 
     @PostMapping("/transId")
-    public Response transmitId(Integer dpartId){
-        sessionUtils.putIntoSession(SessionKeyConstants.DPART_ID, dpartId);
+    public Response transmitId(HttpSession session, Integer dpartId){
+        sessionUtils.putIntoSession(session, SessionKeyConstants.DPART_ID, dpartId);
         return Response.ok();
     }
 
     @GetMapping("/getDpart")
-    public Response getDpartById(){
-        Integer dpartId = (Integer) sessionUtils.getFromSession(SessionKeyConstants.DPART_ID);
+    public Response getDpartById(HttpSession session){
+        Integer dpartId = sessionUtils.getFromSession(session, SessionKeyConstants.DPART_ID);
         Department dpart = departmentService.getById(dpartId);
         return Response.ok(dpart);
     }

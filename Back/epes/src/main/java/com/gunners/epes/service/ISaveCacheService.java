@@ -1,6 +1,7 @@
 package com.gunners.epes.service;
 
 import com.gunners.epes.entity.Notice;
+import com.gunners.epes.entity.PrjTask;
 import com.gunners.epes.entity.Project;
 
 public interface ISaveCacheService {
@@ -17,5 +18,11 @@ public interface ISaveCacheService {
      * @param project
      */
     void saveProject(Project project);
+
+    /**
+     * 保存任务到redis
+     * @param prjTask
+     */
+    void savePrjTask(PrjTask prjTask);
 
 }

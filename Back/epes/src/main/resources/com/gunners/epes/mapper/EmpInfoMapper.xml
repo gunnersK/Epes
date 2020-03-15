@@ -14,11 +14,12 @@
     </resultMap>
 
     <sql id="baseColumnList">
-        id, emp_id, emp_name, gender, t1.dpart_id, dpart_name, role, contact
+        id, t1.emp_id, emp_name, gender, t1.dpart_id, dpart_name, role, contact
     </sql>
 
     <select id="getEmpInfo" resultMap="baseResultMap">
-        select id, t1.emp_id, emp_name, gender, t1.dpart_id, dpart_name, role, contact
+        select
+            <include refid="baseColumnList"></include>
         from employee t1
         left join department t2 on t1.dpart_id = t2.dpart_id
         left join user t3 on t1.emp_id = t3.emp_id

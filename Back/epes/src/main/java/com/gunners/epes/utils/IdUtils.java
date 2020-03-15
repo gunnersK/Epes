@@ -9,6 +9,7 @@ import com.gunners.epes.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,10 +26,10 @@ public class IdUtils {
      * 生成员工id
      * @return
      */
-    public String generateEmpId(){
+    public String generateEmpId(HttpSession session){
         //部门id
         String dpartId = "";
-        Integer temp = (Integer)sessionUtils.getFromSession(SessionKeyConstants.DPART_ID);
+        Integer temp = sessionUtils.getFromSession(session, SessionKeyConstants.DPART_ID);
         dpartId += "" + temp;
         if(temp < 10){
             dpartId = "0" + temp;

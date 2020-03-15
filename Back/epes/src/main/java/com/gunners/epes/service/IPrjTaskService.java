@@ -2,6 +2,9 @@ package com.gunners.epes.service;
 
 import com.gunners.epes.entity.PrjTask;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gunners.epes.entity.vo.PrjTaskVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IPrjTaskService extends IService<PrjTask> {
 
     Integer countTaskNum(Integer prjId);
+
+    List<PrjTask> listPrjTask(PrjTaskVo prjTaskVo);
 
 }

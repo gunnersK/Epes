@@ -15,34 +15,38 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">项目详情</h1>
 		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" id="finish" class="mui-btn mui-btn-primary" style="top: 0;">完成项目</button>
+		</nav>
 		<div id="" class="mui-content">
 			<div class="info-item">
 				项目名：
-				<span id="emp_id">OL</span>
+				<span id="prj_name"></span>
 			</div>
 			<div class="info-item">
 				关联项目数：
-				<span id="gender">5</span>
+				<span id="num"></span>
 			</div>
 			<div class="info-item">
 				项目描述：
-				<span id="emp_name">网盟平台，提供广告推广和追踪服务平台</span>
+				<span id="prj_desc"></span>
 			</div>
 			<div class="info-item">
 				状态：
-				<span id="passwd">未开始</span>
+				<span id="status"></span>
 			</div>
 			<div class="info-item">
 				创建时间：
-				<span id="passwd">2020-01-01</span>
+				<span id="create_time"></span>
 			</div>
-			<!-- <div class="info-item">
+			<div class="info-item">
 				完成时间：
-				<span id="passwd">2020-01-15</span>
-			</div> -->
+				<span id="finish_time"></span>
+			</div>
 		</div>
 		
 		<script src="js/mui.js"></script>
+		<script src="js/prj_detail.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>

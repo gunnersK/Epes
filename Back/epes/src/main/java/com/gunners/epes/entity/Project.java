@@ -1,6 +1,7 @@
 package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import lombok.Data;
@@ -47,6 +48,7 @@ public class Project implements Serializable {
     /**
      * 关联项目数
      */
+    @TableField(exist = false)
     private Integer releTaskNum;
 
 

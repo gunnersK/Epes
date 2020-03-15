@@ -7,7 +7,7 @@
  * MUI核心JS
  * @type _L4.$|Function
  */
-var urlPattern = {
+var urlPattern = { 
 	value: "http://192.168.43.21:8080" ,//手机调试,自己电脑
 	// value: "http://192.168.2.112:8080" //手机调试,公司电脑
 	// value: "api" //电脑调试,走nginx

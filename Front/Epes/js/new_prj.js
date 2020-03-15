@@ -11,6 +11,7 @@ publishBtn.addEventListener('tap', function(){
 		success: function(data){
 			if(data.status == "200"){
 				mui.toast('新增成功', { duration:'long', type:'div' });
+				mui.back();
 			}
 		} 
 	}); 

@@ -19,24 +19,20 @@ public class SessionUtils {
     @Autowired
     private RedissonClient redissonClient;
 
-    /**
-     * 保存用户信息
-     */
-    private RMap session;
 
     /**
      * 为每个user在redis中存一个RMap保存用户信息
-     * @param sessionID
+     * @param session
      */
-    public void saveSession(String sessionID){
-        this.session = redissonClient.getMap(sessionID);
+    public void saveSession(HttpSession session){
+        redissonClient.getMap(session.getId());
     }
 
     /**
      * 清除session
      */
-    public void clearSession(){
-        session.delete();
+    public void clearSession(HttpSession session){
+        getSession(session).delete();
     }
 
     /**
@@ -44,8 +40,9 @@ public class SessionUtils {
      * @param key
      * @param value
      */
-    public void putIntoSession(String key, Object value){
-        session.put(key, value);
+    public <T> void putIntoSession(HttpSession session, String key, T value){
+        RMap map = getSession(session);
+        map.put(key, value);
     }
 
     /**
@@ -54,7 +51,22 @@ public class SessionUtils {
      * @param key
      * @return
      */
-    public Object getFromSession(String key){
-        return session.get(key);
+    public <T> T getFromSession(HttpSession session, String key){
+        RMap map = getSession(session);
+        return (T) map.get(key);
+    }
+
+    public void removeFromSession(HttpSession session, String key){
+        RMap map = getSession(session);
+        map.remove(key);
+    }
+
+    /**
+     * 获取redis中的session
+     * @param session
+     * @return
+     */
+    private RMap getSession(HttpSession session){
+        return redissonClient.getMap(session.getId());
     }
 }

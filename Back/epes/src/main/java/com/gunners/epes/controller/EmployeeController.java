@@ -58,8 +58,8 @@ public class EmployeeController {
     IEmpInfoService empInfoService;
 
     @GetMapping("/newId")
-    public Response generateEmpId(){
-        String newEmpId = idUtils.generateEmpId();
+    public Response generateEmpId(HttpSession session){
+        String newEmpId = idUtils.generateEmpId(session);
         return Response.ok(newEmpId);
     }
 
@@ -87,27 +87,27 @@ public class EmployeeController {
 
     @GetMapping("/list")
     public Response listEmployee(HttpSession session){
-        Integer dpartId = (Integer) sessionUtils.getFromSession(SessionKeyConstants.DPART_ID);
+        Integer dpartId = sessionUtils.getFromSession(session, SessionKeyConstants.DPART_ID);
         List list = employeeService.listByDpartId(dpartId);
         return Response.ok(list);
     }
 
     @PostMapping("/transId")
-    public Response transmitId(String empId){
-        sessionUtils.putIntoSession(SessionKeyConstants.EMP_ID, empId);
+    public Response transmitId(HttpSession session, String empId){
+        sessionUtils.putIntoSession(session, SessionKeyConstants.EMP_ID, empId);
         return Response.ok();
     }
 
     @GetMapping("/getEmpInfo")
-    public Response getEmpInfo(){
-        String empId = (String) sessionUtils.getFromSession(SessionKeyConstants.EMP_ID);
+    public Response getEmpInfo(HttpSession session){
+        String empId = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_ID);
         EmpInfo empInfo = empInfoService.getEmpInfo(empId);
         return Response.ok(empInfo);
     }
 
     @GetMapping("/getProfile")
-    public Response getProfile(){
-        User user = (User) sessionUtils.getFromSession(SessionKeyConstants.USER);
+    public Response getProfile(HttpSession session){
+        User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
         EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
         return Response.ok(empInfo);
     }
