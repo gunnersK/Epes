@@ -73,12 +73,12 @@
 		if(startTime == undefined){
 			startTime = "";
 		} else{
-			var startTime = Date.parse(new Date(document.getElementById("start_res").data)) / 1000;
+			var startTime = Date.parse(new Date(startTime)) / 1000;
 		}
 		if(endTime == undefined){
 			endTime = "";
 		} else{
-			var endTime = Date.parse(new Date(document.getElementById("end_res").data)) / 1000;
+			var endTime = Date.parse(new Date(endTime)) / 1000;
 		}
 		if(status == undefined){
 			status = "";
@@ -94,9 +94,6 @@
 			type:'post',//HTTP请求类型
 			success: function(data){
 				if(data.status == "200"){
-					// mui.openWindow({
-					// 	url: 'prj_list.html'
-					// });
 					mui.back();
 				}
 			}

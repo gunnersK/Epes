@@ -15,4 +15,10 @@ public interface IClearCacheService {
      * @param prjId
      */
     void deleteProject(Integer prjId);
+
+    /**
+     * 删除redis中的项目任务
+     * @param taskId
+     */
+    void deletePrjTask(Integer taskId);
 }

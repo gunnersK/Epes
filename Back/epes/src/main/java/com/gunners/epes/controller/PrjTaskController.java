@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -56,6 +57,36 @@ public class PrjTaskController {
         return Response.ok();
     }
 
+    @PostMapping("/delete")
+    public Response deleteProject(Integer taskId){
+        prjTaskService.removeById(taskId);
+        clearCacheService.deleteProject(taskId);
+        return Response.ok();
+    }
+
+    /**
+     * 页面间传递过滤条件
+     * @param prjTaskVo
+     * @param session
+     * @return
+     */
+    @PostMapping("/transFilter")
+    public Response transmitFilter(PrjTaskVo prjTaskVo, HttpSession session){
+        if (!Objects.isNull(prjTaskVo.getStartTime())) {
+            sessionUtils.putIntoSession(session, SessionKeyConstants.PRJTASK_START_TIME, prjTaskVo.getStartTime());
+        }
+        if (!Objects.isNull(prjTaskVo.getEndTime())) {
+            sessionUtils.putIntoSession(session, SessionKeyConstants.PRJTASK_END_TIME, prjTaskVo.getEndTime());
+        }
+        if (!Objects.isNull(prjTaskVo.getPrjId())) {
+            sessionUtils.putIntoSession(session, SessionKeyConstants.PRJTASK_PRJ_ID, prjTaskVo.getPrjId());
+        }
+        if (!Objects.isNull(prjTaskVo.getStatus())) {
+            sessionUtils.putIntoSession(session, SessionKeyConstants.PRJTASK_STATUS, prjTaskVo.getStatus());
+        }
+        return Response.ok();
+    }
+
     @GetMapping("/list")
     public Response listProject(HttpSession session, PrjTaskVo prjTaskVo){
 
@@ -73,6 +104,39 @@ public class PrjTaskController {
         sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_STATUS);
 
         return Response.ok(list);
+    }
+
+    @PostMapping("/transId")
+    public Response transmitId(HttpSession session, Integer taskId){
+        sessionUtils.putIntoSession(session, SessionKeyConstants.PRJTASK_ID, taskId);
+        return Response.ok();
+    }
+
+    @GetMapping("/getTask")
+    public Response getProject(HttpSession session){
+        Integer taskId = sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_ID);
+        PrjTask prjTask = getCacheService.getPrjTask(taskId);
+//        if(Objects.isNull(prjTask)){
+//            prjTask = prjTaskService.getById(taskId);
+//        }
+        return Response.ok(prjTask);
+    }
+
+    @PostMapping("/finish")
+    //赋值完成时间，更新状态，用prjTask接，更新redis、数据库
+    public Response finishProject(HttpSession session){
+        Integer taskId = sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_ID);
+
+        //更新状态、完成时间，更新进redis
+        PrjTask prjTask = getCacheService.getPrjTask(taskId);
+        prjTask.setFinishTime(Instant.now().getEpochSecond());
+        prjTask.setStatus(1);
+        saveCacheService.savePrjTask(prjTask);
+
+        //更新mysql
+        prjTaskService.updatePrjTask(prjTask);
+
+        return Response.ok();
     }
 
 }

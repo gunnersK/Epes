@@ -115,14 +115,14 @@ public class ProjectController {
     public Response getProject(HttpSession session){
         Integer prjId = sessionUtils.getFromSession(session, SessionKeyConstants.PROJECT_ID);
         Project project = getCacheService.getProject(prjId);
-        if(Objects.isNull(project)){
-            project = projectService.getById(prjId);
-        }
+//        if(Objects.isNull(project)){
+//            project = projectService.getById(prjId);
+//        }
         return Response.ok(project);
     }
 
     @PostMapping("/finish")
-    //赋值完成时间，更新状态，用project接，更新cache、数据库
+    //赋值完成时间，更新状态，用project接，更新redis、数据库
     public Response finishProject(HttpSession session){
         Integer prjId = sessionUtils.getFromSession(session, SessionKeyConstants.PROJECT_ID);
 
@@ -138,7 +138,7 @@ public class ProjectController {
         return Response.ok();
     }
 
-    @GetMapping("/listAll")
+    @GetMapping("/listUndo")
     public Response listUndo(){
         List<Project> list = projectService.listUndo();
         return Response.ok(list);

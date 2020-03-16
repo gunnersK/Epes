@@ -15,7 +15,7 @@
     </resultMap>
 
     <sql id="baseColumnList">
-        task_id, task_name, prj_name, t1.status
+        task_id, task_name, t2.prj_name, t1.status
     </sql>
 
     <select id="listPrjTask" resultMap="baseResultMap">
@@ -28,13 +28,13 @@
                 task_name like "%"#{prjTaskVo.taskName}"%"
             </if>
             <if test="prjTaskVo.prjId != null">
-                and prj_id = #{prjTaskVo.prjId}
+                and t1.prj_id = #{prjTaskVo.prjId}
             </if>
             <if test="prjTaskVo.startTime != null">
-                and <![CDATA[ create_time >= #{prjTaskVo.startTime} ]]>
+                and <![CDATA[ t1.create_time >= #{prjTaskVo.startTime} ]]>
             </if>
             <if test="prjTaskVo.endTime != null">
-                and <![CDATA[ create_time <= #{prjTaskVo.endTime} ]]>
+                and <![CDATA[ t1.create_time <= #{prjTaskVo.endTime} ]]>
             </if>
             <if test="prjTaskVo.status != null">
                 and t1.status = #{prjTaskVo.status}

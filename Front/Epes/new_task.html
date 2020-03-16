@@ -26,7 +26,8 @@
 			</div>
 			<div class="info-item">
 				<label>所属项目：</label>
-				<input type="text" id="prj" value="" data="">
+				<input type="text" id="prj_name" value="">
+				<input type="hidden" id="prj_id">
 			</div>
 			<div class="info-item">
 				权重：
@@ -50,8 +51,16 @@
 		<script src="js/js/mui.picker.min.js"></script>
 		<script src="js/new_task.js"></script>
 		<script type="text/javascript">
-			mui.init();
-			// mui('#weight').numbox()
+			mui.init({
+				beforeback: function() {　　　　
+					var list = plus.webview.currentWebview().opener();　　　　
+					//refresh是A页面自定义事件
+					mui.fire(list, 'refresh');
+					// mui.toast('发布成功', { duration:'long', type:'div' });
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			})
 		</script>
 	</body>
 

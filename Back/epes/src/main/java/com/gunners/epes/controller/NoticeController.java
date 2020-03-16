@@ -88,9 +88,9 @@ public class NoticeController {
     public Response getNotice(HttpSession session){
         Integer ntId = sessionUtils.getFromSession(session, SessionKeyConstants.NOTICE_ID);
         Notice notice = getCacheService.getNotice(ntId);
-        if(Objects.isNull(notice)){
-            notice = noticeService.getById(ntId);
-        }
+//        if(Objects.isNull(notice)){
+//            notice = noticeService.getById(ntId);
+//        }
         return Response.ok(notice);
     }
 

@@ -1,6 +1,7 @@
 package com.gunners.epes.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gunners.epes.entity.PrjTask;
@@ -39,5 +40,12 @@ public class PrjTaskServiceImpl extends ServiceImpl<PrjTaskMapper, PrjTask> impl
         long start = (prjTaskVo.getPage() - 1) * limit;
         List<PrjTask> list = this.baseMapper.listPrjTask(prjTaskVo, start, limit);
         return list;
+    }
+
+    @Override
+    public boolean updatePrjTask(PrjTask prjTask) {
+        UpdateWrapper updateWrapper = new UpdateWrapper<Project>()
+                .eq("task_id", prjTask.getTaskId());
+        return this.update(prjTask, updateWrapper);
     }
 }

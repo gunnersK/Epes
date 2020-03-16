@@ -15,41 +15,45 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">任务详情</h1>
 		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" id="finish" class="mui-btn mui-btn-primary" style="top: 0;">完成项目</button>
+		</nav>
 		<div id="" class="mui-content">
 			<div class="info-item">
 				任务名：
-				<span id="emp_id">smartpuller加impression_url</span>
+				<span id="task_name"></span>
 			</div>
 			<div class="info-item">
 				所属项目：
-				<span id="gender">smartpuller</span>
+				<span id="prj_name"></span>
 			</div>
 			<div class="info-item">
 				任务描述：
-				<span id="emp_name">客户需要对接impression_url，smartpuller将有impression_url的平台这个字段对接进来</span>
+				<span id="task_desc"></span>
 			</div>
 			<div class="info-item">
 				权重：
-				<span id="dpart_name">5</span>
+				<span id="weight"></span>
 			</div>
 			<div class="info-item">
 				评分标准：
-				<span id="contract">内网测试1个bug扣5分，灰度测试一个bug扣10分</span>
+				<span id="score_desc"></span>
 			</div>
 			<div class="info-item">
 				状态：
-				<span id="passwd">未开始</span>
+				<span id="status"></span>
 			</div>
 			<div class="info-item">
 				创建时间：
-				<span id="passwd">2020-01-01</span>
+				<span id="create_time"></span>
 			</div>
 			<div class="info-item">
 				完成时间：
-				<span id="passwd">2020-01-15</span>
+				<span id="finish_time"></span>
 			</div>
 		</div>
 		<script src="js/mui.js"></script>
+		<script src="js/task_detail.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>

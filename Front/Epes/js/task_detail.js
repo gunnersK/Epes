@@ -1,12 +1,14 @@
 (function($){
-	mui.ajax(urlPattern.value+'/project/getPrj', {
+	mui.ajax(urlPattern.value+'/prjTask/getTask', {
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
 			if(data.status == "200"){
+				document.getElementById('task_name').innerHTML = data.data.taskName;
 				document.getElementById('prj_name').innerHTML = data.data.prjName;
-				document.getElementById('num').innerHTML = data.data.releTaskNum;
-				document.getElementById('prj_desc').innerHTML = data.data.prjDesc;
+				document.getElementById('task_desc').innerHTML = data.data.taskDesc;
+				document.getElementById('weight').innerHTML = data.data.weight;
+				document.getElementById('score_desc').innerHTML = data.data.scoreDesc;
 				if(data.data.status == 0){
 					document.getElementById('status').innerHTML = "进行中";
 				} else if(data.data.status == 1){
@@ -26,12 +28,12 @@
 	finishBtn.addEventListener('tap', function(){
 		mui.confirm('确认完成该项目？', 'Hello MUI', btnArray, function(e){
 			if (e.index == 1) {
-				mui.ajax(urlPattern.value+'/project/finish', {
+				mui.ajax(urlPattern.value+'/prjTask/finish', {
 					dataType:'json',//服务器返回json格式数据
 					type:'post',//HTTP请求类型
 					success: function(data){
 						if(data.status == "200"){
-							mui.toast('项目已完成', { duration:'long', type:'div' });
+							mui.toast('任务已完成', { duration:'long', type:'div' });
 							mui.back();
 						}
 					}

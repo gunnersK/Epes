@@ -1,8 +1,9 @@
 (function($) {
 	
 	/* 项目picker */
+	var prjPicker = new $.PopPicker();
 	var undoPrj = [];
-	mui.ajax(urlPattern.value+'/project/listAll', {
+	mui.ajax(urlPattern.value+'/project/listUndo', {
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
@@ -13,29 +14,31 @@
 						"text": data.data[i].prjName
 					});
 				}
-				var prjPicker = new $.PopPicker();
 				prjPicker.setData(undoPrj);
-				var prj = document.getElementById('prj');
-				prj.addEventListener('tap', function(event) {
-					prjPicker.show(function(items) {
-						prj.setAttribute("value", items[0].text);
-						prj.setAttribute("data", items[0].value);
-						//返回 false 可以阻止选择框的关闭
-						//return false;
-					});
-				}, false);
 			}
 		}
 	});
+	 
+	var prjName = document.getElementById('prj_name');
+	var prjId = document.getElementById('prj_id');
+	prjName.addEventListener('tap', function(event) {
+		prjPicker.show(function(items) {
+			prjName.setAttribute("value", items[0].text);
+			prjId.setAttribute("value", items[0].value);
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		});
+	}, false);
 	
+	/* 确认按钮 */
 	var confBtn = document.getElementById("confirm");
 	
 	confBtn.addEventListener('tap', function(){
 		mui.ajax(urlPattern.value+'/prjTask/save', {
 			data: {
 				"taskName": document.getElementById('task_name').value,
-				"prjId": document.getElementById('prj').value,
-				"prjName": document.getElementById('prj').data,
+				"prjId": document.getElementById('prj_id').value,
+				"prjName": document.getElementById('prj_name').value,
 				"weight": document.getElementById('weight').value,
 				"taskDesc": document.getElementById('task_desc').value, 
 				"scoreDesc": document.getElementById('score_desc').value

@@ -20,4 +20,6 @@ public interface IPrjTaskService extends IService<PrjTask> {
 
     List<PrjTask> listPrjTask(PrjTaskVo prjTaskVo);
 
+    boolean updatePrjTask(PrjTask prjTask);
+
 }
