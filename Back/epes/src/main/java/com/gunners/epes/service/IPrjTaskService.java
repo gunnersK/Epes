@@ -12,13 +12,15 @@ import java.util.List;
  * </p>
  *
  * @author gunners
- * @since 2020-02-27
+ * @since 2020-02-27s
  */
 public interface IPrjTaskService extends IService<PrjTask> {
 
     Integer countTaskNum(Integer prjId);
 
     List<PrjTask> listPrjTask(PrjTaskVo prjTaskVo);
+
+    boolean savePrjTask(PrjTask prjTask);
 
     boolean updatePrjTask(PrjTask prjTask);
 

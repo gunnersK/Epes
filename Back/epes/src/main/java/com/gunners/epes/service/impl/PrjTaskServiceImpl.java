@@ -8,10 +8,16 @@ import com.gunners.epes.entity.PrjTask;
 import com.gunners.epes.entity.Project;
 import com.gunners.epes.entity.vo.PrjTaskVo;
 import com.gunners.epes.mapper.PrjTaskMapper;
+import com.gunners.epes.service.IGetCacheService;
 import com.gunners.epes.service.IPrjTaskService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gunners.epes.service.IProjectService;
+import com.gunners.epes.service.ISaveCacheService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.PrinterJob;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +31,15 @@ import java.util.Objects;
  */
 @Service
 public class PrjTaskServiceImpl extends ServiceImpl<PrjTaskMapper, PrjTask> implements IPrjTaskService {
+
+    @Autowired
+    IGetCacheService getCacheService;
+
+    @Autowired
+    ISaveCacheService saveCacheService;
+
+    @Autowired
+    IProjectService projectService;
 
     @Override
     public Integer countTaskNum(Integer prjId) {
@@ -43,6 +58,22 @@ public class PrjTaskServiceImpl extends ServiceImpl<PrjTaskMapper, PrjTask> impl
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean savePrjTask(PrjTask prjTask) {
+        boolean flag = false;
+
+        if(this.save(prjTask)){
+            Project project = getCacheService.getProject(prjTask.getPrjId());
+            project.setReleTaskNum(project.getReleTaskNum() + 1);
+            projectService.updateProject(project);
+            saveCacheService.saveProject(project);
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean updatePrjTask(PrjTask prjTask) {
         UpdateWrapper updateWrapper = new UpdateWrapper<Project>()
                 .eq("task_id", prjTask.getTaskId());

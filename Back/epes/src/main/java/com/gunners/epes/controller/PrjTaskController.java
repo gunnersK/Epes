@@ -52,7 +52,7 @@ public class PrjTaskController {
     public Response save(PrjTask prjTask){
         prjTask.setCreateTime(Instant.now().getEpochSecond());
         prjTask.setStatus(0);
-        prjTaskService.save(prjTask);
+        prjTaskService.savePrjTask(prjTask);
         saveCacheService.savePrjTask(prjTask);
         return Response.ok();
     }
