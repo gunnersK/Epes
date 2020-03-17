@@ -59,7 +59,7 @@ public class PrjTaskController {
 
     @PostMapping("/delete")
     public Response deleteProject(Integer taskId){
-        prjTaskService.removeById(taskId);
+        prjTaskService.deleteById(taskId);
         clearCacheService.deleteProject(taskId);
         return Response.ok();
     }

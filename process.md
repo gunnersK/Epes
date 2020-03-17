@@ -89,9 +89,9 @@
 
 - 3.17
 
-	- 修复项目item详情页的关联任务数
+	- 修复新增和删除任务时项目item详情页的关联任务数
 
-	- 给任务service的update、save方法加事务
+	- 给任务service的update、save、delete方法加事务
 
 	
 

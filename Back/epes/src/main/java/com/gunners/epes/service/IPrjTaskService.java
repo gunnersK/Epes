@@ -12,7 +12,7 @@ import java.util.List;
  * </p>
  *
  * @author gunners
- * @since 2020-02-27s
+ * @since 2020-02-27
  */
 public interface IPrjTaskService extends IService<PrjTask> {
 
@@ -23,5 +23,7 @@ public interface IPrjTaskService extends IService<PrjTask> {
     boolean savePrjTask(PrjTask prjTask);
 
     boolean updatePrjTask(PrjTask prjTask);
+
+    boolean deleteById(Integer taskId);
 
 }

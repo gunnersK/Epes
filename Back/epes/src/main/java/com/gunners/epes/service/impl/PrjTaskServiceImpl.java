@@ -79,4 +79,23 @@ public class PrjTaskServiceImpl extends ServiceImpl<PrjTaskMapper, PrjTask> impl
                 .eq("task_id", prjTask.getTaskId());
         return this.update(prjTask, updateWrapper);
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteById(Integer taskId) {
+        boolean flag = false;
+
+        if(this.removeById(taskId)){
+            PrjTask prjTask = getCacheService.getPrjTask(taskId);
+            Project project = getCacheService.getProject(prjTask.getPrjId());
+            Integer num = project.getReleTaskNum();
+            if(num > 0){
+                project.setReleTaskNum(project.getReleTaskNum() - 1);
+                projectService.updateProject(project);
+                saveCacheService.saveProject(project);
+                flag = true;
+            }
+        }
+        return flag;
+    }
 }
