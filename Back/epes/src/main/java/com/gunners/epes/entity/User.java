@@ -46,7 +46,7 @@ public class User implements Serializable {
     /**
      * （0失效，1生效）
      */
-    @TableField("isActive")
+    @TableField("is_active")
     private Integer isActive;
 
 

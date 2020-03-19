@@ -1,10 +1,18 @@
 package com.gunners.epes.service;
 
+import com.gunners.epes.entity.EmpInfo;
 import com.gunners.epes.entity.Notice;
 import com.gunners.epes.entity.PrjTask;
 import com.gunners.epes.entity.Project;
 
 public interface ISaveCacheService {
+
+    /**
+     * 保存员工信息到redis
+     * @param empInfo
+     * @return
+     */
+    void saveEmpiInfo(EmpInfo empInfo);
 
     /**
      * 保存公告到redis

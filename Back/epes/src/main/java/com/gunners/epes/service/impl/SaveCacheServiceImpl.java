@@ -2,6 +2,7 @@ package com.gunners.epes.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.gunners.epes.constants.CommKeyConstants;
+import com.gunners.epes.entity.EmpInfo;
 import com.gunners.epes.entity.Notice;
 import com.gunners.epes.entity.PrjTask;
 import com.gunners.epes.entity.Project;
@@ -21,6 +22,13 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
 
     @Autowired
     private IPrjTaskService prjTaskService;
+
+    @Override
+    public void saveEmpiInfo(EmpInfo empInfo) {
+        RMap<String, EmpInfo> map = redissonClient.getMap(CommKeyConstants.EMPINFO_KEY);
+        String key = StrUtil.format("emp_info_id_{}", empInfo.getEmpId());
+        map.put(key, empInfo);
+    }
 
     @Override
     public void saveNotice(Notice notice) {

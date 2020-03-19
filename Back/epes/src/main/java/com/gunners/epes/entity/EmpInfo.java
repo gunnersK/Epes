@@ -1,11 +1,16 @@
 package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class EmpInfo {
+public class EmpInfo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 自增id
@@ -41,4 +46,11 @@ public class EmpInfo {
      * 联系方式
      */
     private String contact;
+
+    private Long lastLoginTime;
+
+    /**
+     * （0失效，1生效）
+     */
+    private Integer isActive;
 }

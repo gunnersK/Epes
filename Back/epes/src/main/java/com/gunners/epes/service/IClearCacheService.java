@@ -5,6 +5,12 @@ import com.gunners.epes.entity.Notice;
 public interface IClearCacheService {
 
     /**
+     * 删除redis中的员工信息
+     * @param empId
+     */
+    void deleteEmpInfo(String empId);
+
+    /**
      * 删除redis中的公告
      * @param ntId
      */

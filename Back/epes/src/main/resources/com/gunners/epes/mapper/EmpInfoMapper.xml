@@ -11,10 +11,12 @@
         <result column="dpart_name" property="dpartName"/>
         <result column="role" property="role"/>
         <result column="contact" property="contact"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="is_active" property="isActive"/>
     </resultMap>
 
     <sql id="baseColumnList">
-        id, t1.emp_id, emp_name, gender, t1.dpart_id, dpart_name, role, contact
+        id, t1.emp_id, emp_name, gender, t1.dpart_id, dpart_name, role, contact, last_login_time, is_active
     </sql>
 
     <select id="getEmpInfo" resultMap="baseResultMap">

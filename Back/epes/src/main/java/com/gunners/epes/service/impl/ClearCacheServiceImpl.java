@@ -2,6 +2,7 @@ package com.gunners.epes.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.gunners.epes.constants.CommKeyConstants;
+import com.gunners.epes.entity.EmpInfo;
 import com.gunners.epes.entity.Notice;
 import com.gunners.epes.entity.PrjTask;
 import com.gunners.epes.entity.Project;
@@ -16,6 +17,13 @@ public class ClearCacheServiceImpl implements IClearCacheService {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Override
+    public void deleteEmpInfo(String empId) {
+        RMap<String, EmpInfo> map = redissonClient.getMap(CommKeyConstants.EMPINFO_KEY);
+        String key = StrUtil.format("emp_info_id_{}", empId);
+        map.remove(key);
+    }
 
     @Override
     public void deleteNotice(Integer ntId) {

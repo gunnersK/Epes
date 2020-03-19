@@ -8,9 +8,7 @@ import com.gunners.epes.constants.SessionKeyConstants;
 import com.gunners.epes.entity.EmpInfo;
 import com.gunners.epes.entity.Employee;
 import com.gunners.epes.entity.User;
-import com.gunners.epes.service.IEmpInfoService;
-import com.gunners.epes.service.IEmployeeService;
-import com.gunners.epes.service.IUserService;
+import com.gunners.epes.service.*;
 import com.gunners.epes.entity.Response;
 import com.gunners.epes.utils.IdUtils;
 import com.gunners.epes.utils.SessionUtils;
@@ -57,6 +55,15 @@ public class EmployeeController {
     @Autowired
     IEmpInfoService empInfoService;
 
+    @Autowired
+    ISaveCacheService saveCacheService;
+
+    @Autowired
+    IClearCacheService clearCacheService;
+
+    @Autowired
+    IGetCacheService getCacheService;
+
     @GetMapping("/newId")
     public Response generateEmpId(HttpSession session){
         String newEmpId = idUtils.generateEmpId(session);
@@ -68,6 +75,8 @@ public class EmployeeController {
         employeeService.save(employee);
         user.setPassword(Base64.encode(user.getPassword(), CharsetUtil.UTF_8));
         userService.save(user);
+        EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
+        saveCacheService.saveEmpiInfo(empInfo);
         return Response.ok();
     }
 
@@ -75,6 +84,7 @@ public class EmployeeController {
     public Response deleteEmployee(Employee employee){
         employeeService.deleteByEmpId(employee);
         userService.deleteUserByEmpId(employee);
+        clearCacheService.deleteEmpInfo(employee.getEmpId());
         return Response.ok();
     }
 
@@ -82,12 +92,20 @@ public class EmployeeController {
     public Response updateEmployee(Employee employee, User user){
         employeeService.updateEmployee(employee);
         userService.updateUserByEmpId(user);
+        EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
+        saveCacheService.saveEmpiInfo(empInfo);
         return Response.ok();
     }
 
     @GetMapping("/list")
     public Response listEmployee(HttpSession session){
         Integer dpartId = sessionUtils.getFromSession(session, SessionKeyConstants.DPART_ID);
+        List list = employeeService.listByDpartId(dpartId);
+        return Response.ok(list);
+    }
+
+    @GetMapping("/listByDpartId")
+    public Response listEmployee(Integer dpartId){
         List list = employeeService.listByDpartId(dpartId);
         return Response.ok(list);
     }
@@ -101,14 +119,14 @@ public class EmployeeController {
     @GetMapping("/getEmpInfo")
     public Response getEmpInfo(HttpSession session){
         String empId = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_ID);
-        EmpInfo empInfo = empInfoService.getEmpInfo(empId);
+        EmpInfo empInfo = getCacheService.getEmpInfo(empId);
         return Response.ok(empInfo);
     }
 
     @GetMapping("/getProfile")
     public Response getProfile(HttpSession session){
         User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
-        EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
+        EmpInfo empInfo = getCacheService.getEmpInfo(user.getEmpId());
         return Response.ok(empInfo);
     }
 

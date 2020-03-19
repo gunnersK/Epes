@@ -1,10 +1,18 @@
 package com.gunners.epes.service;
 
+import com.gunners.epes.entity.EmpInfo;
 import com.gunners.epes.entity.Notice;
 import com.gunners.epes.entity.PrjTask;
 import com.gunners.epes.entity.Project;
 
 public interface IGetCacheService {
+
+    /**
+     * 在redis中获取公告
+     * @param empId
+     * @return
+     */
+    EmpInfo getEmpInfo(String empId);
 
     /**
      * 在redis中获取公告
