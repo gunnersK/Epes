@@ -9,7 +9,7 @@
 				for(i = 0; i < data.data.length; i++){
 					var item = "<li class='mui-table-view-cell mui-collapse dpart-item' id="+data.data[i].dpartId+">"
 						+"<a class='mui-navigate-right' href='#'>"+data.data[i].dpartName+"</a>"
-						+"<ul class='mui-table-view mui-table-view-chevron emp-item'>s</ul></li>";
+						+"<ul class='mui-table-view mui-table-view-chevron emp-item'></ul></li>";
 					$("#dpart_list").append(item);
 				} 
 			}
@@ -18,8 +18,8 @@
 	
 	/* 部门item */
 	mui("#dpart_list").on('tap', '.mui-table-view-cell', function(){
-		var empList = this;
-		console.log(this.children[1]);
+		var empList = this.children[1];
+		empList.innerHTML = "";
 		mui.ajax(urlPattern.value+'/employee/listByDpartId', {
 			data: {
 				"dpartId": this.getAttribute("id")
@@ -31,7 +31,7 @@
 					for(i = 0; i < data.data.length; i++){
 						var item = "<li class='mui-table-view-cell emp-item' id="+data.data[i].empId+">"
 							+"<a class='' data-title-type='native' href='#'>"+data.data[i].empName+"</a></li>";
-						empList.children[1].append(item);
+						empList.innerHTML += item;
 					} 
 				}
 			}
