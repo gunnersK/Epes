@@ -27,16 +27,16 @@
             <if test="prjTaskVo.taskName != null and prjTaskVo.taskName != ''">
                 task_name like "%"#{prjTaskVo.taskName}"%"
             </if>
-            <if test="prjTaskVo.prjId != null">
+            <if test="prjTaskVo.prjId != null and prjTaskVo.prjId != ''">
                 and t1.prj_id = #{prjTaskVo.prjId}
             </if>
-            <if test="prjTaskVo.startTime != null">
+            <if test="prjTaskVo.startTime != null and prjTaskVo.startTime != ''">
                 and <![CDATA[ t1.create_time >= #{prjTaskVo.startTime} ]]>
             </if>
-            <if test="prjTaskVo.endTime != null">
+            <if test="prjTaskVo.endTime != null and prjTaskVo.endTime != ''">
                 and <![CDATA[ t1.create_time <= #{prjTaskVo.endTime} ]]>
             </if>
-            <if test="prjTaskVo.status != null">
+            <if test="prjTaskVo.status != null and prjTaskVo.status != ''">
                 and t1.status = #{prjTaskVo.status}
             </if>
         </where>

@@ -29,7 +29,7 @@ public class TaskEva implements Serializable {
     @TableId(value = "eva_id", type = IdType.AUTO)
     private Integer evaId;
 
-    private Integer empId;
+    private String empId;
 
     /**
      * 关联prj_task表
@@ -53,7 +53,7 @@ public class TaskEva implements Serializable {
     private BigDecimal performance;
 
     /**
-     * 0未开始，1进行中，2已完成，3已作废
+     * 0进行中，1已完成
      */
     private Integer status;
 

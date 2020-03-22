@@ -4,5 +4,5 @@ import com.gunners.epes.entity.EmpInfo;
 
 public interface IEmpInfoService {
 
-    public EmpInfo getEmpInfo(String empId);
+    EmpInfo getEmpInfo(String empId);
 }

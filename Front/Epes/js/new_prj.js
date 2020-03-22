@@ -10,7 +10,7 @@ publishBtn.addEventListener('tap', function(){
 		type:'post',//HTTP请求类型
 		success: function(data){
 			if(data.status == "200"){
-				mui.toast('新增成功', { duration:'long', type:'div' });
+				mui.toast('新增成功');
 				mui.back();
 			}
 		} 

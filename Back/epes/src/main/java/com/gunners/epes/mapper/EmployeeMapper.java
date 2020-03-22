@@ -3,6 +3,8 @@ package com.gunners.epes.mapper;
 import com.gunners.epes.entity.Employee;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -13,8 +15,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface EmployeeMapper extends BaseMapper<Employee> {
 
-    public Employee getLastEmp(String subId);
+    Employee getLastEmp(String subId);
 
-    public int deleteByDpartId(Integer dpartId);
+    int deleteByDpartId(Integer dpartId);
+
+    List<Employee> listTaskEmployee(Integer dpartId, Integer taskId);
 
 }

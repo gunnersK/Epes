@@ -2,10 +2,7 @@ package com.gunners.epes.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.gunners.epes.constants.CommKeyConstants;
-import com.gunners.epes.entity.EmpInfo;
-import com.gunners.epes.entity.Notice;
-import com.gunners.epes.entity.PrjTask;
-import com.gunners.epes.entity.Project;
+import com.gunners.epes.entity.*;
 import com.gunners.epes.mapper.ProjectMapper;
 import com.gunners.epes.service.IPrjTaskService;
 import com.gunners.epes.service.ISaveCacheService;
@@ -20,11 +17,8 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
     @Autowired
     private RedissonClient redissonClient;
 
-    @Autowired
-    private IPrjTaskService prjTaskService;
-
     @Override
-    public void saveEmpiInfo(EmpInfo empInfo) {
+    public void saveEmpInfo(EmpInfo empInfo) {
         RMap<String, EmpInfo> map = redissonClient.getMap(CommKeyConstants.EMPINFO_KEY);
         String key = StrUtil.format("emp_info_id_{}", empInfo.getEmpId());
         map.put(key, empInfo);
@@ -53,5 +47,12 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
         RMap<String, PrjTask> map = redissonClient.getMap(CommKeyConstants.PRJTASK_KEY);
         String key = StrUtil.format("task_id_{}", prjTask.getTaskId().toString());
         map.put(key, prjTask);
+    }
+
+    @Override
+    public void saveTaskEvaInfo(TaskEvaInfo taskEvaInfo) {
+        RMap<String, TaskEvaInfo> map = redissonClient.getMap(CommKeyConstants.TASKEVA_INFO_KEY);
+        String key = StrUtil.format("eva_id_{}", taskEvaInfo.getEvaId().toString());
+        map.put(key, taskEvaInfo);
     }
 }

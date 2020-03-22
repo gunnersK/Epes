@@ -16,6 +16,8 @@ import java.util.List;
  */
 public interface INoticeService extends IService<Notice> {
 
-    public List<Notice> listNotice(NoticeVo noticeVo);
+    List<Notice> listNotice(NoticeVo noticeVo);
+
+    Notice getLastNotice();
 
 }

@@ -16,60 +16,68 @@
 			<h1 class="mui-title">绩效详情</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
-			<button type="button" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
+			<button type="button" id="finish" class="mui-btn mui-btn-primary" style="top: 0;">完成</button>
 		</nav>
 		<div id="" class="mui-content">
 			<div class="info-item">
 				任务名：
-				<span id="emp_id">smartpuller加impression_url</span>
+				<span id="task_name"></span>
 			</div>
 			<div class="info-item">
 				任务描述：
-				<span id="emp_name">客户需要对接impression_url，smartpuller将有impression_url的平台这个字段对接进来</span>
-			</div>
-			<div class="info-item">
-				性别：
-				<span id="gender">男</span>
+				<span id="task_desc"></span>
 			</div>
 			<div class="info-item">
 				权重：
-				<span id="dpart_name">5</span>
+				<span id="weight"></span>
 			</div>
 			<div class="info-item">
 				关联员工：
-				<span id="contract">Larry</span>
+				<span id="empName"></span>
 			</div>
 			<div class="info-item">
 				完成状态：
-				<span id="passwd">已完成</span>
+				<span id="status"></span>
 			</div>
 			<div class="info-item">
 				得分：
-				<!-- <span id="passwd">80</span> -->
 				<div class="mui-numbox" data-numbox-step='5' data-numbox-min='0' data-numbox-max='100'>
 				  <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
-				  <input class="mui-numbox-input" type="number" value="80" />
+				  <input class="mui-numbox-input" id="score" type="number" value="80" />
 				  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
 				</div>
 			</div> 
 			<div class="info-item">
 				任务绩效：
-				<span id="passwd">4</span>
+				<span id="performance"></span>
 			</div>
 			<div class="info-item">
 				创建时间：
-				<span id="passwd">2020-01-01</span>
+				<span id="create_time"></span>
 			</div>
 			<div class="info-item">
 				完成时间：
-				<span id="passwd">2020-01-15</span>
+				<span id="finish_time"></span>
+			</div>
+			<div class="info-item">
+				最后一次更新时间：
+				<span id="last_upd_time"></span>
 			</div>
 		</div>
 		
 		<script src="js/mui.js"></script>
 		<script src="js/d_perf_detail.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				beforeback: function() {　　　　
+					var list = plus.webview.currentWebview().opener();　　　　
+					//refresh是A页面自定义事件
+					mui.fire(list, 'refresh');
+					// mui.toast('发布成功', { duration:'long', type:'div' });
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			})
 		</script>
 	</body>
 

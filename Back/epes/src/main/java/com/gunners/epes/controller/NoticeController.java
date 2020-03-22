@@ -1,13 +1,11 @@
 package com.gunners.epes.controller;
 
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.gunners.epes.constants.CommKeyConstants;
 import com.gunners.epes.constants.SessionKeyConstants;
 import com.gunners.epes.entity.Notice;
 import com.gunners.epes.entity.Response;
 import com.gunners.epes.entity.vo.NoticeVo;
+import com.gunners.epes.entity.vo.ProjectVo;
 import com.gunners.epes.service.IClearCacheService;
 import com.gunners.epes.service.IGetCacheService;
 import com.gunners.epes.service.INoticeService;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -68,9 +65,36 @@ public class NoticeController {
     }
 
     @GetMapping("/list")
-    public Response listNotice(NoticeVo noticeVo){
+    public Response listNotice(HttpSession session, NoticeVo noticeVo){
+        //获取过滤条件并查询
+        noticeVo.setStartTime(sessionUtils.getFromSession(session, SessionKeyConstants.NOTICE_START_TIME));
+        noticeVo.setEndTime(sessionUtils.getFromSession(session, SessionKeyConstants.NOTICE_END_TIME));
         List<Notice> list = noticeService.listNotice(noticeVo);
+
+        //清除session过滤条件
+        if(Objects.isNull(list) || list.size() == 0){
+            clearFilter(session);
+        }
+
         return Response.ok(list);
+    }
+
+    /**
+     * 页面间传递过滤条件
+     * @param noticeVo
+     * @param session
+     * @return
+     */
+    @PostMapping("/transFilter")
+    public Response transmitFilter(NoticeVo noticeVo, HttpSession session){
+        clearFilter(session);
+        if (!Objects.isNull(noticeVo.getStartTime())) {
+            sessionUtils.putIntoSession(session, SessionKeyConstants.NOTICE_START_TIME, noticeVo.getStartTime());
+        }
+        if (!Objects.isNull(noticeVo.getEndTime())) {
+            sessionUtils.putIntoSession(session, SessionKeyConstants.NOTICE_END_TIME, noticeVo.getEndTime());
+        }
+        return Response.ok();
     }
 
     /**
@@ -88,10 +112,18 @@ public class NoticeController {
     public Response getNotice(HttpSession session){
         Integer ntId = sessionUtils.getFromSession(session, SessionKeyConstants.NOTICE_ID);
         Notice notice = getCacheService.getNotice(ntId);
-//        if(Objects.isNull(notice)){
-//            notice = noticeService.getById(ntId);
-//        }
         return Response.ok(notice);
+    }
+
+    @GetMapping("/lastNtc")
+    public Response getLastNotice(){
+        Notice notice = noticeService.getLastNotice();
+        return Response.ok(notice);
+    }
+
+    private void clearFilter(HttpSession session){
+        sessionUtils.removeFromSession(session, SessionKeyConstants.NOTICE_START_TIME);
+        sessionUtils.removeFromSession(session, SessionKeyConstants.NOTICE_END_TIME);
     }
 
 }

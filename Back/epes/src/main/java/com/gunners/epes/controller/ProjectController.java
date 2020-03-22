@@ -76,6 +76,7 @@ public class ProjectController {
      */
     @PostMapping("/transFilter")
     public Response transmitFilter(ProjectVo projectVo, HttpSession session){
+        clearFilter(session);
         if (!Objects.isNull(projectVo.getStartTime())) {
             sessionUtils.putIntoSession(session, SessionKeyConstants.PROJECT_START_TIME, projectVo.getStartTime());
         }
@@ -90,7 +91,6 @@ public class ProjectController {
 
     @GetMapping("/list")
     public Response listProject(HttpSession session, ProjectVo projectVo){
-
         //获取过滤条件并查询
         projectVo.setStartTime(sessionUtils.getFromSession(session, SessionKeyConstants.PROJECT_START_TIME));
         projectVo.setEndTime(sessionUtils.getFromSession(session, SessionKeyConstants.PROJECT_END_TIME));
@@ -98,9 +98,9 @@ public class ProjectController {
         List<Project> list = projectService.listProject(projectVo);
 
         //清除session过滤条件
-        sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_START_TIME);
-        sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_END_TIME);
-        sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_STATUS);
+        if(Objects.isNull(list) || list.size() == 0) {
+            clearFilter(session);
+        }
 
         return Response.ok(list);
     }
@@ -138,10 +138,20 @@ public class ProjectController {
         return Response.ok();
     }
 
-    @GetMapping("/listUndo")
-    public Response listUndo(){
-        List<Project> list = projectService.listUndo();
+    /**
+     * 查询所有项目
+     * @return
+     */
+    @GetMapping("/listAll")
+    public Response listAll(){
+        List<Project> list = projectService.listAll();
         return Response.ok(list);
+    }
+
+    private void clearFilter(HttpSession session){
+        sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_START_TIME);
+        sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_END_TIME);
+        sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_STATUS);
     }
 
 }

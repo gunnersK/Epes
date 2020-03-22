@@ -60,7 +60,7 @@ public class PrjTask implements Serializable {
     private String scoreDesc;
 
     /**
-     * 0未开始，1进行中，2已完成，3已作废
+     * 0进行中，1已完成
      */
     private Integer status;
 

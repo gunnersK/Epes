@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.gunners.epes.entity.Notice;
 import com.gunners.epes.entity.PrjTask;
 import com.gunners.epes.entity.Project;
 import com.gunners.epes.entity.vo.PrjTaskVo;
@@ -97,5 +98,14 @@ public class PrjTaskServiceImpl extends ServiceImpl<PrjTaskMapper, PrjTask> impl
             }
         }
         return flag;
+    }
+
+    @Override
+    public List<PrjTask> listUnfinish() {
+        QueryWrapper queryWrapper = new QueryWrapper<Notice>()
+                .select("task_id", "task_name")
+                .eq("status", 0)
+                .orderByDesc("task_id");
+        return this.list(queryWrapper);
     }
 }

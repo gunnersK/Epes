@@ -4,10 +4,11 @@ package com.gunners.epes.controller;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.CharsetUtil;
 import com.gunners.epes.constants.SessionKeyConstants;
+import com.gunners.epes.entity.EmpInfo;
+import com.gunners.epes.entity.Employee;
 import com.gunners.epes.entity.Response;
 import com.gunners.epes.entity.User;
-import com.gunners.epes.service.ILoginService;
-import com.gunners.epes.service.IUserService;
+import com.gunners.epes.service.*;
 //import com.gunners.epes.utils.RedissonUtils;
 import com.gunners.epes.utils.SessionUtils;
 import org.redisson.api.RMap;
@@ -48,12 +49,17 @@ public class LoginController {
     @Autowired
     ILoginService loginService;
 
+    @Autowired
+    IEmployeeService employeeService;
+
     @PostMapping("/login")
     public Response login(User user, HttpSession session){
         User u = userservice.authentication(user);
         if(!Objects.isNull(u)){
             sessionUtils.saveSession(session);
             sessionUtils.putIntoSession(session, SessionKeyConstants.USER, u);
+            Employee employee = employeeService.getOne(user.getEmpId());
+            sessionUtils.putIntoSession(session, SessionKeyConstants.EMPLOYEE, employee);
             return Response.ok();
         }
         return Response.ok(null, "failure");

@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gunners.epes.mapper.NoticeMapper">
 
+    <select id="getLastNotice" resultType="com.gunners.epes.entity.Notice">
+        SELECT nt_id, title FROM `notice`
+        where nt_id = (SELECT max(nt_id) FROM notice)
+    </select>
+
 </mapper>

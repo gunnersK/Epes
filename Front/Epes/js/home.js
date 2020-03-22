@@ -1,11 +1,13 @@
 // $(function(){
 	
+	/* 获取登录用户权限 */
 	mui.ajax(urlPattern.value+'/login/getUser', {
 		async: true,
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
 			if(data.status == "200"){
+				// var role = 1;
 				var role = data.data.role
 				if(role == 0){
 					initAdmin();
@@ -18,6 +20,7 @@
 		}
 	});
 	
+	/* 清除所有按钮 */
 	var btns = document.getElementsByClassName("ind-btn-div");
 	for(i = 0; i < btns.length; i++){
 		btns[i].style.display = "none";
@@ -27,6 +30,7 @@
 	// 	e.style.display = "none";
 	// })	
 	
+	/* 初始化管理员按钮 */
 	function initAdmin(){
 		var btns = document.getElementsByClassName("admin");
 		for(i = 0; i < btns.length; i++){
@@ -34,6 +38,7 @@
 		}
 	}
 	
+	/* 初始化部门主管按钮 */
 	function initDirector(){
 		var btns = document.getElementsByClassName("director");
 		for(i = 0; i < btns.length; i++){
@@ -41,12 +46,16 @@
 		}
 	}
 	
+	/* 初始化普通员工按钮 */
 	function initEmployee(){
 		var btns = document.getElementsByClassName("employee");
 		for(i = 0; i < btns.length; i++){
 			btns[i].style.display = "inline";
 		}
 	}
+	
+	/* 获取最新公告 */
+	getLastNtc();
 	
 	/* 按钮 */
 	var logBtn = document.getElementById('log_btn');
@@ -166,10 +175,41 @@
 		});
 	});
 	
+	/* 定时获取最新公告 */
+	window.setInterval(getLastNtc, 2000);
+	function getLastNtc(){
+		var lastNtc = document.getElementById("last_ntc");
+		mui.ajax(urlPattern.value+'/notice/lastNtc', {
+			dataType:'json',//服务器返回json格式数据
+			type:'get',//HTTP请求类型
+			success: function(data){	
+				if(data.status == "200"){
+					lastNtc.data = data.data.ntId;
+					lastNtc.innerHTML = data.data.title
+				}
+			}
+		});
+	}
+	
 	/* 公告详情 */
 	ntcContent.addEventListener('tap', function(){
-		mui.openWindow({
-			url: 'notice_detail.html'
+		var lastNtc = document.getElementById("last_ntc");
+		mui.ajax(urlPattern.value+'/notice/transId', {
+			data: {
+				"ntId": lastNtc.data
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			success: function(data){
+				if(data.status == "200"){
+					mui.openWindow({
+						url: 'notice_detail.html'
+					});
+				}
+			},
+			error: function(){
+				mui.toast('失败', { duration:'long', type:'div' });
+			}
 		});
 	});
 	

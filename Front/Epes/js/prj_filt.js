@@ -63,9 +63,8 @@
 		});
 	}, false);
 
-
+	/* 确认按钮*/
 	var confBtn = document.getElementById("confirm");
-
 	confBtn.addEventListener('tap', function(){
 		var startTime = document.getElementById("start_res").data;
 		var endTime = document.getElementById("end_res").data;

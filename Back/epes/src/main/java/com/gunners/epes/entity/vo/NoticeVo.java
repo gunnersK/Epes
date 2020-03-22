@@ -7,4 +7,8 @@ public class NoticeVo extends PageVo {
 
     private String title;
 
+    private Long startTime;
+
+    private Long endTime;
+
 }

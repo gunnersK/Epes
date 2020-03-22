@@ -1,9 +1,6 @@
 package com.gunners.epes.service;
 
-import com.gunners.epes.entity.EmpInfo;
-import com.gunners.epes.entity.Notice;
-import com.gunners.epes.entity.PrjTask;
-import com.gunners.epes.entity.Project;
+import com.gunners.epes.entity.*;
 
 public interface ISaveCacheService {
 
@@ -12,7 +9,7 @@ public interface ISaveCacheService {
      * @param empInfo
      * @return
      */
-    void saveEmpiInfo(EmpInfo empInfo);
+    void saveEmpInfo(EmpInfo empInfo);
 
     /**
      * 保存公告到redis
@@ -32,5 +29,11 @@ public interface ISaveCacheService {
      * @param prjTask
      */
     void savePrjTask(PrjTask prjTask);
+
+    /**
+     * 保存绩效信息到redis
+     * @param taskEvaInfo
+     */
+    void saveTaskEvaInfo(TaskEvaInfo taskEvaInfo);
 
 }

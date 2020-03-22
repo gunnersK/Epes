@@ -5,11 +5,8 @@ import cn.hutool.core.codec.Base32;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.CharsetUtil;
 import com.gunners.epes.constants.SessionKeyConstants;
-import com.gunners.epes.entity.EmpInfo;
-import com.gunners.epes.entity.Employee;
-import com.gunners.epes.entity.User;
+import com.gunners.epes.entity.*;
 import com.gunners.epes.service.*;
-import com.gunners.epes.entity.Response;
 import com.gunners.epes.utils.IdUtils;
 import com.gunners.epes.utils.SessionUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +73,7 @@ public class EmployeeController {
         user.setPassword(Base64.encode(user.getPassword(), CharsetUtil.UTF_8));
         userService.save(user);
         EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
-        saveCacheService.saveEmpiInfo(empInfo);
+        saveCacheService.saveEmpInfo(empInfo);
         return Response.ok();
     }
 
@@ -93,7 +90,7 @@ public class EmployeeController {
         employeeService.updateEmployee(employee);
         userService.updateUserByEmpId(user);
         EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
-        saveCacheService.saveEmpiInfo(empInfo);
+        saveCacheService.saveEmpInfo(empInfo);
         return Response.ok();
     }
 
@@ -104,7 +101,12 @@ public class EmployeeController {
         return Response.ok(list);
     }
 
-    @GetMapping("/listByDpartId")
+    /**
+     * 通讯录列表
+     * @param dpartId
+     * @return
+     */
+    @GetMapping("/listCtc")
     public Response listEmployee(Integer dpartId){
         List list = employeeService.listByDpartId(dpartId);
         return Response.ok(list);
@@ -116,6 +118,11 @@ public class EmployeeController {
         return Response.ok();
     }
 
+    /**
+     * 管理员部门管理
+     * @param session
+     * @return
+     */
     @GetMapping("/getEmpInfo")
     public Response getEmpInfo(HttpSession session){
         String empId = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_ID);
@@ -123,11 +130,45 @@ public class EmployeeController {
         return Response.ok(empInfo);
     }
 
+    /**
+     * 获取个人资料
+     * @param session
+     * @return
+     */
     @GetMapping("/getProfile")
     public Response getProfile(HttpSession session){
         User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
         EmpInfo empInfo = getCacheService.getEmpInfo(user.getEmpId());
         return Response.ok(empInfo);
+    }
+
+    /**
+     * 查询选定任务下未被分配的本部门员工
+     * @param session
+     * @return
+     */
+    @GetMapping("/getTaskEmp")
+    public Response getTaskEmployee(HttpSession session){
+        //获取部门id和任务id
+        Employee employee = sessionUtils.getFromSession(session, SessionKeyConstants.EMPLOYEE);
+        Integer dpartId = employee.getDpartId();
+        Integer taskId = sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_ID);
+
+        //查询员工
+        List<Employee> list = employeeService.listTaskEmployee(dpartId, taskId);
+
+        return Response.ok(list);
+    }
+
+    @GetMapping("/listByDpart")
+    public Response listByDpartId(HttpSession session){
+        //获取部门id
+        Employee employee = sessionUtils.getFromSession(session, SessionKeyConstants.EMPLOYEE);
+        Integer dpartId = employee.getDpartId();
+
+        //查询员工
+        List<Employee> list = employeeService.listByDpartId(dpartId);
+        return Response.ok(list);
     }
 
 }

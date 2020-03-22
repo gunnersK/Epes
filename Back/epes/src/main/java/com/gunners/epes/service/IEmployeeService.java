@@ -1,7 +1,9 @@
 package com.gunners.epes.service;
 
+import com.gunners.epes.entity.Department;
 import com.gunners.epes.entity.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gunners.epes.entity.PrjTask;
 
 import java.util.List;
 
@@ -15,14 +17,18 @@ import java.util.List;
  */
 public interface IEmployeeService extends IService<Employee> {
 
-    public boolean deleteByEmpId(Employee employee);
+    Employee getOne(String empId);
 
-    public List<Employee> listByDpartId(Integer dpartId);
+    boolean deleteByEmpId(Employee employee);
 
-    public Employee getLastEmp(String subId);
+    List<Employee> listByDpartId(Integer dpartId);
 
-    public int updateEmployee(Employee employee);
+    Employee getLastEmp(String subId);
 
-    public boolean deleteByDpartId(Integer dpartId);
+    int updateEmployee(Employee employee);
+
+    boolean deleteByDpartId(Integer dpartId);
+
+    List<Employee> listTaskEmployee(Integer dpartId, Integer taskId);
 
 }

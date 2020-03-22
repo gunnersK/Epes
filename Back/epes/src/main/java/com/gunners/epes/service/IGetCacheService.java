@@ -1,9 +1,6 @@
 package com.gunners.epes.service;
 
-import com.gunners.epes.entity.EmpInfo;
-import com.gunners.epes.entity.Notice;
-import com.gunners.epes.entity.PrjTask;
-import com.gunners.epes.entity.Project;
+import com.gunners.epes.entity.*;
 
 public interface IGetCacheService {
 
@@ -34,6 +31,13 @@ public interface IGetCacheService {
      * @return
      */
     PrjTask getPrjTask(Integer taskId);
+
+    /**
+     * 在redis中获取绩效
+     * @param evaId
+     * @return
+     */
+    TaskEvaInfo getTaskEvaInfo(Integer evaId);
 }
 
 

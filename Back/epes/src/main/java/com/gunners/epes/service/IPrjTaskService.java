@@ -26,4 +26,6 @@ public interface IPrjTaskService extends IService<PrjTask> {
 
     boolean deleteById(Integer taskId);
 
+    List<PrjTask> listUnfinish();
+
 }

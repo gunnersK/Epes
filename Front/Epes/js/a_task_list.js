@@ -114,6 +114,7 @@ function loadFirstPage(){
 			}
 		}
 	});
+	pullupRefresh();
 }
 
 var current = 1;

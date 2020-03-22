@@ -3,7 +3,7 @@
 	/* 项目picker */
 	var prjPicker = new $.PopPicker();
 	var undoPrj = [];
-	mui.ajax(urlPattern.value+'/project/listUndo', {
+	mui.ajax(urlPattern.value+'/project/listAll', {
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
@@ -47,7 +47,7 @@
 			type:'post',//HTTP请求类型
 			success: function(data){
 				if(data.status == "200"){
-					mui.toast('新增成功', { duration:'long', type:'div' });
+					mui.toast('新增成功');
 					mui.back();
 				}
 			}  

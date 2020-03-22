@@ -31,30 +31,18 @@
 			<h1 class="mui-title">任务分配</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
-			<button type="button" class="mui-btn" style="top: 0;">取消</button>
 			<button type="button" id="sel_emp_btn" class="mui-btn mui-btn-primary" style="top: 0;">选择员工</button>
 		</nav>
 		<div class="mui-content">
 			<!-- <h5 class="mui-content-padded">图标右对齐</h5> -->
-			<div class="mui-card" id="task_list">
-				<form class="mui-input-group">
-					<div class="mui-input-row mui-checkbox">
-						<span><a href="">smartpuller加impression_url</a></span>
-						<input name="checkbox1" value="Item 3" type="checkbox" >
-					</div>
-					<div class="mui-input-row mui-checkbox">
-						<span><a href="">campaign增加payout过滤</a></span>
-						<input name="checkbox1" value="Item 4" type="checkbox" checked>
-					</div>
-					<div class="mui-input-row mui-checkbox mui-disabled">
-						<span><a href="">checked：false</a></span>
-						<input name="checkbox1" type="checkbox" disabled="disabled">
-					</div>
+			<div class="mui-card">
+				<form class="mui-input-group" id="task_list">
 				</form>
 			</div>
 		</div>
 		
 		<script src="js/mui.js"></script>
+		<script src="js/jquery-3.2.1.js"></script>
 		<script src="js/task_dis.js"></script>
 		<script type="text/javascript">
 			mui.init()

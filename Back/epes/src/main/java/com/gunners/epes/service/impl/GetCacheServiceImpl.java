@@ -2,10 +2,7 @@ package com.gunners.epes.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.gunners.epes.constants.CommKeyConstants;
-import com.gunners.epes.entity.EmpInfo;
-import com.gunners.epes.entity.Notice;
-import com.gunners.epes.entity.PrjTask;
-import com.gunners.epes.entity.Project;
+import com.gunners.epes.entity.*;
 import com.gunners.epes.service.IGetCacheService;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
@@ -43,6 +40,13 @@ public class GetCacheServiceImpl implements IGetCacheService {
     public PrjTask getPrjTask(Integer taskId) {
         RMap<String, PrjTask> map = redissonClient.getMap(CommKeyConstants.PRJTASK_KEY);
         String key = StrUtil.format("task_id_{}", taskId.toString());
+        return map.get(key);
+    }
+
+    @Override
+    public TaskEvaInfo getTaskEvaInfo(Integer evaId) {
+        RMap<String, TaskEvaInfo> map = redissonClient.getMap(CommKeyConstants.TASKEVA_INFO_KEY);
+        String key = StrUtil.format("eva_id_{}", evaId.toString());
         return map.get(key);
     }
 }

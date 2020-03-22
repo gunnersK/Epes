@@ -28,6 +28,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
     IUserService userService;
 
     @Override
+    public Employee getOne(String empId) {
+        Wrapper queryWrapper = new QueryWrapper<Employee>().lambda()
+                .eq(Employee::getEmpId, empId);
+        return this.getOne(queryWrapper);
+}
+
+    @Override
     public boolean deleteByEmpId(Employee employee) {
         Wrapper queryWrapper = new QueryWrapper<Employee>().lambda()
                 .eq(Employee::getEmpId, employee.getEmpId());
@@ -71,5 +78,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         return remove(empWrapper);
     }
 
-
+    @Override
+    public List<Employee> listTaskEmployee(Integer dpartId, Integer taskId) {
+        List<Employee> list = this.getBaseMapper().listTaskEmployee(dpartId, taskId);
+        return list;
+    }
 }

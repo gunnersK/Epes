@@ -12,25 +12,75 @@ mui.init({
 	}
 });
 
+/* 加载未完成任务 */
+$(".task_item").remove();
+mui.ajax(urlPattern.value+'/prjTask/listUnfinish', {
+	dataType:'json',//服务器返回json格式数据
+	type:'get',//HTTP请求类型
+	success: function(data){
+		if(data.status == "200"){
+			for(i = 0; i < data.data.length; i++){
+				var item = "<div class='mui-input-row mui-radio' ><span class='task_item' id="+data.data[i].taskId+">"+
+					data.data[i].taskName+"</span><input type='radio' name='task_item' id="+data.data[i].taskId+"></div>";
+				$("#task_list").append(item);
+			}
+		}
+	}
+});
+
 (function($){
+
+	/* 任务item详情显示 */
+	mui("#task_list").on('tap', '.task_item', function(){
+		mui.ajax(urlPattern.value+'/prjTask/transId', {
+			data: {
+				"taskId": this.id
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			success: function(data){
+				if(data.status == "200"){
+					mui.openWindow({
+						url: 'task_detail.html'
+					});
+				}
+			},
+			error: function(){
+				mui.toast('失败', { duration:'long', type:'div' });
+			}
+		}); 
+	}); 
+	
+	/* 选择员工 */
 	var selEmpBtn = document.getElementById('sel_emp_btn');
-	
-	// filt_btn.addEventListener('tap', function(){
-	// 	mui.openWindow({
-	// 		url: 'd_perf_filt.html'
-	// 	});
-	// });
-	
-	mui("#task_list").on('tap', 'a', function(){
-		mui.openWindow({
-			url: 'task_detail.html'
-		});
-	});
-	
 	selEmpBtn.addEventListener('tap', function(){
-		mui.openWindow({
-			url: 'd_sel_emp.html'
-		});
+		
+		//获取选中的任务id
+		var taskId = undefined;
+		var obj=document.getElementsByTagName("input");
+		for(var i=0; i<obj.length; i++){
+			if(obj[i].checked){
+				taskId = obj[i].id;
+			}
+		}
+		if(taskId != undefined){
+			mui.ajax(urlPattern.value+'/prjTask/transId', {
+				data: {
+					"taskId": taskId
+				}, 
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				success: function(data){
+					if(data.status == "200"){
+						mui.openWindow({
+							url: 'd_sel_emp.html'
+						});
+					}
+				}
+			});
+		} else{
+			mui.toast('请选择任务', { duration:'long', type:'div' });
+		}
 	});
 	
 })(mui);

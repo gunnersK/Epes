@@ -24,7 +24,21 @@
 		}
 	});
 
+	/* 完成任务按钮 */
 	var finishBtn = document.getElementById('finish');
+	
+	/* 限制只有管理员可见 */
+	mui.ajax(urlPattern.value+'/login/getUser', {
+		dataType:'json',//服务器返回json格式数据
+		type:'get',//HTTP请求类型
+		success: function(data){
+			if(data.status == "200"){
+				if(data.data.role == 0){
+					finishBtn.style.display = "inline";
+				}
+			}
+		}
+	});
 	finishBtn.addEventListener('tap', function(){
 		mui.confirm('确认完成该项目？', 'Hello MUI', btnArray, function(e){
 			if (e.index == 1) {

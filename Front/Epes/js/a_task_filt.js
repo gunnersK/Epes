@@ -46,7 +46,7 @@
 	/* 项目picker */
 	var prjPicker = new $.PopPicker();
 	var undoPrj = [];
-	mui.ajax(urlPattern.value+'/project/listUndo', {
+	mui.ajax(urlPattern.value+'/project/listAll', {
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
@@ -93,9 +93,8 @@
 		});
 	}, false);
 	
-	/* 状态picker */
+	/* 确认按钮*/
 	var confBtn = document.getElementById("confirm");
-	
 	confBtn.addEventListener('tap', function(){
 		var startTime = document.getElementById("start_res").data;
 		var endTime = document.getElementById("end_res").data;

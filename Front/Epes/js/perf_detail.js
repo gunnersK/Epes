@@ -13,7 +13,7 @@
 				} else if(data.data.status == 1){
 					document.getElementById('status').innerHTML = "已完成";
 				}
-				document.getElementById('score').value = data.data.score;
+				document.getElementById('score').innerHTML = data.data.score;
 				document.getElementById('performance').innerHTML = data.data.performance;
 				var createTime = data.data.createTime;
 				var lastUpdTime = data.data.lastUpdTime;
@@ -26,27 +26,6 @@
 				}
 			}
 		}
-	});
-
-	/* 完成任务按钮 */
-	var finishBtn = document.getElementById('finish');
-	finishBtn.addEventListener('tap', function(){
-		mui.confirm('确认完成该任务？', 'Hello MUI', btnArray, function(e){
-			if (e.index == 1) {
-				mui.ajax(urlPattern.value+'/taskEva/finish', {
-					data: {"score": document.getElementById('score').value},
-					dataType:'json',//服务器返回json格式数据
-					type:'post',//HTTP请求类型
-					success: function(data){
-						if(data.status == "200"){
-							mui.toast('任务已完成');
-							mui.back();
-						}
-					}
-				});
-			}
-		}, 'div'); 
-		var btnArray = ['确认', '取消'];
 	});
 })(mui);
 

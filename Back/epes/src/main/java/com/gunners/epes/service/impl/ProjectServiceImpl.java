@@ -37,8 +37,10 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         //设置查询where条件
         QueryWrapper queryWrapper = new QueryWrapper<Project>()
                 .select("prj_id", "prj_name")
-                .orderByDesc("prj_id")
-                .like("prj_name", Objects.isNull(projectVo.getPrjName()) ? "" : projectVo.getPrjName());
+                .orderByDesc("prj_id");
+        if(!Objects.isNull(projectVo.getPrjName())){
+            queryWrapper.like("prj_name", projectVo.getPrjName());
+        }
         if(!Objects.isNull(projectVo.getStartTime())){
             queryWrapper.ge("create_time", projectVo.getStartTime());
         }
@@ -65,10 +67,10 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     }
 
     @Override
-    public List<Project> listUndo() {
+    public List<Project> listAll() {
         QueryWrapper queryWrapper = new QueryWrapper<Project>()
                 .select("prj_id", "prj_name")
-                .eq("status", 0);
+                .orderByDesc("prj_id");
         return this.list(queryWrapper);
     }
 }

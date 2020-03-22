@@ -72,6 +72,7 @@ public class PrjTaskController {
      */
     @PostMapping("/transFilter")
     public Response transmitFilter(PrjTaskVo prjTaskVo, HttpSession session){
+        clearFilter(session);
         if (!Objects.isNull(prjTaskVo.getStartTime())) {
             sessionUtils.putIntoSession(session, SessionKeyConstants.PRJTASK_START_TIME, prjTaskVo.getStartTime());
         }
@@ -88,7 +89,7 @@ public class PrjTaskController {
     }
 
     @GetMapping("/list")
-    public Response listProject(HttpSession session, PrjTaskVo prjTaskVo){
+    public Response listPrjTask(HttpSession session, PrjTaskVo prjTaskVo){
 
         //获取过滤条件并查询
         prjTaskVo.setStartTime(sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_START_TIME));
@@ -98,11 +99,16 @@ public class PrjTaskController {
         List<PrjTask> list = prjTaskService.listPrjTask(prjTaskVo);
 
         //清除session过滤条件
-        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_START_TIME);
-        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_END_TIME);
-        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_PRJ_ID);
-        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_STATUS);
+        if(Objects.isNull(list) || list.size() == 0) {
+            clearFilter(session);
+        }
 
+        return Response.ok(list);
+    }
+
+    @GetMapping("/listUnfinish")
+    public Response listUnfinish(){
+        List<PrjTask> list = prjTaskService.listUnfinish();
         return Response.ok(list);
     }
 
@@ -113,7 +119,7 @@ public class PrjTaskController {
     }
 
     @GetMapping("/getTask")
-    public Response getProject(HttpSession session){
+    public Response getPrjTask(HttpSession session){
         Integer taskId = sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_ID);
         PrjTask prjTask = getCacheService.getPrjTask(taskId);
 //        if(Objects.isNull(prjTask)){
@@ -124,7 +130,7 @@ public class PrjTaskController {
 
     @PostMapping("/finish")
     //赋值完成时间，更新状态，用prjTask接，更新redis、数据库
-    public Response finishProject(HttpSession session){
+    public Response finishPrjTask(HttpSession session){
         Integer taskId = sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_ID);
 
         //更新状态、完成时间，更新进redis
@@ -137,6 +143,13 @@ public class PrjTaskController {
         prjTaskService.updatePrjTask(prjTask);
 
         return Response.ok();
+    }
+
+    private void clearFilter(HttpSession session){
+        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_START_TIME);
+        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_END_TIME);
+        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_PRJ_ID);
+        sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_STATUS);
     }
 
 }

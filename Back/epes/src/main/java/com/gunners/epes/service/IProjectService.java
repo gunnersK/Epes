@@ -20,6 +20,6 @@ public interface IProjectService extends IService<Project> {
 
     boolean updateProject(Project project);
 
-    List<Project> listUndo();
+    List<Project> listAll();
 
 }

@@ -9,4 +9,6 @@ public class CommKeyConstants {
     public static final String PROJECT_KEY = "project_key";
 
     public static final String PRJTASK_KEY = "prjtask_key";
+
+    public static final String TASKEVA_INFO_KEY = "task_eva_info_key";
 }

@@ -31,12 +31,28 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
 
     @Override
     public List<Notice> listNotice(NoticeVo noticeVo) {
-        QueryWrapper queryWrapper = new QueryWrapper<Notice>();
-        queryWrapper.orderByDesc("nt_id");
-        queryWrapper.like("title", Objects.isNull(noticeVo.getTitle()) ? "" : noticeVo.getTitle());
+        QueryWrapper queryWrapper = new QueryWrapper<Notice>()
+                .select("nt_id", "title", "create_time")
+                .orderByDesc("nt_id")
+                .like("title", Objects.isNull(noticeVo.getTitle()) ? "" : noticeVo.getTitle());
+        if(!Objects.isNull(noticeVo.getTitle())){
+            queryWrapper.ge("title", noticeVo.getTitle());
+        }
+        if(!Objects.isNull(noticeVo.getStartTime())){
+            queryWrapper.ge("create_time", noticeVo.getStartTime());
+        }
+        if(!Objects.isNull(noticeVo.getEndTime())){
+            queryWrapper.le("create_time", noticeVo.getEndTime());
+        }
         Page page = new Page(noticeVo.getPage(), noticeVo.getSize());
         IPage<Notice> noticePage = this.page(page, queryWrapper);
         List<Notice> list = noticePage.getRecords();
         return list;
+    }
+
+    @Override
+    public Notice getLastNotice() {
+        Notice notice = this.getBaseMapper().getLastNotice();
+        return notice;
     }
 }
