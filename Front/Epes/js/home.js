@@ -1,7 +1,7 @@
 // $(function(){
 	
 	/* 获取登录用户权限 */
-	mui.ajax(urlPattern.value+'/login/getUser', {
+	mui.ajax(urlPattern.value+'/employee/getProfile', {
 		async: true,
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
@@ -9,12 +9,13 @@
 			if(data.status == "200"){
 				// var role = 1;
 				var role = data.data.role
+				var name = data.data.empName
 				if(role == 0){
-					initAdmin();
+					initAdmin("管理员", name);
 				} else if(role == 1){
-					initDirector();
+					initDirector("主管", name);
 				} else if(role == 2){
-					initEmployee();
+					initEmployee("员工", name);
 				}
 			}
 		}
@@ -31,27 +32,36 @@
 	// })	
 	
 	/* 初始化管理员按钮 */
-	function initAdmin(){
+	function initAdmin(role, name){
 		var btns = document.getElementsByClassName("admin");
 		for(i = 0; i < btns.length; i++){
 			btns[i].style.display = "inline";
 		}
+		welcome(role, name);
 	}
 	
 	/* 初始化部门主管按钮 */
-	function initDirector(){
+	function initDirector(role, name){
 		var btns = document.getElementsByClassName("director");
 		for(i = 0; i < btns.length; i++){
 			btns[i].style.display = "inline";
 		}
+		welcome(role, name);
 	}
 	
 	/* 初始化普通员工按钮 */
-	function initEmployee(){
+	function initEmployee(role, name){
 		var btns = document.getElementsByClassName("employee");
 		for(i = 0; i < btns.length; i++){
 			btns[i].style.display = "inline";
 		}
+		welcome(role, name);
+	}
+	
+	/* 设置欢迎栏 */
+	function welcome(role, name){
+		document.getElementById('emp_role').innerHTML = role;
+		document.getElementById('emp_name').innerHTML = name;
 	}
 	
 	/* 获取最新公告 */
@@ -77,7 +87,7 @@
 	var ntcContent = document.getElementById('ntc_content');
 	
 	/* 右上菜单 */
-	var empInfo = document.getElementById('emp_info');
+	var profile = document.getElementById('profile');
 	
 	/* 按钮监听 */	
 	/* 工作日志 */
@@ -168,6 +178,13 @@
 	});
 	var btnArray = ['确认', '取消'];
 	
+	/* 个人信息 */
+	profile.addEventListener('tap', function(){
+		mui.openWindow({
+			url: 'emp_info.html'
+		});
+	});
+	
 	/* 查看全部(公告) */
 	allNtc.addEventListener('tap', function(){
 		mui.openWindow({
@@ -211,14 +228,6 @@
 				mui.toast('失败', { duration:'long', type:'div' });
 			}
 		});
-	});
-	
-	/* 个人信息 */
-	empInfo.addEventListener('tap', function(){
-		mui.openWindow({
-			url: 'emp_info.html'
-		});
-		mui('#topPopover').popover('toggle');//show hide toggle
 	});
 
 // 基于准备好的dom，初始化echarts实例
