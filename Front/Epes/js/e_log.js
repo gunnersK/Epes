@@ -1,10 +1,9 @@
 (function($) {
-	var check_all = document.getElementById('check_all');
+	var allNtc = document.getElementById('all_ntc');
 	
-	check_all.addEventListener('tap', function(){
+	allNtc.addEventListener('tap', function(){
 		mui.openWindow({
 			url: 'e_log_list.html'
 		});
-		mui('#topPopover').popover('toggle');//show hide toggle
 	});
 })(mui);

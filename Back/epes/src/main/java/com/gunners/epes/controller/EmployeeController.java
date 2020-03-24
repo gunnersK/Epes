@@ -138,7 +138,7 @@ public class EmployeeController {
     @GetMapping("/getProfile")
     public Response getProfile(HttpSession session){
         User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
-        EmpInfo empInfo = getCacheService.getEmpInfo(user.getEmpId());
+        EmpInfo empInfo = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_INFO);
         return Response.ok(empInfo);
     }
 
@@ -151,8 +151,8 @@ public class EmployeeController {
     @GetMapping("/getTaskEmp")
     public Response getTaskEmployee(HttpSession session){
         //获取部门id和任务id
-        Employee employee = sessionUtils.getFromSession(session, SessionKeyConstants.EMPLOYEE);
-        Integer dpartId = employee.getDpartId();
+        EmpInfo empInfo = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_INFO);
+        Integer dpartId = empInfo.getDpartId();
         Integer taskId = sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_ID);
 
         //查询员工
@@ -169,8 +169,8 @@ public class EmployeeController {
     @GetMapping("/listByDpart")
     public Response listByDpartId(HttpSession session){
         //获取部门id
-        Employee employee = sessionUtils.getFromSession(session, SessionKeyConstants.EMPLOYEE);
-        Integer dpartId = employee.getDpartId();
+        EmpInfo empInfo = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_INFO);
+        Integer dpartId = empInfo.getDpartId();
 
         //查询员工
         List<Employee> list = employeeService.listByDpartId(dpartId);

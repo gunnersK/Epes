@@ -18,6 +18,15 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
     private RedissonClient redissonClient;
 
     @Override
+    public <T> void save(String rmapKey, String idKey, T entity) {
+        RMap<String, T> map = redissonClient.getMap(rmapKey);
+        map.put(idKey, entity);
+        map.forEach( (k, v) ->{
+            System.out.println(k + ": " + v);
+        });
+    }
+
+    @Override
     public void saveEmpInfo(EmpInfo empInfo) {
         RMap<String, EmpInfo> map = redissonClient.getMap(CommKeyConstants.EMPINFO_KEY);
         String key = StrUtil.format("emp_info_id_{}", empInfo.getEmpId());
@@ -26,9 +35,10 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
 
     @Override
     public void saveNotice(Notice notice) {
-        RMap<String, Notice> map = redissonClient.getMap(CommKeyConstants.NOTICE_KEY);
-        String key = StrUtil.format("nt_id_{}", notice.getNtId().toString());
-        map.put(key, notice);
+//        RMap<String, Notice> map = redissonClient.getMap(CommKeyConstants.NOTICE_KEY);
+        String idkey = StrUtil.format("nt_id_{}", notice.getNtId().toString());
+        this.save(CommKeyConstants.NOTICE_KEY, idkey, notice);
+//        map.put(key, notice);
     }
 
     @Override
@@ -62,4 +72,5 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
         String key = StrUtil.format("daily_log_id_{}", dailyLog.getId().toString());
         map.put(key, dailyLog);
     }
+
 }

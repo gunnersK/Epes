@@ -50,7 +50,7 @@ public class LoginController {
     ILoginService loginService;
 
     @Autowired
-    IEmployeeService employeeService;
+    IEmpInfoService empInfoService;
 
     @PostMapping("/login")
     public Response login(User user, HttpSession session){
@@ -58,8 +58,8 @@ public class LoginController {
         if(!Objects.isNull(u)){
             sessionUtils.saveSession(session);
             sessionUtils.putIntoSession(session, SessionKeyConstants.USER, u);
-            Employee employee = employeeService.getOne(user.getEmpId());
-            sessionUtils.putIntoSession(session, SessionKeyConstants.EMPLOYEE, employee);
+            EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
+            sessionUtils.putIntoSession(session, SessionKeyConstants.EMP_INFO, empInfo);
             return Response.ok();
         }
         return Response.ok(null, "failure");

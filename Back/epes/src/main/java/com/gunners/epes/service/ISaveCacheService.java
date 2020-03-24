@@ -4,6 +4,8 @@ import com.gunners.epes.entity.*;
 
 public interface ISaveCacheService {
 
+    <T> void save(String rmapKey, String idKey, T entity);
+
     /**
      * 保存员工信息到redis
      * @param empInfo
