@@ -44,7 +44,7 @@ public class LoginController {
     SessionUtils sessionUtils;
 
     @Autowired
-    IUserService userservice;
+    IUserService userService;
 
     @Autowired
     ILoginService loginService;
@@ -54,7 +54,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public Response login(User user, HttpSession session){
-        User u = userservice.authentication(user);
+        User u = userService.authentication(user);
         if(!Objects.isNull(u)){
             sessionUtils.saveSession(session);
             sessionUtils.putIntoSession(session, SessionKeyConstants.USER, u);
@@ -79,10 +79,10 @@ public class LoginController {
 
     @PostMapping("/modifyPwd")
     public Response modifyPassword(HttpSession session, String old_passwd, String new_passwd){
-        if(userservice.validPasswd(session, old_passwd)){
+        if(userService.validPasswd(session, old_passwd)){
             User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
             user.setPassword(Base64.encode(new_passwd, CharsetUtil.UTF_8));
-            userservice.updateUserByEmpId(user);
+            userService.updateUserByEmpId(user);
             sessionUtils.putIntoSession(session, SessionKeyConstants.USER, user);
             return Response.ok();
         }

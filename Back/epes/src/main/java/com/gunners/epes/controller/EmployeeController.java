@@ -119,7 +119,7 @@ public class EmployeeController {
     }
 
     /**
-     * 管理员部门管理
+     * 管理员部门管理调用
      * @param session
      * @return
      */
@@ -143,6 +143,7 @@ public class EmployeeController {
     }
 
     /**
+     * 主管任务分配选择员工调用
      * 查询选定任务下未被分配的本部门员工
      * @param session
      * @return
@@ -160,6 +161,11 @@ public class EmployeeController {
         return Response.ok(list);
     }
 
+    /**
+     * 主管绩效过滤页面调用
+     * @param session
+     * @return
+     */
     @GetMapping("/listByDpart")
     public Response listByDpartId(HttpSession session){
         //获取部门id

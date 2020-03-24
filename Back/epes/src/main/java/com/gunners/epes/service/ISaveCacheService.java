@@ -36,4 +36,9 @@ public interface ISaveCacheService {
      */
     void saveTaskEvaInfo(TaskEvaInfo taskEvaInfo);
 
+    /**
+     * 保存员工日志到redis
+     * @param dailyLog
+     */
+    void saveDailyLog(DailyLog dailyLog);
 }

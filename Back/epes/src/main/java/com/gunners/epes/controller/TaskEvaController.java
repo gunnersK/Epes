@@ -82,6 +82,12 @@ public class TaskEvaController {
         return Response.ok();
     }
 
+    /**
+     * 主管绩效评分调用
+     * @param session
+     * @param taskEvaVo
+     * @return
+     */
     @GetMapping("/list")
     public Response listTaskEva(HttpSession session, TaskEvaVo taskEvaVo){
 

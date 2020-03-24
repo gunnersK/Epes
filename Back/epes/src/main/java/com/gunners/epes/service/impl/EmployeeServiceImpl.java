@@ -78,6 +78,12 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         return remove(empWrapper);
     }
 
+    /**
+     * 查询选定任务下未被分配的本部门员工
+     * @param dpartId
+     * @param taskId
+     * @return
+     */
     @Override
     public List<Employee> listTaskEmployee(Integer dpartId, Integer taskId) {
         List<Employee> list = this.getBaseMapper().listTaskEmployee(dpartId, taskId);

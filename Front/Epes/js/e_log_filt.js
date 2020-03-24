@@ -40,4 +40,24 @@
 			
 		}, false);
 	});
+	
+	/* 状态picker */
+	var statusPicker = new $.PopPicker();
+	statusPicker.setData([{
+		value: '0',
+		text: '已审阅'
+	}, {
+		value: '1',
+		text: '未审阅'
+	}]);
+	var status = document.getElementById('status');
+	var statusResult = document.getElementById('status_result');
+	status.addEventListener('tap', function(event) {
+		statusPicker.show(function(items) {
+			statusResult.data = items[0].value;
+			statusResult.innerText = items[0].text;
+			//返回 false 可以阻止选择框的关闭
+			//return false;
+		});
+	}, false);
 })(mui);

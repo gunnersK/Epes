@@ -1,6 +1,7 @@
 package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import lombok.Data;
@@ -29,6 +30,9 @@ public class DailyLog implements Serializable {
     private Integer id;
 
     private String empId;
+
+    @TableField(exist = false)
+    private String empName;
 
     private String content;
 

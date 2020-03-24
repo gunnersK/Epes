@@ -56,7 +56,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public boolean validPasswd(HttpSession session, String old_passwd) {
-        User user = (User) sessionUtils.getFromSession(session, SessionKeyConstants.USER);
+        User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
         Predicate<String> predicate = (passwd) -> {
             return user.getPassword().equals(Base64.encode(passwd, CharsetUtil.UTF_8));
         };

@@ -55,4 +55,11 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
         String key = StrUtil.format("eva_id_{}", taskEvaInfo.getEvaId().toString());
         map.put(key, taskEvaInfo);
     }
+
+    @Override
+    public void saveDailyLog(DailyLog dailyLog) {
+        RMap<String, DailyLog> map = redissonClient.getMap(CommKeyConstants.DAILY_LOG_KEY);
+        String key = StrUtil.format("daily_log_id_{}", dailyLog.getId().toString());
+        map.put(key, dailyLog);
+    }
 }

@@ -24,7 +24,7 @@ function pulldownRefresh() {
 	
 	filt_btn.addEventListener('tap', function(){
 		mui.openWindow({
-			url: 'e_log_date_filt.html'
+			url: 'e_log_filt.html'
 		});
 	});
 	

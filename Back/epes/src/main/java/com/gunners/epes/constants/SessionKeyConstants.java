@@ -49,4 +49,6 @@ public class SessionKeyConstants {
    public static final String EVA_PRJ_ID = "eva_prj_id";
 
    public static final String EVA_STATUS = "eva_status";
+
+   public static final String DAILY_LOG_ID = "daily_log_id";
 }
