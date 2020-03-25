@@ -4,6 +4,13 @@ import com.gunners.epes.entity.*;
 
 public interface ISaveCacheService {
 
+    /**
+     * 保存到redis的公用方法
+     * @param rmapKey
+     * @param idKey
+     * @param entity
+     * @param <T>
+     */
     <T> void save(String rmapKey, String idKey, T entity);
 
     /**

@@ -5,6 +5,15 @@ import com.gunners.epes.entity.*;
 public interface IGetCacheService {
 
     /**
+     * 在redis获取信息的公共方法
+     * @param rmapKey
+     * @param idKey
+     * @param <T>
+     * @return
+     */
+    <T> T get(String rmapKey, String idKey);
+
+    /**
      * 在redis中获取公告
      * @param empId
      * @return

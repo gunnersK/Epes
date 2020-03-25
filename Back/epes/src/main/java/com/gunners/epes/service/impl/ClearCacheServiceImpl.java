@@ -19,30 +19,32 @@ public class ClearCacheServiceImpl implements IClearCacheService {
     private RedissonClient redissonClient;
 
     @Override
+    public <T> void delete(String rmapKey, String idKey) {
+        RMap<String, T> map = redissonClient.getMap(rmapKey);
+        map.remove(idKey);
+    }
+
+    @Override
     public void deleteEmpInfo(String empId) {
-        RMap<String, EmpInfo> map = redissonClient.getMap(CommKeyConstants.EMPINFO_KEY);
-        String key = StrUtil.format("emp_info_id_{}", empId);
-        map.remove(key);
+        String idKey = StrUtil.format("emp_info_id_{}", empId);
+        this.delete(CommKeyConstants.EMPINFO_KEY, idKey);
     }
 
     @Override
     public void deleteNotice(Integer ntId) {
-        RMap<String, Notice> map = redissonClient.getMap(CommKeyConstants.NOTICE_KEY);
-        String key = StrUtil.format("nt_id_{}", ntId.toString());
-        map.remove(key);
+        String idKey = StrUtil.format("nt_id_{}", ntId.toString());
+        this.delete(CommKeyConstants.NOTICE_KEY, idKey);
     }
 
     @Override
     public void deleteProject(Integer prjId) {
-        RMap<String, Project> map = redissonClient.getMap(CommKeyConstants.PROJECT_KEY);
-        String key = StrUtil.format("prj_id_{}", prjId.toString());
-        map.remove(key);
+        String idKey = StrUtil.format("prj_id_{}", prjId.toString());
+        this.delete(CommKeyConstants.PROJECT_KEY, idKey);
     }
 
     @Override
     public void deletePrjTask(Integer taskId) {
-        RMap<String, PrjTask> map = redissonClient.getMap(CommKeyConstants.PRJTASK_KEY);
-        String key = StrUtil.format("task_id_{}", taskId.toString());
-        map.remove(key);
+        String idKey = StrUtil.format("task_id_{}", taskId.toString());
+        this.delete(CommKeyConstants.PRJTASK_KEY, idKey);
     }
 }

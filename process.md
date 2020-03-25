@@ -149,7 +149,11 @@
 
 	- 优化redis相关service方法的代码
 
-	- 继续完善优化redis相关service方法的代码（save、get、clear）
+- 3.25
+
+	- 在云服务器安装mysql和redis
+
+	- 优化redis相关service方法的代码（save、get、clear）
 
 	- 先处理下面那个问题，然后开始写工作日志接口
 

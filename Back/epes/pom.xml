@@ -123,6 +123,12 @@
                 <spring.active>company</spring.active>
             </properties>
         </profile>
+        <profile>
+            <id>remote</id>
+            <properties>
+                <spring.active>remote</spring.active>
+            </properties>
+        </profile>
     </profiles>
 
 </project>

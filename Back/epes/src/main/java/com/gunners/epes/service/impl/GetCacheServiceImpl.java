@@ -16,37 +16,39 @@ public class GetCacheServiceImpl implements IGetCacheService {
     private RedissonClient redissonClient;
 
     @Override
+    public <T> T get(String rmapKey, String idKey){
+        RMap<String, T> map = redissonClient.getMap(rmapKey);
+        T entity = map.get(idKey);
+        return entity;
+    }
+
+    @Override
     public EmpInfo getEmpInfo(String empId) {
-        RMap<String, EmpInfo> map = redissonClient.getMap(CommKeyConstants.EMPINFO_KEY);
-        String key = StrUtil.format("emp_info_id_{}", empId);
-        return map.get(key);
+        String idKey = StrUtil.format("emp_info_id_{}", empId);
+        return this.get(CommKeyConstants.EMPINFO_KEY, idKey);
     }
 
     @Override
     public Notice getNotice(Integer ntId) {
-        RMap<String, Notice> map = redissonClient.getMap(CommKeyConstants.NOTICE_KEY);
-        String key = StrUtil.format("nt_id_{}", ntId.toString());
-        return map.get(key);
+        String idKey = StrUtil.format("nt_id_{}", ntId.toString());
+        return this.get(CommKeyConstants.NOTICE_KEY, idKey);
     }
 
     @Override
     public Project getProject(Integer prjId) {
-        RMap<String, Project> map = redissonClient.getMap(CommKeyConstants.PROJECT_KEY);
-        String key = StrUtil.format("prj_id_{}", prjId.toString());
-        return map.get(key);
+        String idKey = StrUtil.format("prj_id_{}", prjId.toString());
+        return this.get(CommKeyConstants.PROJECT_KEY, idKey);
     }
 
     @Override
     public PrjTask getPrjTask(Integer taskId) {
-        RMap<String, PrjTask> map = redissonClient.getMap(CommKeyConstants.PRJTASK_KEY);
-        String key = StrUtil.format("task_id_{}", taskId.toString());
-        return map.get(key);
+        String idKey = StrUtil.format("task_id_{}", taskId.toString());
+        return this.get(CommKeyConstants.PRJTASK_KEY, idKey);
     }
 
     @Override
     public TaskEvaInfo getTaskEvaInfo(Integer evaId) {
-        RMap<String, TaskEvaInfo> map = redissonClient.getMap(CommKeyConstants.TASKEVA_INFO_KEY);
-        String key = StrUtil.format("eva_id_{}", evaId.toString());
-        return map.get(key);
+        String idKey = StrUtil.format("eva_id_{}", evaId.toString());
+        return this.get(CommKeyConstants.TASKEVA_INFO_KEY, idKey);
     }
 }

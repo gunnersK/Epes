@@ -5,6 +5,14 @@ import com.gunners.epes.entity.Notice;
 public interface IClearCacheService {
 
     /**
+     * 从redis删除信息的公共方法
+     * @param rmapKey
+     * @param idKey
+     * @param <T>
+     */
+    <T> void delete(String rmapKey, String idKey);
+
+    /**
      * 删除redis中的员工信息
      * @param empId
      */
