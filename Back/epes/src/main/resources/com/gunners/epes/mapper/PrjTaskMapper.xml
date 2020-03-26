@@ -36,7 +36,7 @@
             <if test="prjTaskVo.endTime != null and prjTaskVo.endTime != ''">
                 and <![CDATA[ t1.create_time <= #{prjTaskVo.endTime} ]]>
             </if>
-            <if test="prjTaskVo.status != null and prjTaskVo.status != ''">
+            <if test="prjTaskVo.status != null">
                 and t1.status = #{prjTaskVo.status}
             </if>
         </where>

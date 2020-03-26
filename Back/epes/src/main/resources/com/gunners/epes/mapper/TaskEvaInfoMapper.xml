@@ -52,7 +52,7 @@
             <if test="taskEvaVo.endTime != null and taskEvaVo.endTime != ''">
                 and <![CDATA[ t1.create_time <= #{taskEvaVo.endTime} ]]>
             </if>
-            <if test="taskEvaVo.status != null and taskEvaVo.status != ''">
+            <if test="taskEvaVo.status != null">
                 and t1.status = #{taskEvaVo.status}
             </if>
         </where>

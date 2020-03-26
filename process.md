@@ -151,11 +151,15 @@
 
 - 3.25
 
-	- 在云服务器安装mysql和redis
+    - 在云服务器安装mysql和redis
 
-	- 优化redis相关service方法的代码（save、get、clear）
+    - 优化redis相关service方法的代码（save、get、clear）
 
-	- 先处理下面那个问题，然后开始写工作日志接口
+- 3.26
 
-	- 管理员任务管理、主管绩效评分、员工我的绩效模块，都不能筛选进行中状态的信息，查一下。（管理员的项目管理状态过滤正常，参照这个查）
+	- 完成用户登录时在login表插入记录
+
+	- 修复管理员任务管理、主管绩效评分、员工我的绩效模块，都不能筛选进行中状态的信息，原因是对应mapper.xml文件中，status字段的```<if test="taskEvaVo.status != null">```判断条件不能加上status != ''
+	
+	- 开始写工作日志接口，已完成save的了
 
