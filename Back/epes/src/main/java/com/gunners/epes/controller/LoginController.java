@@ -4,10 +4,7 @@ package com.gunners.epes.controller;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.CharsetUtil;
 import com.gunners.epes.constants.SessionKeyConstants;
-import com.gunners.epes.entity.EmpInfo;
-import com.gunners.epes.entity.Employee;
-import com.gunners.epes.entity.Response;
-import com.gunners.epes.entity.User;
+import com.gunners.epes.entity.*;
 import com.gunners.epes.service.*;
 //import com.gunners.epes.utils.RedissonUtils;
 import com.gunners.epes.utils.SessionUtils;
@@ -23,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -54,12 +52,30 @@ public class LoginController {
 
     @PostMapping("/login")
     public Response login(User user, HttpSession session){
+
+        //用户认证
         User u = userService.authentication(user);
+
         if(!Objects.isNull(u)){
+            //在redis保存session
             sessionUtils.saveSession(session);
+
+            //更新user最后登录时间
+            long currentTime = Instant.now().getEpochSecond();
+            u.setLastLoginTime(currentTime);
+            userService.updateById(u);
+
+            //在session保存User和EmpInfo信息
             sessionUtils.putIntoSession(session, SessionKeyConstants.USER, u);
             EmpInfo empInfo = empInfoService.getEmpInfo(user.getEmpId());
             sessionUtils.putIntoSession(session, SessionKeyConstants.EMP_INFO, empInfo);
+
+            //记录到login表
+            Login login = new Login()
+                    .setUserId(u.getUserId())
+                    .setLoginTime(currentTime);
+            loginService.save(login);
+
             return Response.ok();
         }
         return Response.ok(null, "failure");
