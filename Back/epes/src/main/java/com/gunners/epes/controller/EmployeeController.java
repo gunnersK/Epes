@@ -162,7 +162,7 @@ public class EmployeeController {
     }
 
     /**
-     * 主管绩效过滤页面调用
+     * 主管绩效评分、日志管理过滤页面调用
      * @param session
      * @return
      */

@@ -56,6 +56,11 @@ public class SessionUtils {
         return (T) map.get(key);
     }
 
+    /**
+     * 从redis的session map中清除信息
+     * @param session
+     * @param key
+     */
     public void removeFromSession(HttpSession session, String key){
         RMap map = getSession(session);
         map.remove(key);

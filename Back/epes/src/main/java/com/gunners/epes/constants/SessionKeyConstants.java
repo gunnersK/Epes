@@ -51,4 +51,13 @@ public class SessionKeyConstants {
    public static final String EVA_STATUS = "eva_status";
 
    public static final String DAILY_LOG_ID = "daily_log_id";
+
+   public static final String LOG_START_TIME = "log_start_time";
+
+   public static final String LOG_END_TIME = "log_end_time";
+
+   public static final String LOG_EMP_ID = "log_emp_id";
+
+   public static final String LOG_STATUS = "log_status";
+
 }
