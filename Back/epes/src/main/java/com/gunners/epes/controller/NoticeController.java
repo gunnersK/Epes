@@ -71,11 +71,6 @@ public class NoticeController {
         noticeVo.setEndTime(sessionUtils.getFromSession(session, SessionKeyConstants.NOTICE_END_TIME));
         List<Notice> list = noticeService.listNotice(noticeVo);
 
-        //清除session过滤条件
-        if(Objects.isNull(list) || list.size() == 0){
-            clearFilter(session);
-        }
-
         return Response.ok(list);
     }
 
@@ -121,6 +116,12 @@ public class NoticeController {
         return Response.ok(notice);
     }
 
+    /**
+     * 清除所有过滤条件
+     * @param session
+     * @return
+     */
+    @PostMapping("clearAllFilter")
     private void clearFilter(HttpSession session){
         sessionUtils.removeFromSession(session, SessionKeyConstants.NOTICE_START_TIME);
         sessionUtils.removeFromSession(session, SessionKeyConstants.NOTICE_END_TIME);

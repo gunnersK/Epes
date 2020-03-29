@@ -32,18 +32,6 @@
 			</div>
 			<div class="">
 				<ul id="eva_list" class="mui-table-view mui-table-view-striped mui-table-view-condensed ">
-					<!-- <li class="mui-table-view-cell">
-						<div class="mui-table">
-							<div class="mui-table-cell mui-col-xs-10">
-								<h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
-								<h5>Larry</h5>
-								<p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
-							</div>	
-							<div class="mui-table-cell mui-col-xs-2 mui-text-right">
-								<span class="mui-h5">未完成</span>
-							</div>
-						</div>
-					</li> -->
 				</ul>
 			</div>
 		</div>
@@ -52,7 +40,16 @@
 		<script src="js/jquery-3.2.1.js"></script>
 		<script src="js/d_perf_list.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				beforeback: function(){
+					/* 清除所有模块的过滤条件 */
+					mui.ajax(urlPattern.value+'/taskEva/clearAllFilter', {
+						async: true,
+						dataType:'json',//服务器返回json格式数据
+						type:'post'//HTTP请求类型
+					});
+				}
+			});
 		</script>
 	</body>
 

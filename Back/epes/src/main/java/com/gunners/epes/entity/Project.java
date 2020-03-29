@@ -41,7 +41,7 @@ public class Project implements Serializable {
     private Long finishTime;
 
     /**
-     * 0未开始，1进行中，2已完成，3已作废
+     * 0未关闭，1已关闭
      */
     private Integer status;
 

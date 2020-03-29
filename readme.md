@@ -75,15 +75,15 @@
 
 - project（项目表）
 
-    - 字段：自增prj_id, prj_name, create_time, finish_time, prj_desc（项目描述）, status（0进行中，1已完成）
+    - 字段：自增prj_id, prj_name, create_time, finish_time, prj_desc（项目描述）, status（0未关闭，1已关闭）
 
 - prj_task（项目任务表）
 
-    - 字段：自增task_id, task_name, prj_id（外键关联project）, weight（任务权重）, create_time, finish_time, task_desc（任务描述）, score_desc（评分标准说明）,  status（0未开始，1进行中，2已完成，3已作废）
+    - 字段：自增task_id, task_name, prj_id（外键关联project）, weight（任务权重）, create_time, finish_time, task_desc（任务描述）, score_desc（评分标准说明）,  status（0进行中，1已完成）
 
 - task_eva（任务绩效表）
   
-    - 字段：自增eva_id, emp_id（外键关联employee）, task_id, create_time, finish_time, last_upd_time, score（任务得分）, performance（绩效=任务得分*任务权重）, status（0未开始，1进行中，2已完成，3已作废）
+    - 字段：自增eva_id, emp_id（外键关联employee）, task_id, create_time, finish_time, last_upd_time, score（任务得分）, performance（绩效=任务得分*任务权重）, status（0进行中，1已完成）
 
 - notice（公告表）
 

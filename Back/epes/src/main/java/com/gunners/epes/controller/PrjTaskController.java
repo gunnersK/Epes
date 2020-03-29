@@ -98,11 +98,6 @@ public class PrjTaskController {
         prjTaskVo.setStatus(sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_STATUS));
         List<PrjTask> list = prjTaskService.listPrjTask(prjTaskVo);
 
-        //清除session过滤条件
-        if(Objects.isNull(list) || list.size() == 0) {
-            clearFilter(session);
-        }
-
         return Response.ok(list);
     }
 
@@ -145,6 +140,12 @@ public class PrjTaskController {
         return Response.ok();
     }
 
+    /**
+     * 清除所有过滤条件
+     * @param session
+     * @return
+     */
+    @PostMapping("clearAllFilter")
     private void clearFilter(HttpSession session){
         sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_START_TIME);
         sessionUtils.removeFromSession(session, SessionKeyConstants.PRJTASK_END_TIME);

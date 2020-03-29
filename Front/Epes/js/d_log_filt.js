@@ -25,6 +25,7 @@
 				 * rs.i 分（minutes 的第二个字母），用法同年
 				 */
 				res[0].innerHTML = rs.y.text + '-' + rs.m.text + '-' + rs.d.text;
+				res[0].data = rs.y.text + '-' + rs.m.text + '-' + rs.d.text;
 				/* 
 				 * 返回 false 可以阻止选择框的关闭
 				 * return false;
@@ -44,42 +45,92 @@
 	
 	/* 员工picker */
 	var empPicker = new $.PopPicker();
-	empPicker.setData([{
-		value: 'ywj',
-		text: '小红'
-	}, {
-		value: 'aaa',
-		text: '小明'
-	}, {
-		value: 'lj',
-		text: '小兰'
-	}]);
+	var empList = [];
+	mui.ajax(urlPattern.value+'/employee/listByDpart', {
+		dataType:'json',//服务器返回json格式数据
+		type:'get',//HTTP请求类型
+		success: function(data){
+			if(data.status == "200"){
+				for(var i = 0; i < data.data.length; i++){
+					empList.push({
+						"value": data.data[i].empId,
+						"text": data.data[i].empName
+					});
+				}
+				empPicker.setData(empList);
+			}
+		}
+	});
 	var emp = document.getElementById('emp');
-	var empResult = document.getElementById('emp_result');
+	var empName = document.getElementById('emp_name');
+	var empId = document.getElementById('emp_id');
 	emp.addEventListener('tap', function(event) {
 		empPicker.show(function(items) {
-			empResult.innerText = JSON.stringify(items[0]);
+			empName.innerText = items[0].text;
+			empId.setAttribute("value", items[0].value);
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
 	}, false);
 	
-	/* 状态picker */
+	/*状态picker */
 	var statusPicker = new $.PopPicker();
 	statusPicker.setData([{
-		value: 'ywj',
+		value: '0',
 		text: '未审阅'
 	}, {
-		value: 'lj',
+		value: '1',
 		text: '已审阅'
 	}]);
 	var status = document.getElementById('status');
 	var statusResult = document.getElementById('status_result');
 	status.addEventListener('tap', function(event) {
 		statusPicker.show(function(items) {
-			statusResult.innerText = JSON.stringify(items[0]);
+			statusResult.data = items[0].value;
+			statusResult.innerText = items[0].text;
 			//返回 false 可以阻止选择框的关闭
 			//return false;
 		});
 	}, false);
+	
+	/* 确认按钮*/
+	var confBtn = document.getElementById("confirm");
+	confBtn.addEventListener('tap', function(){
+		var startTime = document.getElementById("start_res").data;
+		var endTime = document.getElementById("end_res").data;
+		var empId = document.getElementById("emp_id").value;
+		var status = document.getElementById("status_result").data;
+		if(startTime == undefined){
+			startTime = "";
+		} else{
+			var startTime = Date.parse(new Date(startTime)) / 1000;
+		}
+		if(endTime == undefined){
+			endTime = "";
+		} else{
+			var endTime = Date.parse(new Date(endTime)) / 1000;
+		}
+		if(empId == undefined){
+			empId = "";
+		}
+		if(status == undefined){
+			status = "";
+		}
+		
+		mui.ajax(urlPattern.value+'/dailyLog/transFilter', {
+			data: {
+				"startTime": startTime,
+				"endTime": endTime,
+				"empId": empId,
+				"status": status,
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			success: function(data){
+				if(data.status == "200"){
+					mui.back();
+				}
+			}
+		});
+	});
 })(mui);

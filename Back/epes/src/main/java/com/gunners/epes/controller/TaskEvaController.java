@@ -48,6 +48,20 @@ public class TaskEvaController {
     @Autowired
     IGetCacheService getCacheService;
 
+
+    /**
+     * 获取首页统计图数据
+     * @param year
+     * @param dpartId
+     * @param empId
+     * @return
+     */
+    @GetMapping("/getChartData")
+    public Response getChartData(Integer year, Integer dpartId, String empId){
+        List<Integer> dataList = taskEvaService.queryChartData(year, dpartId, empId);
+        return Response.ok(dataList);
+    }
+
     @PostMapping("/save")
     public Response save(HttpSession session, String[] empIdList){
         Integer taskId = sessionUtils.getFromSession(session, SessionKeyConstants.PRJTASK_ID);
@@ -82,29 +96,34 @@ public class TaskEvaController {
         return Response.ok();
     }
 
+    @GetMapping("/list")
+    public Response listTaskEva(HttpSession session, TaskEvaVo taskEvaVo){
+        //获取过滤条件并查询
+        taskEvaVo.setStartTime(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_START_TIME));
+        taskEvaVo.setEndTime(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_END_TIME));
+        taskEvaVo.setEmpId(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_EMP_ID));
+        taskEvaVo.setDpartId(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_DPART_ID));
+        taskEvaVo.setPrjId(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_PRJ_ID));
+        taskEvaVo.setStatus(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_STATUS));
+        List<TaskEvaInfo> list = taskEvaInfoService.listTaskEva(taskEvaVo);
+
+        return Response.ok(list);
+    }
+
     /**
      * 主管绩效评分调用
      * @param session
      * @param taskEvaVo
      * @return
      */
-    @GetMapping("/list")
-    public Response listTaskEva(HttpSession session, TaskEvaVo taskEvaVo){
+    @GetMapping("/listByDPartId")
+    public Response listByDPartId(HttpSession session, TaskEvaVo taskEvaVo){
+        //获取当前主管部门id
+        EmpInfo empInfo = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_INFO);
+        sessionUtils.putIntoSession(session, SessionKeyConstants.EVA_DPART_ID, empInfo.getDpartId());
 
-        //获取过滤条件并查询
-        taskEvaVo.setStartTime(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_START_TIME));
-        taskEvaVo.setEndTime(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_END_TIME));
-        taskEvaVo.setEmpId(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_EMP_ID));
-        taskEvaVo.setPrjId(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_PRJ_ID));
-        taskEvaVo.setStatus(sessionUtils.getFromSession(session, SessionKeyConstants.EVA_STATUS));
-        List<TaskEvaInfo> list = taskEvaInfoService.listTaskEva(taskEvaVo);
-
-        //清除session过滤条件
-        if(Objects.isNull(list) || list.size() == 0) {
-            clearFilter(session);
-        }
-
-        return Response.ok(list);
+        Response response = listTaskEva(session, taskEvaVo);
+        return response;
     }
 
     /**
@@ -115,9 +134,9 @@ public class TaskEvaController {
     @GetMapping("/listByEmpId")
     public Response listByEmpId(HttpSession session, TaskEvaVo taskEvaVo){
         //获取当前员工id
-        User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
+        EmpInfo empInfo = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_INFO);
+        sessionUtils.putIntoSession(session, SessionKeyConstants.EVA_EMP_ID, empInfo.getEmpId());
 
-        sessionUtils.putIntoSession(session, SessionKeyConstants.EVA_EMP_ID, user.getEmpId());
         Response response = listTaskEva(session, taskEvaVo);
         return response;
     }
@@ -155,6 +174,12 @@ public class TaskEvaController {
         return Response.ok();
     }
 
+    /**
+     * 清除所有过滤条件
+     * @param session
+     * @return
+     */
+    @PostMapping("clearAllFilter")
     private void clearFilter(HttpSession session){
         sessionUtils.removeFromSession(session, SessionKeyConstants.EVA_START_TIME);
         sessionUtils.removeFromSession(session, SessionKeyConstants.EVA_END_TIME);

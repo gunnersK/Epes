@@ -11,5 +11,7 @@ public class DailyLogVo extends PageVo {
 
     private String empId;
 
+    private Integer dpartId;
+
     private Integer status;
 }

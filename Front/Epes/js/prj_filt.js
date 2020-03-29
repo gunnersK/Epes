@@ -47,10 +47,10 @@
 	var statusPicker = new $.PopPicker();
 	statusPicker.setData([{
 		value: '0',
-		text: '进行中'
+		text: '未关闭'
 	}, {
 		value: '1',
-		text: '已完成'
+		text: '已关闭'
 	}]);
 	var status = document.getElementById('status');
 	var statusResult = document.getElementById('status_result');

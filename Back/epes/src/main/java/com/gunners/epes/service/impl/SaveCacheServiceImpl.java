@@ -58,7 +58,7 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
 
     @Override
     public void saveDailyLog(DailyLog dailyLog) {
-        String idkey = StrUtil.format("daily_log_id_{}", dailyLog.getId().toString());
+        String idkey = StrUtil.format("log_id_{}", dailyLog.getId().toString());
         this.save(CommKeyConstants.DAILY_LOG_KEY, idkey, dailyLog);
     }
 

@@ -137,7 +137,6 @@ public class EmployeeController {
      */
     @GetMapping("/getProfile")
     public Response getProfile(HttpSession session){
-        User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
         EmpInfo empInfo = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_INFO);
         return Response.ok(empInfo);
     }
@@ -162,7 +161,7 @@ public class EmployeeController {
     }
 
     /**
-     * 主管绩效评分、日志管理过滤页面调用
+     * 主管绩效评分、首页统计图选择员工、日志管理过滤页面调用
      * @param session
      * @return
      */

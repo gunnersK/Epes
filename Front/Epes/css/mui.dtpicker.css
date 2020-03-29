@@ -124,13 +124,16 @@
 
 [data-type="month"] .mui-picker,
 [data-type="month"] .mui-dtpicker-title h5 {
-	width: 50%;
+	width: 100%;
 }
 [data-type="month"] [data-id="picker-d"],
 [data-type="month"] [data-id="picker-h"],
 [data-type="month"] [data-id="picker-i"],
+[data-type="month"] [data-id="picker-m"],
 [data-type="month"] [data-id="title-d"],
 [data-type="month"] [data-id="title-h"],
-[data-type="month"] [data-id="title-i"] {
+[data-type="month"] [data-id="title-i"],
+[data-type="month"] [data-id="title-m"]
+{
 	display: none;
 }

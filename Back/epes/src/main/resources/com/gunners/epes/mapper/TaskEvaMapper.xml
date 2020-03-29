@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gunners.epes.mapper.TaskEvaMapper">
 
+    <select id="queryChartData" resultType="java.lang.Integer">
+        SELECT SUM(t1.performance) 'sum'
+        FROM `task_eva` t1
+        LEFT JOIN employee t2 on t1.emp_id = t2.emp_id
+        LEFT JOIN department t3 on t2.dpart_id = t3.dpart_id
+        <where>
+            <if test="empId != null and empId != ''">
+                and t2.emp_id = #{empId}
+            </if>
+            <if test="dpartId != null and dpartId != ''">
+                and t3.dpart_id = #{dpartId}
+            </if>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and t1.finish_time BETWEEN #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
 </mapper>

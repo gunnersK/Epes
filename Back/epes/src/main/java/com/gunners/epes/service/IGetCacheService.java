@@ -47,6 +47,13 @@ public interface IGetCacheService {
      * @return
      */
     TaskEvaInfo getTaskEvaInfo(Integer evaId);
+
+    /**
+     * 在redis中获取公告
+     * @param id
+     * @return
+     */
+    DailyLog getDailyLog(Integer id);
 }
 
 

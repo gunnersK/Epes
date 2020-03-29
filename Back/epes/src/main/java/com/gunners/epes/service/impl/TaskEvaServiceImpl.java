@@ -1,5 +1,6 @@
 package com.gunners.epes.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Lists;
@@ -10,7 +11,9 @@ import com.gunners.epes.service.ISaveCacheService;
 import com.gunners.epes.service.ITaskEvaInfoService;
 import com.gunners.epes.service.ITaskEvaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gunners.epes.utils.TimeUtils;
 import javafx.concurrent.Task;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,13 +32,44 @@ import java.util.Objects;
  * @since 2020-02-27
  */
 @Service
+@Slf4j
 public class TaskEvaServiceImpl extends ServiceImpl<TaskEvaMapper, TaskEva> implements ITaskEvaService {
+
+
+    @Autowired
+    private TaskEvaMapper taskEvaMapper;
 
     @Autowired
     private ITaskEvaInfoService taskEvaInfoService;
 
     @Autowired
     ISaveCacheService saveCacheService;
+
+    @Override
+    public List<Integer> queryChartData(Integer year, Integer dpartId, String empId) {
+        List<Integer> dataList = Lists.newArrayList();
+        long start = System.currentTimeMillis();
+        for(int i = 1; i <= 12; i++){
+            Integer num = 0;
+            Long startTime = TimeUtils.getSecondByYear(StrUtil.format("{}-{}-1", year, i));
+            Long endTime = 0L;
+            if(i != 12){
+                endTime = TimeUtils.getSecondByYear(StrUtil.format("{}-{}-1", year, (i + 1)));
+            } else {
+                endTime = TimeUtils.getSecondByYear(StrUtil.format("{}-1-1", (year + 1)));
+            }
+            num = taskEvaMapper.queryChartData(startTime, endTime, dpartId, empId);
+            if(Objects.isNull(num)){
+                dataList.add(0);
+            } else {
+                dataList.add(num);
+            }
+        }
+
+        long end = System.currentTimeMillis();
+        log.info(StrUtil.format("query chart data cost {} ms", (end - start)));
+        return dataList;
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)

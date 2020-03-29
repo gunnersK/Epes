@@ -81,8 +81,9 @@ function pullupRefresh() {
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
 			success: function(data){	
-				if(data.status == "200"){
+				if(data.status == "200" && data.data.length > 0){
 					addItem(data);
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(false); //参数为true代表没有更多数据了。
 				}
 				if(data.data.length == 0){
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
@@ -90,7 +91,6 @@ function pullupRefresh() {
 				}
 			}
 		});
-		mui('#pullrefresh').pullRefresh().endPullupToRefresh(false); //参数为true代表没有更多数据了。
 	}, 500);
 }
 

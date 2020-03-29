@@ -93,16 +93,4 @@ public class LoginController {
         return Response.ok();
     }
 
-    @PostMapping("/modifyPwd")
-    public Response modifyPassword(HttpSession session, String old_passwd, String new_passwd){
-        if(userService.validPasswd(session, old_passwd)){
-            User user = sessionUtils.getFromSession(session, SessionKeyConstants.USER);
-            user.setPassword(Base64.encode(new_passwd, CharsetUtil.UTF_8));
-            userService.updateUserByEmpId(user);
-            sessionUtils.putIntoSession(session, SessionKeyConstants.USER, user);
-            return Response.ok();
-        }
-        return Response.ok(null, "failure");
-    }
-
 }

@@ -1,13 +1,8 @@
-/* 隐藏审阅按钮 */
-$("#read").css("display", "none");
-
-/* 加载日志详情 */
 mui.ajax(urlPattern.value+'/dailyLog/getDailyLog', {
 		dataType:'json',//服务器返回json格式数据
 	type:'get',//HTTP请求类型
 	success: function(data){
 		if(data.status == "200"){
-			showReadBtn(data.data.status);
 			var createTime = data.data.createTime;
 			document.getElementById('create_time').innerHTML = EPES.formatDateTime(createTime * 1000);
 			document.getElementById('log_emp').innerHTML = data.data.empName;
@@ -15,41 +10,38 @@ mui.ajax(urlPattern.value+'/dailyLog/getDailyLog', {
 		}
 	}
 });
+/* 完成任务按钮 */
+// var finishBtn = document.getElementById('finish');
 
-/* 审阅按钮监听 */
-var readBtn = document.getElementById('read');
-readBtn.addEventListener('tap', function(){
-	mui.confirm('确认审阅该日志？', 'Hello MUI', btnArray, function(e){
-		if (e.index == 1) {
-			mui.ajax(urlPattern.value+'/dailyLog/read', {
-				dataType:'json',//服务器返回json格式数据
-				type:'post',//HTTP请求类型
-				success: function(data){
-					if(data.status == "200"){
-						mui.toast('已审阅');
-						mui.back();
-					}
-				}
-			});
-		}
-	}, 'div'); 
-	var btnArray = ['确认', '取消'];
-});
-
-/* 重新显示显示审阅按钮 */
-function showReadBtn(status){
-	if(status == 0){
-		$("#read").removeClass("read");
-		$("#read").addClass("unread");
-		$("#read").text("审阅");
-	} else if(status == 1){
-		$("#read").removeClass("unread");
-		$("#read").addClass("read");
-		$("#read").text("已审阅");
-		$("#read").attr("disabled", true);
-	}
-	$("#read").css("display", "block");
-}
+// /* 限制只有管理员可见 */
+// mui.ajax(urlPattern.value+'/login/getUser', {
+// 	dataType:'json',//服务器返回json格式数据
+// 	type:'get',//HTTP请求类型
+// 	success: function(data){
+// 		if(data.status == "200"){
+// 			if(data.data.role == 0){
+// 				finishBtn.style.display = "inline";
+// 			}
+// 		}
+// 	}
+// });
+// finishBtn.addEventListener('tap', function(){
+// 	mui.confirm('确认完成该项目？', 'Hello MUI', btnArray, function(e){
+// 		if (e.index == 1) {
+// 			mui.ajax(urlPattern.value+'/prjTask/finish', {
+// 				dataType:'json',//服务器返回json格式数据
+// 				type:'post',//HTTP请求类型
+// 				success: function(data){
+// 					if(data.status == "200"){
+// 						mui.toast('任务已完成', { duration:'long', type:'div' });
+// 						mui.back();
+// 					}
+// 				}
+// 			});
+// 		}
+// 	}, 'div'); 
+// 	var btnArray = ['确认', '取消'];
+// });
 
 Date.prototype.format = function(format){ 
 	var o =  { 
@@ -80,4 +72,3 @@ var EPES = {
 	}
 
 }
-

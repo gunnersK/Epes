@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TaskEvaMapper extends BaseMapper<TaskEva> {
 
+    Integer queryChartData(Long startTime, Long endTime, Integer dpartId, String empId);
+
 }

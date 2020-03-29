@@ -8,6 +8,8 @@
 		<link href="css/mui.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/common.css"/>
 		<link rel="stylesheet" type="text/css" href="css/home.css"/>
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<link href="css/mui.dtpicker.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/icons-extra.css"/>
 		<style>
 			#topPopover {
@@ -26,7 +28,6 @@
 				padding: 10px;
 			}
 		</style>
-		<script src="js/js/echarts-all.js"></script>
 	</head>
 
 	<body>
@@ -37,14 +38,36 @@
 		</header>
 		<div id="" class="mui-content">
 			<div class="welcome-area">
-				<span id="emp_name">Larry</span>
-				<span id="emp_role">员工</span>
+				<span id="emp_name"></span>
+				<span id="emp_role"></span>
 				<span>欢迎&nbsp;&nbsp;</span>
 			</div>
+			<div style="height: 5px;"></div>
 			<div class="chart-area">
+				<div class="filter">
+					<!-- 条件过滤部分 -->
+					<div class="filter-left">
+						<div class="date" data-options='{"type":"month"}'>
+							<div class="triangle"></div> 
+							<input type="hidden" id="year_value" value="2020">
+							<input type="text" value="2020年" id="year_res" class="result" placeholder="选择年份" readonly="readonly">
+						</div>
+					</div>
+					<div class="filter-right">
+						<div id="dpart" style="display: none;" class="admin">
+							<div class="triangle"></div> 
+							<input type="hidden" id="dpart_id" value="">
+							<input type="text" class="result" id="dpart_res" placeholder="选择部门" readonly="readonly">
+						</div>
+						<div id="emp" style="display: none;" class="director">
+							<div class="triangle"></div> 
+							<input type="hidden" id="emp_id" value="">
+							<input type="text" class="result" id="emp_res" placeholder="选择员工" readonly="readonly">
+						</div>
+					</div>
+				</div>
+				<!-- 图表部分 -->
 				<div class="line-chart" id="chart" style="width: 320px;height:200px;">
-		<!-- 			<h5>线图示例</h5>
-					<div class="chart" id="lineChart"></div> -->
 				</div>
 			</div>
 			<div id="" class="ind-ntc-bar">
@@ -122,7 +145,9 @@
 		</div>
 		
 		<script src="js/mui.js"></script>
-		<script src="js/jquery-3.2.1.js"></script>
+		<!-- <script src="js/jquery-3.2.1.js"></script> -->
+		<script src="js/js/mui.picker.min.js"></script>
+		<script src="js/js/echarts-all.js"></script>
 		<script src="js/home.js"></script>
 		<script type="text/javascript">
 			mui.init()

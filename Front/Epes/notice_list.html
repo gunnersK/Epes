@@ -29,12 +29,6 @@
 		<div id="pullrefresh" class="mui-content">
 			<div class="ntc_list">
 				<ul id="ntc_list" class="mui-table-view mui-table-view-striped mui-table-view-condensed ntc_list">
-					<!-- <li class="mui-table-view-cell">
-						<div class="mui-table">
-							<h4 class="mui-ellipsis">2020春节放假通知</h4>
-							<p class="mui-h6 mui-ellipsis">2020-01-01 23:01:01</p>
-						</div>
-					</li> -->
 				</ul>
 			</div>
 		</div>
@@ -42,7 +36,16 @@
 		<script src="js/jquery-3.2.1.js"></script>
 		<script src="js/notice_list.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				beforeback: function(){
+					/* 清除所有模块的过滤条件 */
+					mui.ajax(urlPattern.value+'/notice/clearAllFilter', {
+						async: true,
+						dataType:'json',//服务器返回json格式数据
+						type:'post'//HTTP请求类型
+					});
+				}
+			});
 		</script>
 	</body>
 

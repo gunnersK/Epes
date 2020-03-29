@@ -97,11 +97,6 @@ public class ProjectController {
         projectVo.setStatus(sessionUtils.getFromSession(session, SessionKeyConstants.PROJECT_STATUS));
         List<Project> list = projectService.listProject(projectVo);
 
-        //清除session过滤条件
-        if(Objects.isNull(list) || list.size() == 0) {
-            clearFilter(session);
-        }
-
         return Response.ok(list);
     }
 
@@ -148,6 +143,12 @@ public class ProjectController {
         return Response.ok(list);
     }
 
+    /**
+     * 清除所有过滤条件
+     * @param session
+     * @return
+     */
+    @PostMapping("clearAllFilter")
     private void clearFilter(HttpSession session){
         sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_START_TIME);
         sessionUtils.removeFromSession(session, SessionKeyConstants.PROJECT_END_TIME);

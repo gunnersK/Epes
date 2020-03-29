@@ -51,4 +51,10 @@ public class GetCacheServiceImpl implements IGetCacheService {
         String idKey = StrUtil.format("eva_id_{}", evaId.toString());
         return this.get(CommKeyConstants.TASKEVA_INFO_KEY, idKey);
     }
+
+    @Override
+    public DailyLog getDailyLog(Integer id) {
+        String idKey = StrUtil.format("log_id_{}", id.toString());
+        return this.get(CommKeyConstants.DAILY_LOG_KEY, idKey);
+    }
 }

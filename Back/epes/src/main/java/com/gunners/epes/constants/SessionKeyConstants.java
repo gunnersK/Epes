@@ -1,7 +1,5 @@
 package com.gunners.epes.constants;
 
-import com.gunners.epes.entity.Employee;
-
 public class SessionKeyConstants {
 
    public static final String USER = "user";
@@ -11,8 +9,6 @@ public class SessionKeyConstants {
    public static final String DPART_ID = "dpart_id";
 
    public static final String EMP_ID = "emp_id";
-
-   public static final String EMPLOYEE = "employee";
 
    public static final String NOTICE_ID = "notice_id";
 
@@ -46,6 +42,8 @@ public class SessionKeyConstants {
 
    public static final String EVA_EMP_ID = "eva_emp_id";
 
+   public static final String EVA_DPART_ID = "eva_dpart_id";
+
    public static final String EVA_PRJ_ID = "eva_prj_id";
 
    public static final String EVA_STATUS = "eva_status";
@@ -57,6 +55,8 @@ public class SessionKeyConstants {
    public static final String LOG_END_TIME = "log_end_time";
 
    public static final String LOG_EMP_ID = "log_emp_id";
+
+   public static final String LOG_DPART_ID = "log_dpart_id";
 
    public static final String LOG_STATUS = "log_status";
 

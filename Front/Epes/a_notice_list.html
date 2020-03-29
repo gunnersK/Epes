@@ -45,7 +45,16 @@
 		<script src="js/jquery-3.2.1.js"></script>
 		<script src="js/a_notice_list.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				beforeback: function(){
+					/* 清除所有模块的过滤条件 */
+					mui.ajax(urlPattern.value+'/notice/clearAllFilter', {
+						async: true,
+						dataType:'json',//服务器返回json格式数据
+						type:'post'//HTTP请求类型
+					});
+				}
+			});
 		</script>
 	</body>
 

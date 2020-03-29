@@ -16,12 +16,12 @@ import javax.servlet.http.HttpSession;
  */
 public interface IUserService extends IService<User> {
 
-    public boolean deleteUserByEmpId(Employee employee);
+    boolean deleteUserByEmpId(Employee employee);
 
-    public int updateUserByEmpId(User user);
+    int updateUserByEmpId(User user);
 
-    public User authentication(User user);
+    User authentication(User user);
 
-    public boolean validPasswd(HttpSession session, String old_passwd);
+    boolean validPasswd(HttpSession session, String old_passwd);
 
 }

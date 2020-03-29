@@ -22,7 +22,7 @@ confBtn.addEventListener('tap', function(){
 		var newPasswd = document.getElementById("new_passwd").value;
 		var confPasswd = document.getElementById("conf_passwd").value;
 		if(newPasswd == confPasswd){
-			mui.ajax(urlPattern.value+'/login/modifyPwd', {
+			mui.ajax(urlPattern.value+'/user/modifyPwd', {
 				data: {
 					"old_passwd": oldPasswd,
 					"new_passwd": newPasswd

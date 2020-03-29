@@ -11,6 +11,8 @@ public class TaskEvaVo extends PageVo {
 
     private Long endTime;
 
+    private Integer dpartId;
+
     private String empId;
 
     private Integer prjId;
