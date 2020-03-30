@@ -3,11 +3,13 @@ package com.gunners.epes.controller;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.StrUtil;
 import com.gunners.epes.constants.SessionKeyConstants;
 import com.gunners.epes.entity.*;
 import com.gunners.epes.service.*;
 //import com.gunners.epes.utils.RedissonUtils;
 import com.gunners.epes.utils.SessionUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ import java.util.Objects;
  * @author gunners
  * @since 2020-02-27
  */
+@Slf4j
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -76,8 +79,10 @@ public class LoginController {
                     .setLoginTime(currentTime);
             loginService.save(login);
 
+            log.info(StrUtil.format("employee_{} login success! user_id_{}", u.getEmpId(), u.getUserId()));
             return Response.ok();
         }
+        log.error(StrUtil.format("employee_{} login failure!", u.getEmpId()));
         return Response.ok(null, "failure");
     }
 

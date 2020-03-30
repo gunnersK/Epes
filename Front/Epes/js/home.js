@@ -44,7 +44,7 @@
 		welcome(role, name);
 		var btns = document.getElementsByClassName("admin");
 		for(i = 0; i < btns.length; i++){
-			btns[i].style.display = "inline";
+			btns[i].style.display = "block";
 		}
 		initDpartPicker();
 		document.getElementsByClassName("filter-right")[0].style.display = "inline";
@@ -55,7 +55,7 @@
 		welcome(role, name);
 		var btns = document.getElementsByClassName("director");
 		for(i = 0; i < btns.length; i++){
-			btns[i].style.display = "inline";
+			btns[i].style.display = "block";
 		}
 		//当部门主管请求图表数据时带上他，dpartId是空的,所以当选择all员工,就会导致查到全公司的员工数据
 		//所以要先把dpartId存起来,请求图表数据时带上他,就能只查到本部门的员工数据
