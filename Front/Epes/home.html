@@ -48,6 +48,7 @@
 					<!-- 条件过滤部分 -->
 					<div class="filter-left">
 						<div class="date" data-options='{"type":"month"}'>
+							<div class="filt-label"><span>选择年份</span></div>
 							<div class="triangle"></div> 
 							<input type="hidden" id="year_value" value="2020">
 							<input type="text" value="2020年" id="year_res" class="result" placeholder="选择年份" readonly="readonly">
@@ -55,14 +56,16 @@
 					</div>
 					<div class="filter-right">
 						<div id="dpart" style="display: none;" class="admin">
+							<div class="filt-label"><span>选择部门</span></div>
 							<div class="triangle"></div> 
 							<input type="hidden" id="dpart_id" value="">
-							<input type="text" class="result" id="dpart_res" placeholder="选择部门" readonly="readonly">
+							<input type="text" class="result" id="dpart_res" readonly="readonly">
 						</div>
 						<div id="emp" style="display: none;" class="director">
+							<div class="filt-label"><span>选择员工</span></div>
 							<div class="triangle"></div> 
 							<input type="hidden" id="emp_id" value="">
-							<input type="text" class="result" id="emp_res" placeholder="选择员工" readonly="readonly">
+							<input type="text" class="result" id="emp_res" readonly="readonly">
 						</div>
 					</div>
 				</div>
@@ -145,7 +148,6 @@
 		</div>
 		
 		<script src="js/mui.js"></script>
-		<!-- <script src="js/jquery-3.2.1.js"></script> -->
 		<script src="js/js/mui.picker.min.js"></script>
 		<script src="js/js/echarts-all.js"></script>
 		<script src="js/home.js"></script>
