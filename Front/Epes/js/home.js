@@ -1,7 +1,7 @@
 /* 用户角色全局变量 */
 // var role;
 (function($) {
-	
+	loadChart([0]);
 	/* 获取登录用户权限 */
 	mui.ajax(urlPattern.value+'/employee/getProfile', {
 		dataType:'json',//服务器返回json格式数据
@@ -341,11 +341,13 @@
 	}
 })(mui);
 
-/* 加载chart图表数据 */
+/* 刷新chart图表 */
 function refreshChart(){
 	var year = document.getElementById('year_value').value;
 	var dpartId = document.getElementById('dpart_id').value;
 	var empId = document.getElementById('emp_id').value;
+	
+	/* 获取图表数据 */
 	mui.ajax(urlPattern.value+'/taskEva/getChartData', {
 		// async: false,
 		data: {
@@ -362,40 +364,47 @@ function refreshChart(){
 				for(var i = 0; i < data.data.length; i++){
 					dataList.push(data.data[i]);
 				}
-				// 基于准备好的dom，初始化echarts实例
-				var myChart = echarts.init(document.getElementById('chart'));
 				
-				// 指定图表的配置项和数据
-				var option = {
-					title: {
-						// text: 'ECharts 入门示例'
-					},
-					tooltip: {},
-					legend: {
-						data:['月度绩效']
-					},
-					xAxis: {
-						data: ["1","2","3","4","5","6","7","8","9","10","11","12"]
-					},
-					yAxis: {},
-					grid: {
-						x: 35,
-						x2: 10,
-						y: 30,
-						y2: 25,
-					},
-					series: [{
-						name: '月度绩效',
-						type: 'line',
-						data: dataList
-					}]
-				};
-				
-				// 使用刚指定的配置项和数据显示图表。
-				myChart.setOption(option);
+				/* 加载chart图表 */
+				loadChart(dataList);
 			}
 		}
 	});
+}
+
+/* 加载chart图表 */
+function loadChart(dataList){
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('chart'));
+	
+	// 指定图表的配置项和数据
+	var option = {
+		title: {
+			// text: 'ECharts 入门示例'
+		},
+		tooltip: {},
+		legend: {
+			data:['月度绩效']
+		},
+		xAxis: {
+			data: ["1","2","3","4","5","6","7","8","9","10","11","12"]
+		},
+		yAxis: {},
+		grid: {
+			x: 35,
+			x2: 10,
+			y: 30,
+			y2: 25,
+		},
+		series: [{
+			name: '月度绩效',
+			type: 'line',
+			data: dataList
+		}]
+	};
+	
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
 }
 
 
