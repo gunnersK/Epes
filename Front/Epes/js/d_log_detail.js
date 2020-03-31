@@ -39,11 +39,8 @@ readBtn.addEventListener('tap', function(){
 /* 重新显示显示审阅按钮 */
 function showReadBtn(status){
 	if(status == 0){
-		$("#read").removeClass("read");
-		$("#read").addClass("unread");
 		$("#read").text("审阅");
 	} else if(status == 1){
-		$("#read").removeClass("unread");
 		$("#read").addClass("read");
 		$("#read").text("已审阅");
 		$("#read").attr("disabled", true);

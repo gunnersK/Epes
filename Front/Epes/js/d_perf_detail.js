@@ -1,9 +1,15 @@
+/* 隐藏完成按钮 */
+$("#finish").css("display", "none");
+
 (function($){
+	
+	/* 加载任务详情 */
 	mui.ajax(urlPattern.value+'/taskEva/getEva', {
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
 			if(data.status == "200"){
+				showFinishBtn(data.data.status);
 				document.getElementById('task_name').innerHTML = data.data.taskName;
 				document.getElementById('task_desc').innerHTML = data.data.taskDesc;
 				document.getElementById('weight').innerHTML = data.data.weight;
@@ -49,6 +55,18 @@
 		var btnArray = ['确认', '取消'];
 	});
 })(mui);
+
+/* 重新显示完成按钮 */
+function showFinishBtn(status){
+	if(status == 0){
+		$("#finish").text("完成");
+	} else if(status == 1){
+		$("#finish").addClass("finish");
+		$("#finish").text("已完成");
+		$("#finish").attr("disabled", true);
+	}
+	$("#finish").css("display", "block");
+}
 
 Date.prototype.format = function(format){ 
 	var o =  { 

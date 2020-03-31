@@ -101,6 +101,10 @@ public class PrjTaskController {
         return Response.ok(list);
     }
 
+    /**
+     * 主管任务分配列表调用
+     * @return
+     */
     @GetMapping("/listUnfinish")
     public Response listUnfinish(){
         List<PrjTask> list = prjTaskService.listUnfinish();

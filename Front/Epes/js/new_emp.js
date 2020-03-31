@@ -9,29 +9,31 @@
 	/* 确定添加按钮 */
 	var addBtn = document.getElementById('add_btn');
 	addBtn.addEventListener('tap', function(){
-		mui.ajax(urlPattern.value+'/employee/save', {
-			data: {
-				"empId": document.getElementById('emp_id').value,
-				"empName": document.getElementById('emp_name').value,
-				"password": "12345678",
-				"gender": document.getElementById('gender').data,
-				"dpartId": document.getElementById('dpart').data,
-				"role": document.getElementById('role').data,
-				"contact": document.getElementById('contact').value
-			},
-			// processData: false,
-			dataType:'json',//服务器返回json格式数据
-			type:'post',//HTTP请求类型
-			// headers:{'Content-Type':'application/json'},
-			success: function(data){
-				if(data.status == "200"){
-					
-					mui.back(function(){
-						mui.toast('新增成功', { duration:'long', type:'div' });
-					});
+		if(validInput()){
+			mui.ajax(urlPattern.value+'/employee/save', {
+				data: {
+					"empId": document.getElementById('emp_id').value,
+					"empName": document.getElementById('emp_name').value,
+					"password": "12345678",
+					"gender": document.getElementById('gender').data,
+					"dpartId": document.getElementById('dpart').data,
+					"role": document.getElementById('role').data,
+					"contact": document.getElementById('contact').value
+				},
+				// processData: false,
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				// headers:{'Content-Type':'application/json'},
+				success: function(data){
+					if(data.status == "200"){
+						
+						mui.back(function(){
+							mui.toast('新增成功', { duration:'long', type:'div' });
+						});
+					}
 				}
-			}
-		});
+			});
+		}
 	});
 	
 })(mui);
@@ -104,5 +106,23 @@ function loadDpart(){
 			}
 		}
 	});
+}
+
+/* 验证表单输入 */
+function validInput(){
+	if(document.getElementById('emp_name').value == ""){
+		mui.toast("请输入姓名", {type: 'div'});
+		return false;
+	} else if(document.getElementById('gender').data == undefined){
+		mui.toast("请输入性别", {type: 'div'});
+		return false;
+	} else if(document.getElementById('role').data == undefined){
+		mui.toast("请输入角色", {type: 'div'});
+		return false;
+	} else if(document.getElementById('contact').value == ""){
+		mui.toast("请输入联系方式", {type: 'div'});
+		return false;
+	}
+	return true;
 }
 

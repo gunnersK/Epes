@@ -8,22 +8,26 @@
 		var btnArray = ['确定', '取消']; //e.index:[0,1]
 		mui.prompt(' ', ' ', '新部门名称', btnArray, function(e) {
 			if (e.index == 0) {
-				mui.ajax(urlPattern.value+'/department/save', {
-					data: {
-						"dpartName": e.value,
-					},
-					dataType:'json',//服务器返回json格式数据
-					type:'post',//HTTP请求类型
-					success: function(data){
-						if(data.status == "200"){
-							loadList();
-							mui.toast('新增成功', { duration:'long', type:'div' });
+				if(e.value != ""){
+					mui.ajax(urlPattern.value+'/department/save', {
+						data: {
+							"dpartName": e.value,
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						success: function(data){
+							if(data.status == "200"){
+								loadList();
+								mui.toast('新增成功', { duration:'long', type:'div' });
+							}
+						}, 
+						error: function(){
+							mui.toast('新增失败', { duration:'long', type:'div' });
 						}
-					}, 
-					error: function(){
-						mui.toast('新增失败', { duration:'long', type:'div' });
-					}
-				});
+					});
+				} else{
+					mui.toast('请输入部门名称', { duration:'long', type:'div' });
+				}
 			}
 		}, 'div')
 	});

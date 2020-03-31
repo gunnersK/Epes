@@ -32,27 +32,45 @@
 	
 	/* 确认按钮 */
 	var confBtn = document.getElementById("confirm");
-	
 	confBtn.addEventListener('tap', function(){
-		mui.ajax(urlPattern.value+'/prjTask/save', {
-			data: {
-				"taskName": document.getElementById('task_name').value,
-				"prjId": document.getElementById('prj_id').value,
-				"prjName": document.getElementById('prj_name').value,
-				"weight": document.getElementById('weight').value,
-				"taskDesc": document.getElementById('task_desc').value, 
-				"scoreDesc": document.getElementById('score_desc').value
-			},
-			dataType:'json',//服务器返回json格式数据
-			type:'post',//HTTP请求类型
-			success: function(data){
-				if(data.status == "200"){
-					mui.toast('新增成功');
-					mui.back();
-				}
-			}  
-		}); 
+		if(validInput()){
+			mui.ajax(urlPattern.value+'/prjTask/save', {
+				data: {
+					"taskName": document.getElementById('task_name').value,
+					"prjId": document.getElementById('prj_id').value,
+					"prjName": document.getElementById('prj_name').value,
+					"weight": document.getElementById('weight').value,
+					"taskDesc": document.getElementById('task_desc').value, 
+					"scoreDesc": document.getElementById('score_desc').value
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				success: function(data){
+					if(data.status == "200"){
+						mui.toast('新增成功');
+						mui.back();
+					}
+				}  
+			}); 
+		}
 	});
 
-	
 })(mui);
+
+/* 验证表单输入 */
+function validInput(){
+	if(document.getElementById('task_name').value == ""){
+		mui.toast("请输入任务名", {type: 'div'});
+		return false;
+	} else if(document.getElementById('prj_id').value == ""){
+		mui.toast("请输入项目", {type: 'div'});
+		return false;
+	} else if(document.getElementById('task_desc').value == ""){
+		mui.toast("请输入项任务描述", {type: 'div'});
+		return false;
+	} else if(document.getElementById('score_desc').value == ""){
+		mui.toast("请输入评分标准", {type: 'div'});
+		return false;
+	}
+	return true;
+}
