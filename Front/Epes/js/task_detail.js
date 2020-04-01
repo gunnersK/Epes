@@ -1,9 +1,13 @@
+/* 隐藏完成按钮 */
+$("#finish").css("display", "none");
+
 (function($){
 	mui.ajax(urlPattern.value+'/prjTask/getTask', {
 		dataType:'json',//服务器返回json格式数据
 		type:'get',//HTTP请求类型
 		success: function(data){
 			if(data.status == "200"){
+				showFinishBtn(data.data.status);
 				document.getElementById('task_name').innerHTML = data.data.taskName;
 				document.getElementById('prj_name').innerHTML = data.data.prjName;
 				document.getElementById('task_desc').innerHTML = data.data.taskDesc;
@@ -26,19 +30,6 @@
 
 	/* 完成任务按钮 */
 	var finishBtn = document.getElementById('finish');
-	
-	/* 限制只有管理员可见 */
-	mui.ajax(urlPattern.value+'/login/getUser', {
-		dataType:'json',//服务器返回json格式数据
-		type:'get',//HTTP请求类型
-		success: function(data){
-			if(data.status == "200"){
-				if(data.data.role == 0){
-					finishBtn.style.display = "inline";
-				}
-			}
-		}
-	});
 	finishBtn.addEventListener('tap', function(){
 		mui.confirm('确认完成该项目？', 'Hello MUI', btnArray, function(e){
 			if (e.index == 1) {
@@ -57,6 +48,31 @@
 		var btnArray = ['确认', '取消'];
 	});
 })(mui);
+
+/* 重新显示显示完成按钮 */
+function showFinishBtn(status){
+	/* 限制只有管理员可见 */
+	mui.ajax(urlPattern.value+'/login/getUser', {
+		dataType:'json',//服务器返回json格式数据
+		type:'get',//HTTP请求类型
+		success: function(data){
+			if(data.status == "200"){
+				if(data.data.role == 0){
+					if(status == 0){
+						$("#finish").text("完成任务");
+					} else if(status == 1){
+						$("#finish").addClass("finish");
+						$("#finish").text("已完成");
+						$("#finish").attr("disabled", true);
+					}
+					$("#finish").css("display", "block");
+				} else{
+					return;
+				}
+			}
+		}
+	});
+}
 
 Date.prototype.format = function(format){ 
 	var o =  { 

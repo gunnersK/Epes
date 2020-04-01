@@ -23,13 +23,10 @@
 				// processData: false,
 				dataType:'json',//服务器返回json格式数据
 				type:'post',//HTTP请求类型
-				// headers:{'Content-Type':'application/json'},
 				success: function(data){
 					if(data.status == "200"){
-						
-						mui.back(function(){
-							mui.toast('新增成功', { duration:'long', type:'div' });
-						});
+						mui.toast('新增成功', { type:'div' });
+						mui.back();
 					}
 				}
 			});

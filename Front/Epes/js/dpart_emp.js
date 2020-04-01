@@ -1,3 +1,7 @@
+window.addEventListener('refresh', function(e){//执行刷新
+	  location.reload();
+});
+
 (function($){
 	
 	loadDpartName();
@@ -27,7 +31,7 @@
 				}
 			}, 
 			error: function(){
-				mui.toast('失败', { duration:'long', type:'div' });
+				mui.toast('失败', { type:'div' });
 			}
 		});
 	});
@@ -47,7 +51,7 @@
 					success: function(data){
 						if(data.status == "200"){
 							li.parentNode.removeChild(li);
-							mui.toast('删除成功', { duration:'long', type:'div' });
+							mui.toast('删除成功', { type:'div' });
 						}
 					}
 				});

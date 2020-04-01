@@ -18,15 +18,15 @@
 						success: function(data){
 							if(data.status == "200"){
 								loadList();
-								mui.toast('新增成功', { duration:'long', type:'div' });
+								mui.toast('新增成功', { type:'div' });
 							}
 						}, 
 						error: function(){
-							mui.toast('新增失败', { duration:'long', type:'div' });
+							mui.toast('新增失败', { type:'div' });
 						}
 					});
 				} else{
-					mui.toast('请输入部门名称', { duration:'long', type:'div' });
+					mui.toast('请输入部门名称', { type:'div' });
 				}
 			}
 		}, 'div')
