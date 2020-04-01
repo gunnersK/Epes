@@ -24,16 +24,7 @@
 		<script src="js/jquery-3.2.1.js"></script>
 		<script src="js/dpart_emp.js"></script>
 		<script type="text/javascript">
-			mui.init({
-				beforeback: function() {　　　　
-					var list = plus.webview.currentWebview().opener();　　　　
-					//refresh是A页面自定义事件
-					mui.fire(list, 'refresh');
-					// mui.toast('发布成功', { duration:'long', type:'div' });
-					//返回true,继续页面关闭逻辑
-					return true;
-				}
-			})
+			mui.init()
 		</script>
 	</body>
      

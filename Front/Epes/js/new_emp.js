@@ -25,7 +25,7 @@
 				type:'post',//HTTP请求类型
 				success: function(data){
 					if(data.status == "200"){
-						mui.toast('新增成功', { type:'div' });
+						mui.toast('新增成功');
 						mui.back();
 					}
 				}

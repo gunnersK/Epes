@@ -15,7 +15,7 @@
 					if(data.status == "200"){
 						mui.toast('发布成功');
 						mui.back();
-`					}
+					}
 				}
 			});
 		}
