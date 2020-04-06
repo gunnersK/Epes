@@ -2,6 +2,8 @@ package com.gunners.epes.constants;
 
 public class SessionKeyConstants {
 
+   public static final String SESSIONID = "SESSIONID";
+
    public static final String USER = "user";
 
    public static final String EMP_INFO = "emp_info";

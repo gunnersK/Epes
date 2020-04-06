@@ -28,6 +28,12 @@ public interface ISaveCacheService {
     void saveNotice(Notice notice);
 
     /**
+     * 保存最新公告
+     * @param notice
+     */
+    void saveLastNotice(Notice notice);
+
+    /**
      * 保存项目到redis
      * @param project
      */

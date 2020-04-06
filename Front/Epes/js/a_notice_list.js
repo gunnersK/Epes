@@ -61,7 +61,7 @@ window.addEventListener('refresh', function(e){//执行刷新
 							li.parentNode.removeChild(li);
 							location.reload();
 							mui('#pullrefresh').pullRefresh().refresh(true); //重置上拉加载
-							mui.toast('删除成功', { duration:'long', type:'div' });
+							mui.toast('删除成功');
 						}
 					}
 				});

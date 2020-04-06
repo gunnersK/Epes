@@ -14,6 +14,8 @@ function loadNotice(){
 				$("#ntc_title").text(data.data.title);
 				$("#ntc_time").text(EPES.formatDateTime(data.data.createTime * 1000));
 				$("#ntc_content").text(data.data.content);
+				var read = data.data.readNum + "人已读  " + data.data.unreadNum + "人未读";
+				$("#read").text(read);
 			}
 		}
 	});

@@ -1,6 +1,7 @@
 package com.gunners.epes.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import lombok.Data;
@@ -33,6 +34,12 @@ public class Notice implements Serializable {
     private String content;
 
     private Long createTime;
+
+    @TableField(exist = false)
+    private Integer readNum;
+
+    @TableField(exist = false)
+    private Integer unreadNum;
 
 
 }

@@ -19,6 +19,12 @@ public class ClearCacheServiceImpl implements IClearCacheService {
     private RedissonClient redissonClient;
 
     @Override
+    public <T> void delete(String rmapKey) {
+        RMap map = redissonClient.getMap(rmapKey);
+        map.delete();
+    }
+
+    @Override
     public <T> void delete(String rmapKey, String idKey) {
         RMap<String, T> map = redissonClient.getMap(rmapKey);
         map.remove(idKey);

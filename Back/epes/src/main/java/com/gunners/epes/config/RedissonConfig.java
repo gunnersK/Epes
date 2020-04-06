@@ -21,6 +21,7 @@ public class RedissonConfig {
     public RedissonClient redisson() throws IOException {
         String file = StrUtil.format("redisson-{}.yaml", active);
         Config config = Config.fromYAML(new ClassPathResource(file).getInputStream());
+        config.setLockWatchdogTimeout(2000);
         RedissonClient redissonClient = Redisson.create(config);
         return redissonClient;
     }

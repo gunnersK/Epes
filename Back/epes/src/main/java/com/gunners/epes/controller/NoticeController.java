@@ -2,6 +2,7 @@ package com.gunners.epes.controller;
 
 
 import com.gunners.epes.constants.SessionKeyConstants;
+import com.gunners.epes.entity.EmpInfo;
 import com.gunners.epes.entity.Notice;
 import com.gunners.epes.entity.Response;
 import com.gunners.epes.entity.vo.NoticeVo;
@@ -52,14 +53,14 @@ public class NoticeController {
     @PostMapping("/save")
     public Response saveNotice(Notice notice){
         notice.setCreateTime(Instant.now().getEpochSecond());
-        noticeService.save(notice);
+        noticeService.saveNotice(notice);
         saveCacheService.saveNotice(notice);
         return Response.ok();
     }
 
     @PostMapping("/delete")
     public Response deleteNotice(Integer ntId){
-        noticeService.removeById(ntId);
+        noticeService.deleteById(ntId);
         clearCacheService.deleteNotice(ntId);
         return Response.ok();
     }
@@ -103,16 +104,27 @@ public class NoticeController {
         return Response.ok();
     }
 
+    /**
+     * 公告item详情
+     * @param session
+     * @return
+     */
     @GetMapping("/getNtc")
     public Response getNotice(HttpSession session){
         Integer ntId = sessionUtils.getFromSession(session, SessionKeyConstants.NOTICE_ID);
-        Notice notice = getCacheService.getNotice(ntId);
+        EmpInfo empInfo = sessionUtils.getFromSession(session, SessionKeyConstants.EMP_INFO);
+        String empId = empInfo.getEmpId();
+        Notice notice = noticeService.getSpecNotice(empId, ntId);
         return Response.ok(notice);
     }
 
+    /**
+     * 首页定时获取最新公告
+     * @return
+     */
     @GetMapping("/lastNtc")
     public Response getLastNotice(){
-        Notice notice = noticeService.getLastNotice();
+        Notice notice = noticeService.getLastNotice("redis");
         return Response.ok(notice);
     }
 

@@ -7,6 +7,13 @@ public interface IClearCacheService {
     /**
      * 从redis删除信息的公共方法
      * @param rmapKey
+     * @param <T>
+     */
+    <T> void delete(String rmapKey);
+
+    /**
+     * 从redis删除信息的公共方法
+     * @param rmapKey
      * @param idKey
      * @param <T>
      */

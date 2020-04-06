@@ -16,8 +16,39 @@ import java.util.List;
  */
 public interface INoticeService extends IService<Notice> {
 
+    /**
+     * 保存公告
+     * @param notice
+     * @return
+     */
+    boolean saveNotice(Notice notice);
+
+    /**
+     * 通过id删除
+     * @param ntId
+     * @return
+     */
+    boolean deleteById(Integer ntId);
+
+    /**
+     * 条件分页查询公告
+     * @param noticeVo
+     * @return
+     */
     List<Notice> listNotice(NoticeVo noticeVo);
 
-    Notice getLastNotice();
+    /**
+     * 获取指定公告
+     * @param ntId
+     * @return
+     */
+    Notice getSpecNotice(String empId, Integer ntId);
+
+    /**
+     * 获取最新公告
+     * @param source
+     * @return
+     */
+    Notice getLastNotice(String source);
 
 }

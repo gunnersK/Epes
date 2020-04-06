@@ -102,7 +102,7 @@
 
 	/* 公告 */
 	var allNtc = document.getElementById('all_ntc');
-	var ntcContent = document.getElementById('ntc_content');
+	var lastNtc = document.getElementById('last_ntc');
 
 	/* 右上菜单 */
 	var profile = document.getElementById('profile');
@@ -211,41 +211,43 @@
 	});
 
 	/* 定时获取最新公告 */
-	window.setInterval(getLastNtc, 2000);
+	window.setInterval(getLastNtc, 1000);
 	function getLastNtc(){
 		var lastNtc = document.getElementById("last_ntc");
 		mui.ajax(urlPattern.value+'/notice/lastNtc', {
 			dataType:'json',//服务器返回json格式数据
 			type:'get',//HTTP请求类型
 			success: function(data){	
-				if(data.status == "200"){
+				if(data.status == "200" && data.data != null){
+					lastNtc.style.display = "inline";
 					lastNtc.data = data.data.ntId;
-					lastNtc.innerHTML = data.data.title
+					lastNtc.innerHTML = data.data.title;
+				} else{
+					lastNtc.style.display = "none";
 				}
 			}
 		});
 	}
 
 	/* 公告详情 */
-	ntcContent.addEventListener('tap', function(){
+	lastNtc.addEventListener('tap', function(){
 		var lastNtc = document.getElementById("last_ntc");
-		mui.ajax(urlPattern.value+'/notice/transId', {
-			data: {
-				"ntId": lastNtc.data
-			},
-			dataType:'json',//服务器返回json格式数据
-			type:'post',//HTTP请求类型
-			success: function(data){
-				if(data.status == "200"){
-					mui.openWindow({
-						url: 'notice_detail.html'
-					});
+		if(lastNtc.data != undefined){
+			mui.ajax(urlPattern.value+'/notice/transId', {
+				data: {
+					"ntId": lastNtc.data
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				success: function(data){
+					if(data.status == "200"){
+						mui.openWindow({
+							url: 'notice_detail.html'
+						});
+					}
 				}
-			},
-			error: function(){
-				mui.toast('失败', { duration:'long', type:'div' });
-			}
-		});
+			});
+		}
 	});
 
 

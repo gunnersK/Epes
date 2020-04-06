@@ -1,17 +1,13 @@
 package com.gunners.epes.utils;
 
 import com.gunners.epes.constants.SessionKeyConstants;
-import com.gunners.epes.entity.User;
-import lombok.Data;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
-import org.redisson.api.TransactionOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class SessionUtils {
@@ -21,11 +17,15 @@ public class SessionUtils {
 
 
     /**
-     * 为每个user在redis中存一个RMap保存用户信息
+     * 初始化session，设置有效时间
+     * 为每个user在redis中存一个RMap当做session
+     * 保存用户自己的相关信息，比如页面间传递的id等等
      * @param session
      */
-    public void saveSession(HttpSession session){
-        redissonClient.getMap(session.getId());
+    public void initSession(HttpSession session){
+        RMap map = getSession(session);
+        map.put(SessionKeyConstants.SESSIONID, session.getId());
+        map.expire(30, TimeUnit.MINUTES);  //有效时间为30分钟
     }
 
     /**

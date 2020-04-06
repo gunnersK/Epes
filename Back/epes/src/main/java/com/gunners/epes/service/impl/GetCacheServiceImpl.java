@@ -5,9 +5,13 @@ import com.gunners.epes.constants.CommKeyConstants;
 import com.gunners.epes.entity.*;
 import com.gunners.epes.service.IGetCacheService;
 import org.redisson.api.RMap;
+import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class GetCacheServiceImpl implements IGetCacheService {
@@ -23,6 +27,19 @@ public class GetCacheServiceImpl implements IGetCacheService {
     }
 
     @Override
+    public Set getSet(String setKey) {
+        Set set = redissonClient.getSet(setKey);
+        return set;
+    }
+
+    @Override
+    public Set<String> getAllKeys(String rmapKey) {
+        RMap map = redissonClient.getMap(rmapKey);
+        Set set = map.keySet();
+        return set;
+    }
+
+    @Override
     public EmpInfo getEmpInfo(String empId) {
         String idKey = StrUtil.format("emp_info_id_{}", empId);
         return this.get(CommKeyConstants.EMPINFO_KEY, idKey);
@@ -32,6 +49,11 @@ public class GetCacheServiceImpl implements IGetCacheService {
     public Notice getNotice(Integer ntId) {
         String idKey = StrUtil.format("nt_id_{}", ntId.toString());
         return this.get(CommKeyConstants.NOTICE_KEY, idKey);
+    }
+
+    @Override
+    public Notice getLastNotice() {
+        return this.get(CommKeyConstants.LAST_NT, CommKeyConstants.LAST_NT);
     }
 
     @Override

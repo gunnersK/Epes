@@ -46,7 +46,7 @@ public class Project implements Serializable {
     private Integer status;
 
     /**
-     * 关联项目数
+     * 关联任务数
      */
     @TableField(exist = false)
     private Integer releTaskNum;

@@ -1,6 +1,9 @@
 package com.gunners.epes.service;
 
 import com.gunners.epes.entity.*;
+import org.redisson.api.RSet;
+
+import java.util.Set;
 
 public interface IGetCacheService {
 
@@ -12,6 +15,20 @@ public interface IGetCacheService {
      * @return
      */
     <T> T get(String rmapKey, String idKey);
+
+    /**
+     * 在redis获取set
+     * @param setKey
+     * @return
+     */
+    Set getSet(String setKey);
+
+    /**
+     * 在redis获取某个信息域的所有key
+     * @param rmapKey
+     * @return
+     */
+    Set<String> getAllKeys(String rmapKey);
 
     /**
      * 在redis中获取公告
@@ -26,6 +43,12 @@ public interface IGetCacheService {
      * @return
      */
     Notice getNotice(Integer ntId);
+
+    /**
+     * 在redis中获取最新公告
+     * @return
+     */
+    Notice getLastNotice();
 
     /**
      * 在redis中获取项目

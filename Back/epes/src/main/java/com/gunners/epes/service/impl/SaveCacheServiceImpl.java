@@ -11,6 +11,8 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SaveCacheServiceImpl implements ISaveCacheService {
 
@@ -21,9 +23,6 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
     public <T> void save(String rmapKey, String idKey, T entity) {
         RMap<String, T> map = redissonClient.getMap(rmapKey);
         map.put(idKey, entity);
-//        map.forEach( (k, v) ->{
-//            System.out.println(k + ": " + v);
-//        });
     }
 
     @Override
@@ -36,6 +35,11 @@ public class SaveCacheServiceImpl implements ISaveCacheService {
     public void saveNotice(Notice notice) {
         String idkey = StrUtil.format("nt_id_{}", notice.getNtId().toString());
         this.save(CommKeyConstants.NOTICE_KEY, idkey, notice);
+    }
+
+    @Override
+    public void saveLastNotice(Notice notice) {
+        this.save(CommKeyConstants.LAST_NT, CommKeyConstants.LAST_NT, notice);
     }
 
     @Override

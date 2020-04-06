@@ -52,6 +52,8 @@
     - 前端：html+mui+jquery，HBuilderX开发，nginx部署
     
     - 后端：jdk8+springboot+mybatisPlus，idea开发，tomcat部署
+
+	- 数据库：mysql+redis
     
     - 由于前后端分开开发，会产生跨域问题，故开发中用nginx做代理服务器
 
