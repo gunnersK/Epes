@@ -282,7 +282,7 @@
 				dpartList.push({"value": "", "text": "all"});
 				if(data.status == "200"){
 					for(var i = 0; i < data.data.length; i++){
-						if(data.data[i].dpartId == 1){
+						if(data.data[i].dpartId == 0){
 							continue;
 						}
 						dpartList.push({
