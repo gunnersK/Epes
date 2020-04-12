@@ -24,6 +24,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Struct;
 import java.time.Instant;
@@ -119,6 +120,7 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Notice getSpecNotice(String empId, Integer ntId) {
         Notice notice = getCacheService.getNotice(ntId);
         String readSetKey = StrUtil.format("{}_{}", CommKeyConstants.READ_NT, ntId);
@@ -127,10 +129,8 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
         String lockName = StrUtil.format("{}_{}", LockConstants.LOCK_NT, ntId);
         RLock lock = lockUtils.getLock(lockName);
         try {
-            boolean f;
             //上锁并统计已读未读人数
-            if(f = lock.tryLock(3, TimeUnit.SECONDS)){ //加一个等待锁的时间，其他线程就可以稍等一会，而不是直接不拿公告
-                System.out.println(Thread.currentThread().getName()+"-start-"+f);
+            if(lock.tryLock(3, TimeUnit.SECONDS)){ //加一个等待锁的时间，其他线程就可以稍等一会，而不是直接不拿公告
                 Set readSet = getCacheService.getSet(readSetKey);  //已读set
                 Set unreadSet = getCacheService.getSet(unreadSetKey);  //未读set
                 notice.setReadNum(readSet.size());

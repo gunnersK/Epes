@@ -96,12 +96,12 @@ public class TaskEvaServiceImpl extends ServiceImpl<TaskEvaMapper, TaskEva> impl
         idList.forEach(empId -> {
             TaskEva eva = new TaskEva().setTaskId(taskId).setEmpId(empId)
                     .setCreateTime(createTime).setLastUpdTime(lastUpdTime).setStatus(0);
-            String lockName = StrUtil.format("{}_{}", LockConstants.LOCK_EVA, empId);
+            String taskEmp = StrUtil.format("{}_{}", taskId, empId);
+            String lockName = StrUtil.format("{}_{}", LockConstants.LOCK_EVA, taskEmp);
             RLock lock = lockUtils.getLock(lockName);
             try{
                 //加锁并到任务分配set里判断当前任务是否已存在
                 lock.tryLock(3, TimeUnit.SECONDS);
-                String taskEmp = StrUtil.format("{}_{}", taskId, empId);
                 Set<String> taskEmpSet = getCacheService.getSet(CommKeyConstants.TASK_EMP_SET); //任务分配set
                 if(!taskEmpSet.contains(taskEmp)){
 
