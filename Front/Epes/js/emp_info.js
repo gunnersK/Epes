@@ -44,6 +44,11 @@ confBtn.addEventListener('tap', function(){
 		}
 	}
 });
+
+var cancel = document.getElementById("cancel");
+cancel.addEventListener('tap', function(){
+	mui('#mod_popover').popover('toggle');//show hide toggle
+})
 	
 function validInput(){
 	var oldPasswd = document.getElementById("old_passwd").value;
