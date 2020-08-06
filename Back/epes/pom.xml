@@ -22,6 +22,7 @@
         <redisson.version>3.11.0</redisson.version>
         <guava-version>27.1-jre</guava-version>
         <hutool.version>5.1.5</hutool.version>
+        <knife4j-spring-boot-starter.version>2.0.4</knife4j-spring-boot-starter.version>
     </properties>
 
     <dependencies>
@@ -98,6 +99,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>${knife4j-spring-boot-starter.version}</version>
         </dependency>
 
     </dependencies>
