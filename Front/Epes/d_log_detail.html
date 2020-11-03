@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/d_log_detail.css"/>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">日志详情</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" id="read" class="mui-btn mui-btn-primary" style="top: 0;"></button>
+		</nav>
+		<div id="" class="mui-content">
+			<div class="log-detail-wrap">
+				<div class="log-title">
+					<p>今日工作日志</p>
+				</div>
+				<div class="log-emp">
+					<p id="log_emp"></p>
+				</div>
+				<div class="log-time">
+					<p id="create_time"></p>
+				</div>
+				<div style="height: 15px;"></div>
+				<div class="log-content">
+					<p id="log_content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/mui.js"></script>
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src="js/d_log_detail.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				beforeback: function() {　　　　
+					var list = plus.webview.currentWebview().opener();　　　　
+					//refresh是A页面自定义事件
+					mui.fire(list, 'refresh');
+					// mui.toast('发布成功', { duration:'long', type:'div' });
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			})
+		</script>
+	</body>
+
+</html>

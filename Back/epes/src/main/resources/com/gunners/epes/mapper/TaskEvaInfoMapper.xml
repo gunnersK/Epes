@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gunners.epes.mapper.TaskEvaInfoMapper">
+
+    <resultMap id="baseResultMap" type="com.gunners.epes.entity.TaskEvaInfo">
+        <id column="eva_id" property="evaId"/>
+        <result column="task_name" property="taskName"/>
+        <result column="task_desc" property="taskDesc"/>
+        <result column="gender" property="gender"/>
+        <result column="weight" property="weight"/>
+        <result column="emp_name" property="empName"/>
+        <result column="status" property="status"/>
+        <result column="score" property="score"/>
+        <result column="create_time" property="createTime"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="last_upd_time" property="lastUpdTime"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        eva_id, task_name, task_desc, gender, weight, emp_name, t1.status, score, performance, t1.create_time, t1.finish_time, t1.last_upd_time
+    </sql>
+
+    <select id="getEvaInfo" resultMap="baseResultMap">
+        select
+            <include refid="baseColumnList"></include>
+        from task_eva t1
+        left join prj_task t2 on t1.task_id = t2.task_id
+        left join employee t3 on t1.emp_id = t3.emp_id
+        where t1.eva_id = #{evaId}
+    </select>
+
+    <select id="listTaskEva" resultMap="baseResultMap">
+        select
+        <include refid="baseColumnList"></include>
+        from task_eva t1
+        left join prj_task t2 on t1.task_id = t2.task_id
+        left join project t3 on t2.prj_id = t3.prj_id
+        left join employee t4 on t1.emp_id = t4.emp_id
+        left join department t5 on t4.dpart_id = t5.dpart_id
+        <where>
+            <if test="taskEvaVo.taskName != null and taskEvaVo.taskName != ''">
+                task_name like "%"#{taskEvaVo.taskName}"%"
+            </if>
+            <if test="taskEvaVo.prjId != null and taskEvaVo.prjId != ''">
+                and t3.prj_id = #{taskEvaVo.prjId}
+            </if>
+            <if test="taskEvaVo.empId != null and taskEvaVo.empId != ''">
+                and t4.emp_id = #{taskEvaVo.empId}
+            </if>
+            <if test="taskEvaVo.dpartId != null and taskEvaVo.dpartId != ''">
+                and t5.dpart_id = #{taskEvaVo.dpartId}
+            </if>
+            <if test="taskEvaVo.startTime != null and taskEvaVo.startTime != ''">
+                and <![CDATA[ t1.create_time >= #{taskEvaVo.startTime} ]]>
+            </if>
+            <if test="taskEvaVo.endTime != null and taskEvaVo.endTime != ''">
+                and <![CDATA[ t1.create_time <= #{taskEvaVo.endTime} ]]>
+            </if>
+            <if test="taskEvaVo.status != null">
+                and t1.status = #{taskEvaVo.status}
+            </if>
+        </where>
+        order by eva_id desc
+        limit #{start}, #{limit}
+    </select>
+
+</mapper>

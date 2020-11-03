@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gunners.epes.mapper.DailyLogMapper">
+
+    <resultMap id="baseResultMap" type="com.gunners.epes.entity.DailyLog">
+        <id column="id" property="id"/>
+        <result column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_upd_time" property="lastUpdTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        t1.id, t1.emp_id, t2.emp_name, t1.content, t1.create_time, t1.last_upd_time, t1.status
+    </sql>
+
+    <select id="listDailyLog" resultMap="baseResultMap">
+        select
+        <include refid="baseColumnList"></include>
+        from daily_log t1
+        left join employee t2 on t1.emp_id = t2.emp_id
+        left join department t3 on t2.dpart_id = t3.dpart_id
+        <where>
+            <if test="dailyLogVo.startTime != null and dailyLogVo.startTime != ''">
+                and <![CDATA[ t1.create_time >= #{dailyLogVo.startTime} ]]>
+            </if>
+            <if test="dailyLogVo.endTime != null and dailyLogVo.endTime != ''">
+                and <![CDATA[ t1.create_time <= #{dailyLogVo.endTime} ]]>
+            </if>
+            <if test="dailyLogVo.empId != null and dailyLogVo.empId != ''">
+                and t1.emp_id = #{dailyLogVo.empId}
+            </if>
+            <if test="dailyLogVo.dpartId != null and dailyLogVo.dpartId != ''">
+                and t3.dpart_id = #{dailyLogVo.dpartId}
+            </if>
+            <if test="dailyLogVo.status != null">
+                and t1.status = #{dailyLogVo.status}
+            </if>
+        </where>
+        order by t1.id desc
+        limit #{start}, #{limit}
+    </select>
+
+</mapper>

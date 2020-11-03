@@ -4,16 +4,55 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="js/mui.min.js"></script>
     <link href="css/mui.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="css/common.css"/>
-	<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<style type="text/css">
+		.mui-btn {
+			padding: 10px;
+		}
+		.mui-input-group label {
+			width: 22%;
+		}
+		.mui-input-row label~input {
+			width: 78%; 
+		}
+	</style>
 </head>
-<body>
-	<button type="button" id="btn" class="mui-btn mui-btn-blue">登录</button>
+<body> 
+	<header class="mui-bar mui-bar-nav">
+		<h1 class="mui-title">登录</h1>
+	</header>
+	<div id="" class="mui-content">
+		<!-- <button type="button" id="btn" class="mui-btn mui-btn-blue" 
+			style="height: 500px; width: 100%; position: relative; top: 200px;">登录</button> -->
+		<div style="height: 20px;"></div>
+		<form id='login-form' class="mui-input-group">
+			<div class="mui-input-row">
+				<label>工号</label>
+				<input id='emp_id' value="10001" type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
+			</div>
+			<div class="mui-input-row">
+				<label>密码</label>
+				<input id='password' value="12345678" type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+			</div>
+		</form>
+		<div class="failure-msg" id="failure_msg">
+			用户名不存在或密码错误
+		</div>
+		<div style="height: 15px;"></div>
+		<div class="mui-content-padded">
+			<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+			<!-- <div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+			</div> -->
+		</div>
+	</div>
+	
+	<script src="js/mui.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	  	mui.init();
+	</script>
 </body>
+
 </html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gunners.epes.mapper.EmployeeMapper">
+
+    <select id="getLastEmp" resultType="com.gunners.epes.entity.Employee">
+        select * from employee
+        where emp_id like #{subId}"__"
+        order by id desc
+        limit 1
+    </select>
+
+    <delete id="deleteByDpartId">
+        delete from employee
+        where dpart_id = #{dpartId}
+    </delete>
+
+    <select id="listTaskEmployee" resultType="com.gunners.epes.entity.Employee">
+        SELECT emp_id, emp_name FROM `employee`
+        where dpart_id = #{dpartId}
+        and emp_id not in (select t1.emp_id from task_eva t1
+        inner join employee t2 on t1.emp_id = t2.emp_id
+        inner join department t3 on t2.dpart_id = t3.dpart_id
+        where t1.task_id = #{taskId} and t2.dpart_id = #{dpartId})
+    </select>
+
+</mapper>

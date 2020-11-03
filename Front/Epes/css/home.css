@@ -1,3 +1,10 @@
+/* 欢迎栏 */
+.welcome-area{margin-top:5px; height: 20px;}
+.welcome-area span{float: right; font-size: 14px; color: #007aff;}
+
+/* 统计图 */
+.chart-area{margin: 0 0 20px 0;}
+
 /* 公告栏 */
 .ind-ntc-bar{height: 65px; margin-bottom: 40px;}
 .ntc-title{height: 31px; padding: 0 10px 0 5px;}
@@ -11,10 +18,16 @@
 /* 按钮bar */
 .ind-btn-bar{height: 70px;}
 .ind-btn-bar{padding: 0 10px 0 10px;}
-.ind-btn-div{width: 50px; float: left; margin: 0 5px 0 5px;}
+.ind-btn-div{width: 50px; float: left; margin: 0 8px 0 6px;}
 .index-btn{width: 50px; height: 50px; border-radius: 12px;}
 .ind-btn-div p{font-size: 11px; color: #000000; text-align: center;}
 
-/* 统计图 */
-.chart-area{margin: 0 0 20px 0;}
-/* .line-chart{position: relative; left: -60px;} */
+/* 条件过滤 */
+.filter{height: 80px; border: solid 0px}
+.filter-left, .filter-right{float: left; width: 50%; height: 75px; border: solid 0px; padding: 10px 0;}
+.filt-label{text-align: center;}
+.filt-label span{font-size: 12px;}
+.date, .dpart, .emp{width: 150px; height: 50px; border: solid 0px}
+.triangle{float: right; position: relative; top: 7px; right: 16px; border: solid 6px transparent; border-top: solid 8px #007aff; width: 0; height: 0;}
+#year_res, #dpart_res, #emp_res{width: 120px; height: 10px; float: right;/* border: transparent; */font-size: 15px; margin-bottom: 0}
+.result{text-align: center;}

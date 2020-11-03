@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/prj_detail.css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">项目详情</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" id="finish" class="mui-btn mui-btn-primary" style="top: 0;"></button>
+		</nav>
+		<div id="" class="mui-content">
+			<div class="info-item">
+				项目名：
+				<span id="prj_name"></span>
+			</div>
+			<div class="info-item">
+				关联任务数：
+				<span id="num"></span>
+			</div>
+			<div class="info-item">
+				项目描述：
+				<span id="prj_desc"></span>
+			</div>
+			<div class="info-item">
+				状态：
+				<span id="status"></span>
+			</div>
+			<div class="info-item">
+				创建时间：
+				<span id="create_time"></span>
+			</div>
+			<div class="info-item">
+				关闭时间：
+				<span id="finish_time"></span>
+			</div>
+		</div>
+		
+		<script src="js/mui.js"></script>
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src="js/prj_detail.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

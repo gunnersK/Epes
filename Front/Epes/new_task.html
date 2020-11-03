@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/new_task.css"/>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">新建任务</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" id="confirm" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
+		</nav>
+		<div id="" class="mui-content">
+			<div class="info-item">
+				<label>任务名：</label>
+				<input type="text" id="task_name" value="">
+			</div>
+			<div class="info-item">
+				<label>所属项目：</label>
+				<input type="text" id="prj_name" value="">
+				<input type="hidden" id="prj_id">
+			</div>
+			<div class="info-item">
+				权重：
+				<div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='10'>
+				  <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+				  <input class="mui-numbox-input" id="weight" type="number" value="5" />
+				  <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+				</div>
+			</div> 
+			<div class="info-item text-item">
+				<label>任务描述：</label>
+				<textarea id="task_desc" rows="5" placeholder=""></textarea>
+			</div>
+			<div style="height: 20px;"></div>
+			<div class="info-item text-item">
+				<label>评分标准：</label>
+				<textarea id="score_desc" rows="5" placeholder=""></textarea>
+			</div>
+		</div>
+		<script src="js/mui.js"></script>
+		<script src="js/js/mui.picker.min.js"></script>
+		<script src="js/new_task.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				beforeback: function() {　　　　
+					var list = plus.webview.currentWebview().opener();　　　　
+					//refresh是A页面自定义事件
+					mui.fire(list, 'refresh');
+					// mui.toast('发布成功', { duration:'long', type:'div' });
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			})
+		</script>
+	</body>
+
+</html>

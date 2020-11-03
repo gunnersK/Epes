@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/e_log.css"/>
+		
+		<style>
+			
+			.mui-plus .plus{
+				display: inline;
+			}
+			.plus{
+			
+				display: none;
+			}
+			
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			.mui-popover {
+				height: 200px;
+			}
+			.mui-content {
+				padding: 10px;
+			}
+		</style>
+	</head> 
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">工作日志</h1>
+			<a id="all_ntc" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right"></a>
+		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" id="submit" class="mui-btn mui-btn-primary" style="top: 0;">提交</button>
+		</nav>
+		<div id="" class="mui-content">
+			<div class="mui-input-row" style="margin: 10px 5px;">
+				<textarea id="textarea" rows="5" placeholder="今日工作日志"></textarea>
+			</div>
+		</div>
+		
+		<script src="js/mui.js"></script>
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src="js/e_log.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function () {});
+			
+			mui('.mui-scroll-wrapper').scroll();
+			mui('body').on('shown', '.mui-popover', function(e) {
+			});
+			mui('body').on('hidden', '.mui-popover', function(e) {
+			});
+		</script>
+	</body>
+
+</html>

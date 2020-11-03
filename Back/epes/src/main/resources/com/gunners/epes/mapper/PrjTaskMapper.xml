@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gunners.epes.mapper.PrjTaskMapper">
+
+    <resultMap id="baseResultMap" type="com.gunners.epes.entity.PrjTask">
+        <id column="task_id" property="taskId"/>
+        <result column="task_name" property="taskName"/>
+        <result column="prj_id" property="prjId"/>
+        <result column="weight" property="weight"/>
+        <result column="create_time" property="createTime"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="task_desc" property="taskDesc"/>
+        <result column="score_desc" property="scoreDesc"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        task_id, task_name, t2.prj_name, t1.status
+    </sql>
+
+    <select id="listPrjTask" resultMap="baseResultMap">
+        select
+            <include refid="baseColumnList"></include>
+        from prj_task t1
+        left join project t2 on t1.prj_id = t2.prj_id
+        <where>
+            <if test="prjTaskVo.taskName != null and prjTaskVo.taskName != ''">
+                task_name like "%"#{prjTaskVo.taskName}"%"
+            </if>
+            <if test="prjTaskVo.prjId != null and prjTaskVo.prjId != ''">
+                and t1.prj_id = #{prjTaskVo.prjId}
+            </if>
+            <if test="prjTaskVo.startTime != null and prjTaskVo.startTime != ''">
+                and <![CDATA[ t1.create_time >= #{prjTaskVo.startTime} ]]>
+            </if>
+            <if test="prjTaskVo.endTime != null and prjTaskVo.endTime != ''">
+                and <![CDATA[ t1.create_time <= #{prjTaskVo.endTime} ]]>
+            </if>
+            <if test="prjTaskVo.status != null">
+                and t1.status = #{prjTaskVo.status}
+            </if>
+        </where>
+        order by task_id desc
+        limit #{start}, #{limit}
+    </select>
+
+</mapper>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<link href="css/notice_date_filt.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择日期</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab btn-bar" style="height: 0;">
+			<button type="button" id="confirm" class="mui-btn mui-btn-primary" style="top: 0;">确定</button>
+		</nav>
+		<div id="" class="mui-content">
+			<div class="filt-area">
+				<ul id="list" class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right date" data-options='{"type":"date"}'>
+							起始日期
+							<span class="result" id="start_res" data=""></span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right date" data-options='{"type":"date"}'>
+							结束日期
+							<span class="result" id="end_res" data=""></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="js/mui.js"></script>
+		<script src="js/js/mui.picker.min.js"></script>
+		<script src="js/notice_date_filt.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				beforeback: function() {　　　　
+					var list = plus.webview.currentWebview().opener();　　　　
+					//refresh是A页面自定义事件
+					mui.fire(list, 'refresh');
+					// mui.toast('发布成功', { duration:'long', type:'div' });
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gunners.epes.mapper.EmpInfoMapper">
+
+    <resultMap id="baseResultMap" type="com.gunners.epes.entity.EmpInfo">
+        <id column="id" property="id"/>
+        <result column="emp_id" property="empId"/>
+        <result column="emp_name" property="empName"/>
+        <result column="gender" property="gender"/>
+        <result column="dpart_id" property="dpartId"/>
+        <result column="dpart_name" property="dpartName"/>
+        <result column="role" property="role"/>
+        <result column="contact" property="contact"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="is_active" property="isActive"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        id, t1.emp_id, emp_name, gender, t1.dpart_id, dpart_name, role, contact, last_login_time, is_active
+    </sql>
+
+    <select id="getEmpInfo" resultMap="baseResultMap">
+        select
+            <include refid="baseColumnList"></include>
+        from employee t1
+        left join department t2 on t1.dpart_id = t2.dpart_id
+        left join user t3 on t1.emp_id = t3.emp_id
+        where t1.emp_id = #{empId}
+    </select>
+
+</mapper>

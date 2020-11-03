@@ -26,7 +26,6 @@ mvnw
 ### HBuilderX
 unpackage/
 
-*.jpg
 
 ### NetBeans ###
 /nbproject/private/

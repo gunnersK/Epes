@@ -7,6 +7,12 @@
  * MUI核心JS
  * @type _L4.$|Function
  */
+var urlPattern = { 
+	// value: "http://192.168.43.21:8080" ,//手机调试,自己电脑
+	// value: "http://192.168.1.17:8080" //手机调试,公司电脑
+	value: "http://118.190.202.230:8080" //阿里云
+	// value: "api" //电脑调试,走nginx 
+}
 var mui = (function(document, undefined) {
 	var readyRE = /complete|loaded|interactive/;
 	var idSelectorRE = /^#([\w-]+)$/;

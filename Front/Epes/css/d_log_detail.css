@@ -1,0 +1,10 @@
+.mui-content{margin: 20px;}
+.log-detail-wrap{padding: 20px 10px 20px 10px}
+.log-title p{font-size: 18px; color: #000000; margin-bottom: 20px}
+.log-time p, .log-emp p{font-size: 12px; margin-bottom: 0px}
+.log-content p{font-size: 15px; color: #000000;}
+
+/* 按钮bar */
+.btn-bar{text-align: center;}
+.btn-bar button{width: 100%; height: 43px; border: 0;}
+.read{background-color: gray; }

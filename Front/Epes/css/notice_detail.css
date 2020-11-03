@@ -1,4 +1,6 @@
 .ntc-detail-wrap{padding: 20px 10px 20px 10px}
 .ntc-title p{font-size: 18px; color: #000000;}
 .ntc-time p{font-size: 12px;}
+.ntc-content{margin-bottom: 50px;}
 .ntc-content p{font-size: 15px; color: #000000;}
+.read{font-size: 12px; float: right; position: relative; right: 10px;}
