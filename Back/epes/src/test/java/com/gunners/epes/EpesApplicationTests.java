@@ -1,13 +1,13 @@
 package com.gunners.epes;
 
+import cn.hutool.http.HttpUtil;
 import com.gunners.epes.controller.TestController;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 
-@SpringBootTest
+//@SpringBootTest
 @Slf4j
 class EpesApplicationTests {
 
@@ -16,8 +16,8 @@ class EpesApplicationTests {
 
     @Test
     void contextLoads() {
-        String a = "d";
-        System.out.println(a.getClass());
+        String s = HttpUtil.get("https://static.msmds.cn/jplus/api/jdjtt/pull/goodsList");
+        System.out.println(s);
     }
 
 }
