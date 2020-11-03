@@ -22,6 +22,7 @@
 - back()返回上一页，需要在本页html的init加点东西（prj_filt.html）
 
 # <a name="back">后端</a> 
+>>>>>>> d24df822aa1f2df1ea9cb1f83d528f811de8fb05
 
 - 跨域问题
 
