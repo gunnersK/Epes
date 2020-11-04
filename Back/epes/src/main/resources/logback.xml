@@ -12,7 +12,7 @@
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/jplus.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>logs/epes.log.%d{yyyy-MM-dd}</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
 
